@@ -1,0 +1,9 @@
+<label for="{{name}}">{{label}}</label>
+{{#options}}
+<input  type="radio"
+        name="{{name}}"
+        value="{{.}}"
+        class="{{rowClass}}"
+        title="{{tooltip}}" />
+<span>{{.}}</span>
+{{/options}}

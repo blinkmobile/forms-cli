@@ -1,0 +1,38 @@
+{
+  "name": "@blinkmobile/forms-investigation",
+  "version": "0.0.1",
+  "description": "a test of transducers on a form definition",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eslint ava",
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "ava": "ava"
+  },
+  "author": "Simon Dobie",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "co": "^4.6.0",
+    "mustache": "^2.2.1",
+    "transducers-js": "^0.4.174"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "eslint": "^3.2.2",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "fixpack": "^2.3.1"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
