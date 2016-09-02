@@ -1,363 +1,367 @@
-{
-  "default": {
-    "uniqueNameId": "2huuim",
-    "name": "simple_form",
-    "formDescription": "",
-    "defaultCategory": "",
-    "maxStep": 6,
-    "labelPlacement": "auto",
-    "header": "",
-    "footer": "",
-    "_elements": [
-      {
-        "default": {
-          "name": "id",
-          "type": "text",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "textbox",
-          "type": "text",
-          "label": "Textbox",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "maxWidthPrefix": "characters",
-          "page": 0
+[
+  {
+    "default": {
+      "uniqueNameId": "2huuim",
+      "name": "simple_form",
+      "formDescription": "",
+      "defaultCategory": "",
+      "maxStep": 6,
+      "labelPlacement": "auto",
+      "header": "",
+      "footer": "",
+      "_elements": [
+        {
+          "default": {
+            "name": "id",
+            "type": "text",
+            "page": 0
+          }
         },
-        "add": {
-          "customise": "1",
-          "label": "Add Textbox",
-          "tooltip": "add tool tip",
-          "rowClass": "row-class",
-          "placeholderText": "add placeholder"
+        {
+          "default": {
+            "name": "textbox",
+            "type": "text",
+            "label": "Textbox",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "maxWidth": "10",
+            "maxWidthPrefix": "characters",
+            "characterLimit": "20",
+            "page": 0
+          },
+          "add": {
+            "customise": "1",
+            "label": "Add Textbox",
+            "tooltip": "add tool tip",
+            "rowClass": "row-class",
+            "placeholderText": "add placeholder"
+          },
+          "edit": {
+            "customise": "1",
+            "label": "edit textbox",
+            "labelPlacement": "left",
+            "tooltip": "edit textbox tooltip",
+            "placeholderText": "edit placeholder"
+          }
         },
-        "edit": {
-          "customise": "1",
-          "label": "edit textbox",
-          "labelPlacement": "left",
-          "tooltip": "edit textbox tooltip",
-          "placeholderText": "edit placeholder"
-        }
-      },
-      {
-        "default": {
-          "name": "textarea",
-          "type": "textarea",
-          "label": "Textarea",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "required": "1",
-          "wrap": "hard",
-          "page": 0
+        {
+          "default": {
+            "name": "textarea",
+            "type": "textarea",
+            "label": "Textarea",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "required": "1",
+            "wrap": "hard",
+            "page": 0
+          },
+          "add": {
+            "customise": "1",
+            "label": "add textarea label",
+            "tooltip": "add textarea tooltip"
+          }
         },
-        "add": {
-          "customise": "1",
-          "label": "add textarea label",
-          "tooltip": "add textarea tooltip"
+        {
+          "default": {
+            "name": "date",
+            "type": "date",
+            "label": "Date",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "selectbox",
+            "type": "select",
+            "label": "Selectbox",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "options": {
+              "select 1": "select 1",
+              "select 2": "select 2",
+              "select 3": "select 3"
+            },
+            "dataSource": "static",
+            "mode": "collapsed",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "choice",
+            "type": "select",
+            "label": "Choice",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "options": {
+              "choice 1": "choice 1",
+              "choice 2": "choice 2",
+              "choice 3": "choice 3"
+            },
+            "mode": "expanded",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "password",
+            "type": "password",
+            "label": "Password",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "email",
+            "type": "email",
+            "label": "Email",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "url",
+            "type": "url",
+            "label": "Url",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "phoneNumber",
+            "type": "telephone",
+            "label": "Phone Number",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "number",
+            "type": "number",
+            "label": "Number",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "currency",
+            "type": "number",
+            "label": "Currency",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "multiSelect",
+            "type": "multi",
+            "label": "Multi Select",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "options": {
+              "multi 1": "multi 1",
+              "multi 2": "multi 2",
+              "multi 3": "multi 3"
+            },
+            "other": "1",
+            "mode": "collapsed",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "checkBoxes",
+            "type": "multi",
+            "label": "Check Boxes",
+            "labelPlacement": "default",
+            "labelStyle": "Plain",
+            "options": {
+              "check boxes 1": "check boxes 1",
+              "check boxes 2": "check boxes 2",
+              "check boxes 3": "check boxes 3"
+            },
+            "mode": "expanded",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "checkbox",
+            "type": "boolean",
+            "label": "Checkbox",
+            "options": [
+              "n",
+              "y"
+            ],
+            "defaultValue": 0,
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "time",
+            "type": "time",
+            "label": "Time",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "dateTime",
+            "type": "datetime",
+            "label": "Date Time",
+            "page": 0
+          }
         }
-      },
-      {
-        "default": {
-          "name": "date",
-          "type": "date",
-          "label": "Date",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "selectbox",
-          "type": "select",
-          "label": "Selectbox",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "options": {
-            "select 1": "select 1",
-            "select 2": "select 2",
-            "select 3": "select 3"
-          },
-          "dataSource": "static",
-          "mode": "collapsed",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "radio",
-          "type": "select",
-          "label": "Choice",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "options": {
-            "radio 1": "radio 1",
-            "radio 2": "radio 2",
-            "radio 3": "radio 3"
-          },
-          "mode": "expanded",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "password",
-          "type": "password",
-          "label": "Password",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "email",
-          "type": "email",
-          "label": "Email",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "url",
-          "type": "url",
-          "label": "Url",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "phoneNumber",
-          "type": "telephone",
-          "label": "Phone Number",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "number",
-          "type": "number",
-          "label": "Number",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "currency",
-          "type": "number",
-          "label": "Currency",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "multiSelect",
-          "type": "multi",
-          "label": "Multi Select",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "options": {
-            "multi 1": "multi 1",
-            "multi 2": "multi 2",
-            "multi 3": "multi 3"
-          },
-          "other": "1",
-          "mode": "collapsed",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "checkBoxes",
-          "type": "multi",
-          "label": "Check Boxes",
-          "labelPlacement": "default",
-          "labelStyle": "Plain",
-          "options": {
-            "check boxes 1": "check boxes 1",
-            "check boxes 2": "check boxes 2",
-            "check boxes 3": "check boxes 3"
-          },
-          "mode": "expanded",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "checkbox",
-          "type": "boolean",
-          "label": "Checkbox",
-          "options": [
-            "n",
-            "y"
-          ],
-          "defaultValue": 0,
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "time",
-          "type": "time",
-          "label": "Time",
-          "page": 0
-        }
-      },
-      {
-        "default": {
-          "name": "dateTime",
-          "type": "datetime",
-          "label": "Date Time",
-          "page": 0
-        }
-      }
-    ],
-    "_checks": [
+      ],
+      "_checks": [
 
-    ],
-    "_actions": [
+      ],
+      "_actions": [
 
-    ],
-    "_behaviours": [
+      ],
+      "_behaviours": [
 
-    ]
-  },
-  "list": {
-    "interaction": "SIMPLE_FORM_LIST",
-    "displayName": "SIMPLE_FORM LIST",
-    "defaultCategory": "",
-    "header": "",
-    "footer": "",
-    "hidden": null,
-    "action": "list",
-    "orderBy": null,
-    "showLink": {
-      "edit": "1",
-      "view": "1",
-      "delete": "1"
+      ]
     },
-    "dataStorageList": "temporary",
-    "downloadModeList": "partial",
-    "recordsToDisplay": "",
-    "_elements": [
-      "textbox",
-      "textarea",
-      "date"
-    ]
-  },
-  "search": {
-    "interaction": "",
-    "displayName": null,
-    "defaultCategory": null,
-    "header": null,
-    "footer": null,
-    "hidden": null,
-    "action": "search"
-  },
-  "add": {
-    "interaction": "SIMPLE_FORM_ADD",
-    "displayName": "SIMPLE_FORM ADD",
-    "defaultCategory": "",
-    "header": "",
-    "footer": "",
-    "hidden": null,
-    "action": "add",
-    "_elements": [
-      "textbox",
-      "textarea",
-      "date",
-      "selectbox",
-      "radio",
-      "password",
-      "email",
-      "url",
-      "phoneNumber",
-      "number",
-      "currency",
-      "multiSelect",
-      "checkBoxes",
-      "checkbox",
-      "time",
-      "dateTime"
-    ]
-  },
-  "edit": {
-    "interaction": "SIMPLE_FORM_EDIT",
-    "displayName": "SIMPLE_FORM EDIT",
-    "defaultCategory": "",
-    "header": "",
-    "footer": "",
-    "hidden": "1",
-    "action": "edit",
-    "_elements": [
-      "textbox",
-      "textarea",
-      "date",
-      "selectbox",
-      "radio",
-      "password",
-      "email",
-      "url",
-      "phoneNumber",
-      "number",
-      "currency",
-      "multiSelect",
-      "checkBoxes",
-      "checkbox",
-      "time",
-      "dateTime"
-    ]
-  },
-  "view": {
-    "interaction": "SIMPLE_FORM_VIEW",
-    "displayName": "SIMPLE_FORM VIEW",
-    "defaultCategory": "",
-    "header": "",
-    "footer": "",
-    "hidden": "1",
-    "action": "view",
-    "_elements": [
-      "textbox",
-      "textarea",
-      "date",
-      "selectbox",
-      "radio",
-      "password",
-      "email",
-      "url",
-      "phoneNumber",
-      "number",
-      "currency",
-      "multiSelect",
-      "checkBoxes",
-      "checkbox",
-      "time",
-      "dateTime"
-    ]
-  },
-  "delete": {
-    "interaction": "SIMPLE_FORM_DELETE",
-    "displayName": "SIMPLE_FORM DELETE",
-    "defaultCategory": "",
-    "header": "",
-    "footer": "",
-    "hidden": "1",
-    "action": "delete",
-    "_elements": [
-      "textbox",
-      "textarea",
-      "date",
-      "selectbox",
-      "radio",
-      "password",
-      "email",
-      "url",
-      "phoneNumber",
-      "number",
-      "currency",
-      "multiSelect",
-      "checkBoxes",
-      "checkbox",
-      "time",
-      "dateTime"
-    ]
+    "list": {
+      "interaction": "SIMPLE_FORM_LIST",
+      "displayName": "SIMPLE_FORM LIST",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": null,
+      "action": "list",
+      "orderBy": null,
+      "showLink": {
+        "edit": "1",
+        "view": "1",
+        "delete": "1"
+      },
+      "dataStorageList": "temporary",
+      "downloadModeList": "partial",
+      "recordsToDisplay": "",
+      "_elements": [
+        "textbox",
+        "textarea",
+        "date"
+      ]
+    },
+    "search": {
+      "interaction": "",
+      "displayName": null,
+      "defaultCategory": null,
+      "header": null,
+      "footer": null,
+      "hidden": null,
+      "action": "search"
+    },
+    "add": {
+      "interaction": "SIMPLE_FORM_ADD",
+      "displayName": "SIMPLE_FORM ADD",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": null,
+      "action": "add",
+      "_elements": [
+        "textbox",
+        "textarea",
+        "date",
+        "selectbox",
+        "choice",
+        "password",
+        "email",
+        "url",
+        "phoneNumber",
+        "number",
+        "currency",
+        "multiSelect",
+        "checkBoxes",
+        "checkbox",
+        "time",
+        "dateTime"
+      ]
+    },
+    "edit": {
+      "interaction": "SIMPLE_FORM_EDIT",
+      "displayName": "SIMPLE_FORM EDIT",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "edit",
+      "_elements": [
+        "textbox",
+        "textarea",
+        "date",
+        "selectbox",
+        "choice",
+        "password",
+        "email",
+        "url",
+        "phoneNumber",
+        "number",
+        "currency",
+        "multiSelect",
+        "checkBoxes",
+        "checkbox",
+        "time",
+        "dateTime"
+      ]
+    },
+    "view": {
+      "interaction": "SIMPLE_FORM_VIEW",
+      "displayName": "SIMPLE_FORM VIEW",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "view",
+      "_elements": [
+        "textbox",
+        "textarea",
+        "date",
+        "selectbox",
+        "choice",
+        "password",
+        "email",
+        "url",
+        "phoneNumber",
+        "number",
+        "currency",
+        "multiSelect",
+        "checkBoxes",
+        "checkbox",
+        "time",
+        "dateTime"
+      ]
+    },
+    "delete": {
+      "interaction": "SIMPLE_FORM_DELETE",
+      "displayName": "SIMPLE_FORM DELETE",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "delete",
+      "_elements": [
+        "textbox",
+        "textarea",
+        "date",
+        "selectbox",
+        "choice",
+        "password",
+        "email",
+        "url",
+        "phoneNumber",
+        "number",
+        "currency",
+        "multiSelect",
+        "checkBoxes",
+        "checkbox",
+        "time",
+        "dateTime"
+      ]
+    }
   }
-}
+]

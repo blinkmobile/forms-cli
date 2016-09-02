@@ -1,0 +1,8 @@
+<label for="{{name}}">{{label}}</label>
+<textarea class="{{rowClass}}"
+          ng-model="{{name}}"
+          name="{{name}}"
+          placeholder="{{placehoderText}}"
+          {{#required}}ng-required="true"{{/required}}
+          {{#characterLimit}}ng-maxlength="{{characterLimit}}"{{/characterLimit}}
+          title="{{tooltip}}"></textarea>

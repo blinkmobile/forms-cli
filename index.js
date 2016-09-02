@@ -17,8 +17,10 @@ const fixChoice = require('./lib/transforms/fix-choice.js')
 // filters
 const inForm = require('./lib/filters/element-in-form.js')
 
+const getTemplatePaths = require('./lib/utils/get-template-paths.js').getTemplatePaths
+
 // dodgy template strings
-const header = `<html>
+const header = `<html ng-app>
   <head>
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/skeleton.css" />
@@ -30,57 +32,55 @@ const header = `<html>
 
 const footer = `
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js">
   </body>
 </html>`
-
-const templatePaths = [
-  './templates/html/text.mustache',
-  './templates/html/url.mustache',
-  './templates/html/telephone.mustache',
-  './templates/html/password.mustache',
-  './templates/html/number.mustache',
-  './templates/html/email.mustache',
-  './templates/html/textarea.mustache',
-  './templates/html/date.mustache',
-  './templates/html/datetime.mustache',
-  './templates/html/select.mustache',
-  './templates/html/radio.mustache',
-  './templates/html/checkbox.mustache'
-]
 
 const makeRendererDetails = t.map((templatePath) => Promise.all([
   Promise.resolve(path.basename(templatePath, '.mustache')),
   createRendererFn(templatePath)
 ]))
 
-Promise.all(t.into([], makeRendererDetails, templatePaths))
-  .then((templates) => t.into({}, t.identity, templates))
-  .then((templates) => {
-    return readContents('./test/fixtures/forms2-simple-form-definition.json')
-      .then((contents) => {
-        contents = JSON.parse(contents)
+getTemplatePaths('./templates/angular1.5/html').then((templatePaths) => {
+  return Promise.all(t.into([], makeRendererDetails, templatePaths))
+    .then((templates) => t.into({}, t.identity, templates))
+    .then((templates) => {
+      return readContents('./test/fixtures/forms2-simple-form-definition.json')
+        .then((contents) => {
+          try {
+            contents = JSON.parse(contents)
+          } catch (e) {
+            console.log(`Error parsing JSON: ${e}`)
+            process.exit(1)
+          }
 
-        const elements = contents.default._elements
-        const addElements = contents.add._elements
+          contents = contents[0]
+          const elements = contents.default._elements
+          const addElements = contents.add._elements
 
-        const accum = (memo, val) => {
-          memo.push(val)
-          return memo
-        }
+          const accum = (memo, val) => {
+            memo.push(val)
+            return memo
+          }
 
-        const wrapInDiv = (html) => `<div class="row">
-  ${html}
-</div>
-`
+          const wrapInDiv = (html) => `<div class="row">
+    ${html}
+  </div>
+  `
+          const makefullLength = (el) => {
+            el.rowClass = el.rowClass ? el.rowClass + ' u-full-width' : 'u-full-width'
+            return el
+          }
+          const xf = t.comp(t.map(flatten('add')),
+                            t.filter(inForm(addElements)),
+                            t.map(fixChoice),
+                            t.map(makefullLength),
+                            t.map(elementHTMLRenderer(templates)),
+                            t.map(wrapInDiv))
 
-        const xf = t.comp(t.map(flatten('add')),
-                          t.filter(inForm(addElements)),
-                          t.map(fixChoice),
-                          t.map(elementHTMLRenderer(templates)),
-                          t.map(wrapInDiv))
-
-        return t.transduce(xf, accum, [], elements)
-      })
-  })
-.then((form) => fs.writeFile('output/index.html', [header].concat(form).concat(footer).join('')))
-.catch((err) => console.log(err))
+          return t.transduce(xf, accum, [], elements)
+        })
+    })
+  .then((form) => fs.writeFile('output/index.html', [header].concat(form).concat(footer).join('')))
+  .catch((err) => console.log(err))
+})

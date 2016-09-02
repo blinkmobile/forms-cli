@@ -1,0 +1,10 @@
+<label for="{{name}}">{{label}}</label>
+{{#options}}
+<input  type="checkbox"
+        ng-model="{{name}}"
+        name="{{name}}"
+        value="{{.}}"
+        class="{{rowClass}}"
+        title="{{tooltip}}" />
+<span>{{.}}</span>
+{{/options}}
