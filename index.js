@@ -20,19 +20,22 @@ const inForm = require('./lib/filters/element-in-form.js')
 const getTemplatePaths = require('./lib/utils/get-template-paths.js').getTemplatePaths
 
 // dodgy template strings
-const header = `<html ng-app>
+const header = `<!doctype html>
+<html ng-app>
   <head>
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/skeleton.css" />
     <link rel="stylesheet" href="./css/demo.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   </head>
   <body>
-    <form>
+  <p>{{'i have been enhanced by angular!'}}</p>
+    <form novalidate>
       `
 
 const footer = `
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js">
+
   </body>
 </html>`
 
