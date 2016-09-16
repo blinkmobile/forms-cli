@@ -7,8 +7,8 @@
       "defaultCategory": "",
       "maxStep": 6,
       "labelPlacement": "auto",
-      "header": "",
-      "footer": "",
+      "header": "<p>I am the header of a form from the defintion</p>",
+      "footer": "<p>I am the footer of a form from the defintion</p>",
       "_elements": [
         {
           "default": {
@@ -390,6 +390,277 @@
         "time",
         "dateTime",
         "fileUpload"
+      ]
+    }
+  },
+  {
+    "default": {
+      "uniqueNameId": "vjhj96im",
+      "name": "small_with_subform",
+      "formDescription": "",
+      "defaultCategory": "",
+      "maxStep": 6,
+      "labelPlacement": "auto",
+      "header": "",
+      "footer": "",
+      "_elements": [
+        {
+          "default": {
+            "name": "id",
+            "type": "text",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "first",
+            "type": "text",
+            "label": "First",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "second",
+            "type": "text",
+            "label": "Second",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "subform_1",
+            "type": "subForm",
+            "subForm": "subform_1",
+            "page": 0
+          }
+        }
+      ],
+      "_checks": [
+
+      ],
+      "_actions": [
+
+      ],
+      "_behaviours": [
+
+      ]
+    },
+    "list": {
+      "interaction": "SMALL_WITH_SUBFORM_LIST",
+      "displayName": "SMALL_WITH_SUBFORM LIST",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": null,
+      "action": "list",
+      "orderBy": null,
+      "showLink": {
+        "edit": "1",
+        "view": "1",
+        "delete": "1"
+      },
+      "dataStorageList": "temporary",
+      "downloadModeList": "partial",
+      "recordsToDisplay": "",
+      "_elements": [
+        "first",
+        "second",
+        "subform_1"
+      ]
+    },
+    "search": {
+      "interaction": null,
+      "displayName": null,
+      "defaultCategory": null,
+      "header": null,
+      "footer": null,
+      "hidden": null,
+      "action": "search"
+    },
+    "add": {
+      "interaction": "SMALL_WITH_SUBFORM_ADD",
+      "displayName": "SMALL_WITH_SUBFORM ADD",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": null,
+      "action": "add",
+      "_elements": [
+        "first",
+        "second",
+        "subform_1"
+      ]
+    },
+    "edit": {
+      "interaction": "SMALL_WITH_SUBFORM_EDIT",
+      "displayName": "SMALL_WITH_SUBFORM EDIT",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "edit",
+      "_elements": [
+        "first",
+        "second",
+        "subform_1"
+      ]
+    },
+    "view": {
+      "interaction": "SMALL_WITH_SUBFORM_VIEW",
+      "displayName": "SMALL_WITH_SUBFORM VIEW",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "view",
+      "_elements": [
+        "first",
+        "second",
+        "subform_1"
+      ]
+    },
+    "delete": {
+      "interaction": "SMALL_WITH_SUBFORM_DELETE",
+      "displayName": "SMALL_WITH_SUBFORM DELETE",
+      "defaultCategory": "",
+      "header": "",
+      "footer": "",
+      "hidden": "1",
+      "action": "delete",
+      "_elements": [
+        "first",
+        "second",
+        "subform_1"
+      ]
+    }
+  },
+  {
+    "default": {
+      "uniqueNameId": "3gep",
+      "name": "subform_1",
+      "formDescription": "",
+      "defaultCategory": "",
+      "maxStep": 4,
+      "labelPlacement": null,
+      "header": null,
+      "footer": null,
+      "_elements": [
+        {
+          "default": {
+            "name": "id",
+            "type": "text",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "sub_first",
+            "type": "text",
+            "label": "Sub First",
+            "page": 0
+          }
+        },
+        {
+          "default": {
+            "name": "sub_second",
+            "type": "text",
+            "label": "Sub Second",
+            "page": 0
+          }
+        }
+      ],
+      "_checks": [
+
+      ],
+      "_actions": [
+
+      ],
+      "_behaviours": [
+
+      ]
+    },
+    "list": {
+      "interaction": "",
+      "displayName": "",
+      "defaultCategory": "",
+      "header": null,
+      "footer": null,
+      "hidden": null,
+      "action": "list",
+      "orderBy": null,
+      "showLink": {
+        "edit": 1,
+        "view": 1,
+        "delete": 1
+      },
+      "dataStorageList": null,
+      "downloadModeList": null,
+      "recordsToDisplay": null,
+      "_elements": [
+        "sub_first",
+        "sub_second"
+      ]
+    },
+    "search": {
+      "interaction": null,
+      "displayName": null,
+      "defaultCategory": null,
+      "header": null,
+      "footer": null,
+      "hidden": null,
+      "action": "search"
+    },
+    "add": {
+      "interaction": "",
+      "displayName": "",
+      "defaultCategory": "",
+      "header": null,
+      "footer": null,
+      "hidden": null,
+      "action": "add",
+      "_elements": [
+        "sub_first",
+        "sub_second"
+      ]
+    },
+    "edit": {
+      "interaction": "",
+      "displayName": "",
+      "defaultCategory": "",
+      "header": null,
+      "footer": null,
+      "hidden": "1",
+      "action": "edit",
+      "_elements": [
+        "sub_first",
+        "sub_second"
+      ]
+    },
+    "view": {
+      "interaction": "",
+      "displayName": "",
+      "defaultCategory": "",
+      "header": null,
+      "footer": null,
+      "hidden": "1",
+      "action": "view",
+      "_elements": [
+        "sub_first",
+        "sub_second"
+      ]
+    },
+    "delete": {
+      "interaction": "",
+      "displayName": "",
+      "defaultCategory": "",
+      "header": null,
+      "footer": null,
+      "hidden": "1",
+      "action": "delete",
+      "_elements": [
+        "sub_first",
+        "sub_second"
       ]
     }
   }

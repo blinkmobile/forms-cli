@@ -9,15 +9,9 @@ const t = require('transducers-js')
 const createRendererFn = require('./lib/utils/template-helper.js').createRenderer
 const readContents = require('./lib/utils/read-file-contents.js').readContents
 
-// transforms
-const flatten = require('./lib/transforms/flatten-definition.js')
-const elementHTMLRenderer = require('./lib/transforms/to-element-html.js')
-const fixChoice = require('./lib/transforms/fix-choice.js')
-
-// filters
-const inForm = require('./lib/filters/element-in-form.js')
-
 const getTemplatePaths = require('./lib/utils/get-template-paths.js').getTemplatePaths
+const ElementTransducer = require('./element-HTML-transducer.js').elementTransducer
+const formsTransducer = require('./form-transducer.js').processForm
 
 // dodgy template strings
 const header = `<!doctype html>
@@ -30,60 +24,67 @@ const header = `<!doctype html>
   </head>
   <body>
   <p>{{'i have been enhanced by angular!'}}</p>
-    <form novalidate>
       `
 
 const footer = `
-    </form>
-
   </body>
 </html>`
+
+const formTemplatePath = './templates/angular1.5/html/form.mustache'
+const definitionPath = './test/fixtures/multi-form-with subform-definition.json'
 
 const makeRendererDetails = t.map((templatePath) => Promise.all([
   Promise.resolve(path.basename(templatePath, '.mustache')),
   createRendererFn(templatePath)
 ]))
 
-getTemplatePaths('./templates/angular1.5/html').then((templatePaths) => {
-  return Promise.all(t.into([], makeRendererDetails, templatePaths))
-    .then((templates) => t.into({}, t.identity, templates))
-    .then((templates) => {
-      return readContents('./test/fixtures/forms2-simple-form-definition.json')
-        .then((contents) => {
+// make angular elements transforms
+function makeHTML (tp) {
+  return getTemplatePaths(tp).then((templatePaths) => {
+    return Promise.all(t.into([], makeRendererDetails, templatePaths))
+      .then((templates) => t.into({}, t.identity, templates))
+      .then((templates) => {
+        const elementTransducer = ElementTransducer(templates)
+
+        return Promise.all([
+          readContents(definitionPath),
+          createRendererFn(formTemplatePath),
+          createRendererFn('./templates/angular1.5/js/form-controller.js')
+        ]).then((results) => {
+          let definition
+          const formTemplate = results[1]
+          const formControllerTemplate = results[2]
           try {
-            contents = JSON.parse(contents)
+            definition = JSON.parse(results[0])
           } catch (e) {
-            console.log(`Error parsing JSON: ${e}`)
+            console.log(`Error parsing definition JSON:
+  ${e}`)
             process.exit(1)
           }
 
-          contents = contents[0]
-          const elements = contents.default._elements
-          const addElements = contents.add._elements
-
-          const accum = (memo, val) => {
-            memo.push(val)
-            return memo
+          return {
+            definition,
+            formTemplate,
+            formControllerTemplate,
+            elementTransducer
           }
-
-          const wrapInDiv = (html) => `<div class="row">
-    ${html}
-  </div>
-  `
-          const makefullLength = (el) => {
-            el.rowClass = el.rowClass ? el.rowClass + ' u-full-width' : 'u-full-width'
-            return el
-          }
-          const xf = t.comp(t.map(flatten('add')),
-                            t.filter(inForm(addElements)),
-                            t.map(fixChoice),
-                            t.map(makefullLength),
-                            t.map(elementHTMLRenderer(templates)),
-                            t.map(wrapInDiv))
-
-          return t.transduce(xf, accum, [], elements)
         })
-    })
-  .then((form) => fs.writeFile('output/index.html', [header].concat(form).concat(footer).join('')))
-  .catch((err) => console.log(err))
-})
+      })
+      .then((results) => formsTransducer(results))
+      //.then((formDefinition) => fs.writeFile('output/definition.json', JSON.stringify(formDefinition)))
+      .then((forms) => {
+        const keys = Object.keys(forms)
+        keys.forEach((key) => {
+          const formNames = Object.keys(forms[key])
+          formNames.forEach((name) => fs.writeFile(path.join('output', `${name}.html`), `${header}${forms[key][name]}${footer}`))
+        })
+      })
+      .catch((err) => console.log(err))
+  })
+}
+
+function makeJS () {
+
+}
+
+makeHTML('./templates/angular1.5/html')
