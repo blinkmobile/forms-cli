@@ -1,7 +1,5 @@
 'use strict'
 
-const fs = require('fs')
-
 const t = require('transducers-js')
 
 const getInteractions = t.filter(require('./lib/filters/is-interaction.js'))
@@ -10,8 +8,8 @@ const flatten = require('./lib/transforms/flatten-definition.js')
 function processForm (options) {
   const definition = options.definition
   const elementTransducer = options.elementTransducer
+  const jsTemplates = options.jsTemplates
   const formTemplate = options.formTemplate
-  const formControllerTemplate = options.formControllerTemplate
 
   // loop through each form in a definition running the
   // transduers on the data
@@ -20,44 +18,50 @@ function processForm (options) {
     const elements = form.default._elements
     const header = form.default.header
     const footer = form.default.footer
+    const formName = form.default.name
 
-    // html transducer
+    // Make the HTML For each form with an interaction
     const toFormElement = t.map((formType) => {
       const formTypeName = formType[0]
       const formTypeData = formType[1]
       formTypeData.elements = elementTransducer(formTypeName, elements, formTypeData._elements).join('')
       formTypeData.header = formTypeData.header || header
       formTypeData.footer = formTypeData.footer || footer
-      return { [formTypeData.interaction]: formTemplate(formTypeData) }
+      return { [formTypeData.interaction.toLowerCase()]: formTemplate(formTypeData) }
     })
     const formHTMLXf = t.comp(getInteractions, toFormElement)
     const formHTML = t.transduce(formHTMLXf, Object.assign, {}, form)
+  console.log('formTypeData', formHTML)
 
-    // make the controller
-    const toFormController = t.map((formType) => {
+    // make the controller config
+    const toFormControllerConfig = t.map((formType, idx) => {
       const formTypeName = formType[0]
       const formTypeData = flatten(formTypeName)(form)
+      formTypeData.variation = formTypeName
+      // formTypeData.templatePath = formHTML
+      const interactionName = (formTypeData.interaction || 'subform').toLowerCase()
+      // const controllerName = interactionName + '-controller'
+      const fileRenderer = jsTemplates[`${formTypeName}-form-controller.js`]
 
-      return () => {
-        return new Promise((resolve, reject) => {
-          const filename = `./output/js/${formTypeData.interaction || 'subform-' + form.name}-controller.js`
-          fs.writeFile(filename, formControllerTemplate(formTypeData, true), (err) => {
-            if (err) {
-              return reject(err)
-            }
-
-            resolve(filename)
-          })
-        })
-      }
+      return {[interactionName]: fileRenderer && fileRenderer(formTypeData) || ''}
     })
 
-    const formControllerXf = t.comp(getInteractions, toFormController)
-    const controllersArray = t.into([], formControllerXf, form)
+    const accum = (memo, item) => Object.assign(memo, item)
+    // const formControllerXf = t.comp(getInteractions, toFormControllerConfig)
+    const controllers = t.transduce(toFormControllerConfig, accum, {}, form)
 
-    return Promise.all(controllersArray.map((fn) => fn())).then(() => Object.assign(memo, {[form.default.uniqueNameId]: formHTML}))
+    // make the module file
+    const moduleTemplate = jsTemplates['form-module.js']
+
+    memo[formName] = {
+      module: moduleTemplate(form.default),
+      controllers,
+      views: formHTML
+    }
+
+    return memo
   }, {})
-
+ console.log('result = ', result)
   return result
 }
 
