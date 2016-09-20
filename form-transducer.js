@@ -20,6 +20,7 @@ function processForm (options) {
     const footer = form.default.footer
     const formName = form.default.name
 
+    // ************************************************
     // Make the HTML For each form with an interaction
     const toFormElement = t.map((formType) => {
       const formTypeName = formType[0]
@@ -31,37 +32,39 @@ function processForm (options) {
     })
     const formHTMLXf = t.comp(getInteractions, toFormElement)
     const formHTML = t.transduce(formHTMLXf, Object.assign, {}, form)
-  console.log('formTypeData', formHTML)
 
+    // ***********************************
     // make the controller config
     const toFormControllerConfig = t.map((formType, idx) => {
-      const formTypeName = formType[0]
-      const formTypeData = flatten(formTypeName)(form)
-      formTypeData.variation = formTypeName
-      // formTypeData.templatePath = formHTML
-      const interactionName = (formTypeData.interaction || 'subform').toLowerCase()
-      // const controllerName = interactionName + '-controller'
-      const fileRenderer = jsTemplates[`${formTypeName}-form-controller.js`]
+      const variation = formType[0]
+      const variationData = flatten(variation)(form)
+      variationData.controllerName = variationData.name[0].toUpperCase() + variationData.name.substring(1)
+      variationData.variation = variation
+      // variationData.templatePath = formHTML
+      const interactionName = (variationData.interaction || 'subform').toLowerCase()
+      const fileRenderer = jsTemplates[`${variation}-form-controller.js`] || ((a) => '')
 
-      return {[interactionName]: fileRenderer && fileRenderer(formTypeData) || ''}
+      return {
+        [interactionName]: {
+          component: fileRenderer(variationData)
+        }
+      }
     })
 
     const accum = (memo, item) => Object.assign(memo, item)
     // const formControllerXf = t.comp(getInteractions, toFormControllerConfig)
     const controllers = t.transduce(toFormControllerConfig, accum, {}, form)
 
-    // make the module file
-    const moduleTemplate = jsTemplates['form-module.js']
-
     memo[formName] = {
-      module: moduleTemplate(form.default),
-      controllers,
+      module: jsTemplates['form-module.js'](form.default),
+      resource: jsTemplates['resource-factory.js'](form.default),
+      code: controllers,
       views: formHTML
     }
 
     return memo
   }, {})
- console.log('result = ', result)
+ // console.log('result = ', JSON.stringify(result))
   return result
 }
 
