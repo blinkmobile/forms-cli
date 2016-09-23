@@ -7,14 +7,11 @@ const t = require('transducers-js')
 // helpers for template processing
 const createRendererFn = require('./lib/utils/template-helper.js').createRenderer
 const readContents = require('./lib/utils/read-file-contents.js').readContents
-// const writeFileContents = require('./lib/utils/write-file-contents.js').writeFileContents
 const writeSite = require('./lib/write-site.js').writeSite
 
 const getTemplatePaths = require('./lib/utils/get-template-paths.js').getTemplatePaths
-const ElementTransducer = require('./element-HTML-transducer.js').elementTransducer
-const formsTransducer = require('./form-transducer.js').processForm
-
-const passThroughTransducer = require('./lib/transforms/pass-through.js')
+const ElementTransducer = require('./lib/transducers/angular1.5/element-HTML-transducer.js').elementTransducer
+const formsTransducer = require('./lib/transducers/angular1.5/form-transducer.js').processForm
 
 const definitionPath = './test/fixtures/multi-form-with subform-definition.json'
 const outputPath = './output/'
@@ -28,6 +25,7 @@ const makeRendererDetails = t.map((templatePath) => Promise.all([
 function makeHTML (options) {
   const htmlTemplateGlob = options.viewTemplates
   const jsTemplateGlob = options.scriptTemplates
+
   return Promise.all([
     getTemplatePaths(htmlTemplateGlob),
     getTemplatePaths(jsTemplateGlob)
