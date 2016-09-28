@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict'
 
   function {{controllerName}}{{#variation}}_{{variation}}{{/variation}}_Controller (formModel) {
