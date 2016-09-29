@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict'
 
-  function {{controllerName}}{{#variation}}_{{variation}}{{/variation}}_Controller (formModel) {
+  function {{controllerName}}{{#variation}}_{{variation}}{{/variation}}_Controller () {
 
     this.save = (model) => console.log('i am saving ', model)
   }

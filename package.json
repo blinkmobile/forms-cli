@@ -15,6 +15,7 @@
   "author": "Simon Dobie",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@blinkmobile/varied-definition": "^1.1.0",
     "co": "^4.6.0",
     "mkdirp": "^0.5.1",
     "mustache": "^2.2.1",
