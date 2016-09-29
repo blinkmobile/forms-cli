@@ -1,11 +1,12 @@
-'use strict'
+(function (angular) {
+  'use strict'
 
-function {{controllerName}}{{#variation}}_{{variation}}{{/variation}}_Controller (formModel) {
+  function {{controllerName}}{{#variation}}{{variation}}{{/variation}}Controller (formModel) {
+    this.save = (model) => console.log('i am saving ', model)
+  }
 
-  this.save = (model) => console.log('i am saving ', model)
-}
-
-angular.module('{{name}}').component('{{name}}{{#variation}}_{{variation}}{{/variation}}', {
-  templateUrl: '../templates/{{name}}{{#variation}}_{{variation}}{{/variation}}.html',
-  controller: {{controllerName}}{{#variation}}_{{variation}}{{/variation}}_Controller
-})
+  angular.module('{{name}}').component('{{controllerName}}{{#variation}}{{variation}}{{/variation}}', {
+    templateUrl: '{{name}}/templates/{{name}}{{#variation}}_{{variation}}{{/variation}}.html',
+    controller: {{controllerName}}{{#variation}}{{variation}}{{/variation}}Controller
+  })
+})(window.angular)
