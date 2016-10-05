@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict'
 
-  angular.module('{{name}}', []).
+  angular.module('{{name}}', [{{#dependencies}}'{{dependencies}}'{{/dependencies}}]).
   config(function() { // provider-injector
     // This is an example of config block.
     // You can have as many of these as you want.

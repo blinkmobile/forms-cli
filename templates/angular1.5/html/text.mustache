@@ -3,7 +3,9 @@
         ng-model="{{name}}"
         name="{{name}}"
         class="{{rowClass}}"
-        placeholder="{{placehoderText}}"
+        placeholder="{{placeholderText}}"
         {{#required}}ng-required="true"{{/required}}
         {{#characterLimit}}ng-maxlength="{{characterLimit}}"{{/characterLimit}}
+        {{#defaultValue}}value="{{defaultValue}}"{{/defaultValue}}
         title="{{tooltip}}" />
+{{#hint}}<span>{{hint}}</span>{{/hint}}
