@@ -2,7 +2,8 @@
 <textarea class="{{rowClass}}"
           ng-model="{{name}}"
           name="{{name}}"
-          placeholder="{{placehoderText}}"
+          placeholder="{{placeholderText}}"
           {{#required}}ng-required="true"{{/required}}
           {{#characterLimit}}ng-maxlength="{{characterLimit}}"{{/characterLimit}}
           title="{{tooltip}}"></textarea>
+{{#hint}}<span>{{hint}}</span>{{/hint}}

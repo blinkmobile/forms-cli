@@ -14,6 +14,7 @@ const ElementTransducer = require('./lib/transducers/angular1.5/element-HTML-tra
 const formsTransducer = require('./lib/transducers/angular1.5/form-transducer.js').processForm
 
 const definitionPath = './test/fixtures/multi-form-with subform-definition.json'
+// const definitionPath = './simon/definition.json'
 const outputPath = './output/'
 
 const makeRendererDetails = t.map((templatePath) => Promise.all([
@@ -22,7 +23,7 @@ const makeRendererDetails = t.map((templatePath) => Promise.all([
 ]))
 
 // make angular elements transforms
-function makeHTML (options) {
+function transform (options) {
   const htmlTemplateGlob = options.viewTemplates
   const jsTemplateGlob = options.scriptTemplates
 
@@ -67,16 +68,15 @@ ${e}`)
     })
   })
   .then(formsTransducer)
-  .then((formData) => {
-    return writeSite(outputPath, formData)
-  })
-  .then((formData) => {
-    console.log(formData)
-  })
-  .catch((err) => console.log(err))
 }
 
-makeHTML({
+transform({
   viewTemplates: './templates/angular1.5/html',
   scriptTemplates: './templates/angular1.5/js'
+}).then((formData) => {
+  return writeSite(outputPath, formData)
 })
+// .then((formData) => {
+//   console.log(formData)
+// })
+  .catch((err) => console.log(err))
