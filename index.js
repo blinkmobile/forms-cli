@@ -6,15 +6,16 @@ const t = require('transducers-js')
 
 // helpers for template processing
 const createRendererFn = require('./lib/utils/template-helper.js').createRenderer
-const readContents = require('./lib/utils/read-file-contents.js').readContents
 const writeSite = require('./lib/write-site.js').writeSite
 
 const getTemplatePaths = require('./lib/utils/get-template-paths.js').getTemplatePaths
 const ElementTransducer = require('./lib/transducers/angular1.5/element-HTML-transducer.js').elementTransducer
 const formsTransducer = require('./lib/transducers/angular1.5/form-transducer.js').processForm
 
-const definitionPath = './test/fixtures/multi-form-with subform-definition.json'
-// const definitionPath = './simon/definition.json'
+// get forms from a live answerspace
+const getAnswerspaceId = require('./lib/utils/answerspace/fetch-answerspace-id.js')
+const getFormDefinition = require('./lib/utils/answerspace/fetch-forms.js')
+
 const outputPath = './output/'
 
 const makeRendererDetails = t.map((templatePath) => Promise.all([
@@ -29,6 +30,7 @@ let index
 function transform (options) {
   const htmlTemplateGlob = options.viewTemplates
   const jsTemplateGlob = options.scriptTemplates
+  const definition = options.definition
 
   return Promise.all([
     getTemplatePaths(htmlTemplateGlob),
@@ -51,35 +53,30 @@ function transform (options) {
     const elementTransducer = ElementTransducer(templates.htmlTemplates)
     index = templates.htmlTemplates.index
 
-    return readContents(definitionPath).then((definitionStr) => {
-      let definition
-      try {
-        definition = JSON.parse(definitionStr)
-      } catch (e) {
-        console.log(`Error parsing definition JSON:
-${e}`)
-        process.exit(1)
-      }
-
-      const templateFns = {
-        definition,
-        elementTransducer,
-        jsTemplates: templates.jsTemplates,
-        formTemplate: templates.htmlTemplates.form
-      }
-
-      return templateFns
-    })
+    return {
+      definition,
+      elementTransducer,
+      jsTemplates: templates.jsTemplates,
+      formTemplate: templates.htmlTemplates.form
+    }
   })
   .then(formsTransducer)
 }
 
-transform({
-  viewTemplates: './templates/angular1.5/html',
-  scriptTemplates: './templates/angular1.5/js'
-}).then((formData) => {
-  return writeSite(outputPath, formData, index)
-})
+// this is it!
+//
+
+getAnswerspaceId('simon')
+  .then(getFormDefinition)
+  .then((def) => {
+    return transform({
+      viewTemplates: './templates/angular1.5/html',
+      scriptTemplates: './templates/angular1.5/js',
+      definition: def
+    })
+  }).then((formData) => {
+    return writeSite(outputPath, formData, index)
+  })
 // .then((formData) => {
 //   console.log(formData)
 // })

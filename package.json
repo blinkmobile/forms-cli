@@ -19,6 +19,7 @@
     "co": "^4.6.0",
     "mkdirp": "^0.5.1",
     "mustache": "^2.2.1",
+    "node-fetch": "^1.6.3",
     "transducers-js": "^0.4.174"
   },
   "devDependencies": {
