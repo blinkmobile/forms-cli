@@ -6,7 +6,7 @@
   }
 
   angular.module('{{name}}').component('{{controllerName}}{{#variation}}{{variation}}{{/variation}}', {
-    templateUrl: '{{name}}/templates/{{name}}{{#action}}_{{action}}{{/action}}.html',
+    templateUrl: '/{{name}}/templates/{{name}}{{#action}}_{{action}}{{/action}}.html',
     controller: {{controllerName}}{{#variation}}{{variation}}{{/variation}}Controller
   })
 })(window.angular)

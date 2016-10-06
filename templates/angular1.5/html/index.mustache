@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="{{module}}">
+
+<head>
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/skeleton.css" />
+    <link rel="stylesheet" href="/css/demo.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+    {{#dependencies}}<script src="../{{.}}/{{.}}-module.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_add.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_delete.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_edit.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_list.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_search.js"></script>
+    <script src="../{{.}}/components/component-{{.}}_view.js"></script>
+    {{/dependencies}}
+
+    {{#scriptNames}}<script src="{{.}}"></script>
+    {{/scriptNames}}
+
+  </head>
+    <body>
+      {{#componentNames}}
+      <p>{{.}}</p>
+      <{{.}}></{{.}}>
+      <hr/>
+      {{/componentNames}}
+  </body>
+</html>
