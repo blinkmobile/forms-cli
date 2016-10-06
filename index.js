@@ -30,14 +30,17 @@ let index
 function transform (options) {
   const htmlTemplateGlob = options.viewTemplates
   const jsTemplateGlob = options.scriptTemplates
-  const definition = options.definition
+  const answerspace = options.answerspace
 
   return Promise.all([
     getTemplatePaths(htmlTemplateGlob),
-    getTemplatePaths(jsTemplateGlob)
+    getTemplatePaths(jsTemplateGlob),
+    getAnswerspaceId(answerspace).then(getFormDefinition)
   ]).then((templatePaths) => {
     const htmlTemplatePaths = templatePaths[0]
     const jsTemplatePaths = templatePaths[1]
+    const definition = templatePaths[2]
+
     return Promise.all([
       Promise.all(t.into([], makeRendererDetails, jsTemplatePaths)),
       Promise.all(t.into([], makeRendererDetails, htmlTemplatePaths))
@@ -46,7 +49,8 @@ function transform (options) {
       const htmlTemplates = t.into({}, t.identity, renderers[1])
       return {
         jsTemplates,
-        htmlTemplates
+        htmlTemplates,
+        definition
       }
     })
   }).then((templates) => {
@@ -54,10 +58,10 @@ function transform (options) {
     index = templates.htmlTemplates.index
 
     return {
-      definition,
       elementTransducer,
       jsTemplates: templates.jsTemplates,
-      formTemplate: templates.htmlTemplates.form
+      formTemplate: templates.htmlTemplates.form,
+      definition: templates.definition
     }
   })
   .then(formsTransducer)
@@ -66,15 +70,12 @@ function transform (options) {
 // this is it!
 //
 
-getAnswerspaceId('simon')
-  .then(getFormDefinition)
-  .then((def) => {
-    return transform({
-      viewTemplates: './templates/angular1.5/html',
-      scriptTemplates: './templates/angular1.5/js',
-      definition: def
-    })
-  }).then((formData) => {
-    return writeSite(outputPath, formData, index)
-  })
-  .catch((err) => console.log(err))
+transform({
+  viewTemplates: './templates/angular1.5/html',
+  scriptTemplates: './templates/angular1.5/js',
+  answerspace: 'simon'
+}).then((formData) => {
+  return writeSite(outputPath, formData, index)
+})
+.catch((err) => console.log(err))
+
