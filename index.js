@@ -77,7 +77,4 @@ getAnswerspaceId('simon')
   }).then((formData) => {
     return writeSite(outputPath, formData, index)
   })
-// .then((formData) => {
-//   console.log(formData)
-// })
   .catch((err) => console.log(err))
