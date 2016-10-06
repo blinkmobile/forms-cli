@@ -22,6 +22,9 @@ const makeRendererDetails = t.map((templatePath) => Promise.all([
   createRendererFn(templatePath)
 ]))
 
+// dodgy!
+let index
+
 // make angular elements transforms
 function transform (options) {
   const htmlTemplateGlob = options.viewTemplates
@@ -46,6 +49,7 @@ function transform (options) {
     })
   }).then((templates) => {
     const elementTransducer = ElementTransducer(templates.htmlTemplates)
+    index = templates.htmlTemplates.index
 
     return readContents(definitionPath).then((definitionStr) => {
       let definition
@@ -74,7 +78,7 @@ transform({
   viewTemplates: './templates/angular1.5/html',
   scriptTemplates: './templates/angular1.5/js'
 }).then((formData) => {
-  return writeSite(outputPath, formData)
+  return writeSite(outputPath, formData, index)
 })
 // .then((formData) => {
 //   console.log(formData)
