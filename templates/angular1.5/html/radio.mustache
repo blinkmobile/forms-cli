@@ -1,7 +1,7 @@
 <label for="{{name}}">{{label}}</label>
 {{#options}}
 <input  type="radio"
-        ng-model="{{name}}"
+        ng-model="$ctrl.model.{{name}}"
         name="{{name}}"
         value="{{.}}"
         class="{{rowClass}}"

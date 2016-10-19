@@ -1,6 +1,6 @@
 <label for="{{name}}">{{label}}</label>
 <textarea class="{{rowClass}}"
-          ng-model="{{name}}"
+          ng-model="$ctrl.model.{{name}}"
           name="{{name}}"
           placeholder="{{placeholderText}}"
           {{#required}}ng-required="true"{{/required}}

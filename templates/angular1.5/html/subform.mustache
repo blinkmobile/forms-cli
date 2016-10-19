@@ -1,1 +1,4 @@
-<{{{subForm}}}></{{{subForm}}}>
+<p>here be subforms</p>
+<div ng-repeat="subform in $ctrl.model.{{{subForm}}}">
+  <{{{subForm}}} ng-model="subform"></{{{subForm}}}>
+</div>

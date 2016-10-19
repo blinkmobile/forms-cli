@@ -1,6 +1,6 @@
 <label for="{{name}}">{{label}}</label>
 <select name="{{name}}"
-        ng-model="{{name}}"
+        ng-model="$ctrl.model.{{name}}"
         class="{{rowClass}}"
         title="{{tooltip}}"
         {{#multi}}multiple="multiple"{{/multi}}>
