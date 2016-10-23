@@ -4,6 +4,8 @@ const path = require('path')
 
 const t = require('transducers-js')
 
+const writeFileContents = require('./lib/utils/write-file-contents.js').writeFileContents
+
 // helpers for template processing
 const createRendererFn = require('./lib/utils/template-helper.js').createRenderer
 const writeSite = require('./lib/write-site.js').writeSite
@@ -40,6 +42,9 @@ function transform (options) {
     const htmlTemplatePaths = templatePaths[0]
     const jsTemplatePaths = templatePaths[1]
     const definition = templatePaths[2]
+
+// temp
+writeFileContents('./test/simonspace.json', JSON.stringify(definition))
 
     return Promise.all([
       Promise.all(t.into([], makeRendererDetails, jsTemplatePaths)),
