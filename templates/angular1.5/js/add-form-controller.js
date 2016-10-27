@@ -1,9 +1,6 @@
-(function (angular) {
-  'use strict'
-
-  function {{moduleName}}{{#variation}}{{variation}}{{/variation}}Controller ($scope, model) {
+  function {{moduleName}}AddController ($scope, {{moduleName}}Model) {
     // the form model
-    this.model = model || {}
+    this.model = {{moduleName}}Model || {}
 
     // lifecycle functions
     this.$onInit = () => true
@@ -22,16 +19,10 @@
     }
   }
 
-  {{moduleName}}{{#variation}}{{variation}}{{/variation}}Controller.$inject = ['$scope', '{{#serviceNames}}{{name}},{{/serviceNames}}']
-
-  angular.module('{{moduleName}}').component('{{moduleName}}{{#variation}}{{variation}}{{/variation}}', {
-    templateUrl: '/{{name}}/templates/{{name}}{{#action}}_{{action}}{{/action}}.html',
-    controller: {{moduleName}}{{#variation}}{{variation}}{{/variation}}Controller,
+  angular.module('{{moduleName}}').component('{{moduleName}}Add', {
+    templateUrl: '../templates/{{name}}_add.html',
+    controller: {{moduleName}}AddController,
     bindings: {
       model: '=?'
     }
-    // require: {
-    //   model: '^?form'
-    // }
   })
-})(window.angular)
