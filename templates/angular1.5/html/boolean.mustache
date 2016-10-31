@@ -1,6 +1,6 @@
 <label for="{{name}}">{{label}}</label>
 <input  type="checkbox"
-        ng-model="{{name}}"
+        ng-model="$ctrl.model.{{name}}"
         name="{{name}}"
         ng-true-value="{{options[1]}}"
         ng-false-value="{{options[0]}}"

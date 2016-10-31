@@ -4,6 +4,8 @@ const path = require('path')
 
 const t = require('transducers-js')
 
+//const writeFileContents = require('./lib/utils/write-file-contents.js').writeFileContents
+
 // helpers for template processing
 const createRendererFn = require('./lib/utils/template-helper.js').createRenderer
 const writeSite = require('./lib/write-site.js').writeSite
@@ -16,7 +18,7 @@ const formsTransducer = require('./lib/transducers/angular1.5/form-transducer.js
 const getAnswerspaceId = require('./lib/utils/answerspace/fetch-answerspace-id.js')
 const getFormDefinition = require('./lib/utils/answerspace/fetch-forms.js')
 
-const outputPath = './output/'
+const outputPath = './output/src/'
 
 const makeRendererDetails = t.map((templatePath) => Promise.all([
   Promise.resolve(path.basename(templatePath, '.mustache')),
@@ -40,6 +42,9 @@ function transform (options) {
     const htmlTemplatePaths = templatePaths[0]
     const jsTemplatePaths = templatePaths[1]
     const definition = templatePaths[2]
+
+// temp
+//riteFileContents('./test/simonspace.json', JSON.stringify(definition))
 
     return Promise.all([
       Promise.all(t.into([], makeRendererDetails, jsTemplatePaths)),
@@ -74,8 +79,16 @@ transform({
   viewTemplates: './templates/angular1.5/html',
   scriptTemplates: './templates/angular1.5/js',
   answerspace: 'simon'
-}).then((formData) => {
-  return writeSite(outputPath, formData, index)
-})
-.catch((err) => console.log(err))
+}).then((formData) => writeSite(outputPath, formData, index))
+  .then((formData) => {
+    const gulp = require('gulp')
+    require('./gulpfile.js')
+
+    if (gulp.tasks.build) {
+      console.log('running gulp task')
+      process.nextTick(() => gulp.start('build'))
+    }
+  })
+  //.then((formData) => console.log(formData))
+  .catch((err) => console.log(err))
 
