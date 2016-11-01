@@ -25,9 +25,6 @@ const makeRendererDetails = t.map((templatePath) => Promise.all([
   createRendererFn(templatePath)
 ]))
 
-// dodgy!
-let index
-
 // make angular elements transforms
 function transform (options) {
   const htmlTemplateGlob = options.viewTemplates
@@ -44,7 +41,7 @@ function transform (options) {
     const definition = templatePaths[2]
 
 // temp
-//riteFileContents('./test/simonspace.json', JSON.stringify(definition))
+//writeFileContents('./test/simonspace.json', JSON.stringify(definition))
 
     return Promise.all([
       Promise.all(t.into([], makeRendererDetails, jsTemplatePaths)),
@@ -60,7 +57,6 @@ function transform (options) {
     })
   }).then((templates) => {
     const elementTransducer = ElementTransducer(templates.htmlTemplates)
-    index = templates.htmlTemplates.index
 
     return {
       elementTransducer,
@@ -79,7 +75,7 @@ transform({
   viewTemplates: './templates/angular1.5/html',
   scriptTemplates: './templates/angular1.5/js',
   answerspace: 'simon'
-}).then((formData) => writeSite(outputPath, formData, index))
+}).then((formData) => writeSite(outputPath, formData))
   .then((formData) => {
     const gulp = require('gulp')
     require('./gulpfile.js')
