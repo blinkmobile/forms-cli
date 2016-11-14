@@ -20,6 +20,7 @@ const build = './output/build'
 const dest = './output/dest'
 
 gulp.task('blinkForms', () => {
+  console.log('gulp: blinkForms')
   gulp.src('output/src/**/*.js')
       .pipe(babel({presets: ['es2015']}))
       .pipe(angularFilesort())
@@ -36,8 +37,9 @@ gulp.task('blinkForms', () => {
 })
 
 gulp.task('build', ['blinkForms'], () => {
+  console.log('gulp: build')
   gulp.src('./templates/angular1.5/index.html')
-    .pipe(inject(gulp.src([`${dest}/blink.js`, './output/css/*.css'])))
+    .pipe(inject(gulp.src([`${dest}/*.js`, './output/css/*.css'], {read: false})))
     .pipe(gulp.dest(dest))
 })
 
