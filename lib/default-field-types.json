@@ -1,0 +1,19 @@
+{
+  "text": "''",
+  "heading": "''",
+  "textarea": "''",
+  "select": "''",
+  "password": "''",
+  "email": "''",
+  "url": "''",
+  "telephone": "''",
+  "number": "0",
+  "multi": "''",
+  "boolean": "false",
+  "date": "''",
+  "time": "''",
+  "datetime": "''",
+  "file": "''",
+  "message": "''",
+  "subForm": "[]"
+}

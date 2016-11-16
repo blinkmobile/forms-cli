@@ -1,13 +1,17 @@
-angular.module('{{moduleName}}').factory('{{moduleName}}Model', function BlinkModelFactory () {
-  function {{moduleName}}Model () {
-    {{#_elements}}
-    this.{{name}} = ''
-    {{/_elements}}
+angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkModelFactory () {
+  function <%moduleName%>Model () {
+    <%#_elements%>
+    this.<%name%> = <% &value%>
+    <%/_elements%>
   }
 
-  {{moduleName}}Model.prototype.set = function (modelObj) {
+  <%moduleName%>Model.prototype.set = function (modelObj) {
     console.log('setting values!')
   }
 
-  return new {{moduleName}}Model()
+  <%moduleName%>Model.prototype.create = function () {
+    return new <%moduleName%>Model()
+  }
+
+  return new <%moduleName%>Model()
 })

@@ -1,9 +1,9 @@
-<label for="{{name}}">{{label}}</label>
+<label for="<%name%>"><%label%></label>
 <input  type="file"
-        ng-model="$ctrl.model.{{name}}"
-        name={{name}}
-        class="{{rowClass}}"
-        placeholder="{{placeholderText}}"
-        {{#required}}ng-required="true"{{/required}}
-        {{#characterLimit}}ng-maxlength="{{characterLimit}}"{{/characterLimit}}
-        title="{{tooltip}}" />
+        ng-model="$ctrl.model.<%name%>"
+        name=<%name%>
+        class="<%rowClass%>"
+        placeholder="<%placeholderText%>"
+        <%#required%>ng-required="true"<%/required%>
+        <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
+        title="<%tooltip%>" />

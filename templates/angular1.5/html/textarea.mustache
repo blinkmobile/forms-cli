@@ -1,9 +1,9 @@
-<label for="{{name}}">{{label}}</label>
-<textarea class="{{rowClass}}"
-          ng-model="$ctrl.model.{{name}}"
-          name="{{name}}"
-          placeholder="{{placeholderText}}"
-          {{#required}}ng-required="true"{{/required}}
-          {{#characterLimit}}ng-maxlength="{{characterLimit}}"{{/characterLimit}}
-          title="{{tooltip}}"></textarea>
-{{#hint}}<span>{{hint}}</span>{{/hint}}
+<label for="<%name%>"><%label%></label>
+<textarea class="<%rowClass%>"
+          ng-model="$ctrl.model.<%name%>"
+          name="<%name%>"
+          placeholder="<%placeholderText%>"
+          <%#required%>ng-required="true"<%/required%>
+          <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
+          title="<%tooltip%>"></textarea>
+<%#hint%><span><%hint%></span><%/hint%>
