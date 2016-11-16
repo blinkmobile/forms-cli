@@ -1,6 +1,6 @@
-  function {{moduleName}}AddController ($scope, {{moduleName}}Model) {
+  function <%moduleName%>AddController ($scope, <%moduleName%>Model) {
     // the form model
-    this.model = {{moduleName}}Model || {}
+    this.model = this.subform || <%moduleName%>Model || {}
 
     // lifecycle functions
     this.$onInit = () => true
@@ -17,12 +17,20 @@
       const result = textboxContainsShow()
       return result
     }
+
+    this.addSubform = (collection) => {
+      collection.push({})
+    }
+
+    this.removeSubform = (model) => {
+      model._action = 'remove'
+    }
   }
 
-  angular.module('{{moduleName}}').component('{{moduleName}}Add', {
-    templateUrl: 'component-{{name}}_add.html',
-    controller: {{moduleName}}AddController,
+  angular.module('<%moduleName%>').component('<%moduleName%>Add', {
+    templateUrl: 'component-<%name%>_add.html',
+    controller: <%moduleName%>AddController,
     bindings: {
-      model: '=?'
+      subform: '<?'
     }
   })

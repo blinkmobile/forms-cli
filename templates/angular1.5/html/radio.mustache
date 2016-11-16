@@ -1,10 +1,10 @@
-<label for="{{name}}">{{label}}</label>
-{{#options}}
+<label for="<%name%>"><%label%></label>
+<%#options%>
 <input  type="radio"
-        ng-model="$ctrl.model.{{name}}"
-        name="{{name}}"
-        value="{{.}}"
-        class="{{rowClass}}"
-        title="{{tooltip}}" />
-<span>{{.}}</span>
-{{/options}}
+        ng-model="$ctrl.model.<%name%>"
+        name="<%name%>"
+        value="<%.%>"
+        class="<%rowClass%>"
+        title="<%tooltip%>" />
+<span><%.%></span>
+<%/options%>

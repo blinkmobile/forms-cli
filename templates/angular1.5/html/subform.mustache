@@ -1,4 +1,6 @@
 <p>here be subforms</p>
-<div ng-repeat="subform in $ctrl.model.{{{subForm}}}">
-  <{{{subForm}}} ng-model="subform"></{{{subForm}}}>
+<div ng-repeat="subform in $ctrl.model.<%&name%> | filter:{ '_action': '!remove'}">
+  <<%&subFormElement%> subform="subform"></<%&subFormElement%>>
+  <button class="button-primary" ng-click="$ctrl.removeSubform(subform)">Remove Subform</button>
 </div>
+<button class="button-primary" ng-click="$ctrl.addSubform($ctrl.model.<%&name%>)">Add Subform</button>

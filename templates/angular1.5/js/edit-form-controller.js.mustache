@@ -1,4 +1,4 @@
-  function {{moduleName}}EditController () {
+  function <%moduleName%>EditController () {
     // the form model
     this.model = this.model || {}
 
@@ -11,7 +11,7 @@
     this.save = (model) => console.log('i am saving ', model)
   }
 
-  angular.module('{{moduleName}}').component('{{moduleName}}Edit', {
-    templateUrl: 'component-{{name}}_edit.html',
-    controller: {{moduleName}}EditController
+  angular.module('<%moduleName%>').component('<%moduleName%>Edit', {
+    templateUrl: 'component-<%name%>_edit.html',
+    controller: <%moduleName%>EditController
   })
