@@ -5,7 +5,6 @@ const writeSite = require('./lib/write-site.js').writeSite
 const templateService = require('./lib/utils/template-service.js')
 const writeFormSchema = require('./lib/json-schema/write-form-schema.js')
 const formsTransducer = require('./lib/transducers/angular1.5/form-transducer.js').processForm
-const transformEvents = require('./lib/transducers/angular1.5/form-transducer.js').processingEvents
 const EVENT_NAMES = require('./lib/transducers/angular1.5/form-transducer.js').EVENT_NAMES
 
 // get forms from a live answerspace
@@ -25,10 +24,6 @@ function transform (options) {
 
 function compile (options) {
   const outputPath = options.outputPath
-
-  transformEvents.on(EVENT_NAMES.EVENT_FORM_NORMALISED, (form) => {
-    writeFormSchema(outputPath, form)
-  })
 
   return transform(options)
     .then((formData) => writeSite(outputPath, formData))
