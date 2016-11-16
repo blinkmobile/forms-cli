@@ -1,6 +1,6 @@
-  function <%moduleName%>EditController () {
+  function <%moduleName%>EditController (<%moduleName%>Model) {
     // the form model
-    this.model = this.model || {}
+    this.model = this.model || <%moduleName%>Model || {}
 
     // lifecycle functions
     this.$onInit = () => true
@@ -8,10 +8,29 @@
     this.$doCheck = () => true
     this.$onDestroy = () => true
     this.$postLink = () => true
+
     this.save = (model) => console.log('i am saving ', model)
+
+    const textboxContainsShow = () => ($scope.simple_form_add.textbox.$modelValue || '').indexOf('show') > -1
+
+    this.textboxContainsShow_choiceIsChoice1_checkboxIsChecked = function () {
+      const result = textboxContainsShow()
+      return result
+    }
+
+    this.addSubform = (collection) => {
+      collection.push({})
+    }
+
+    this.removeSubform = (model, collection) => {
+      model._action = 'remove'
+    }
   }
 
   angular.module('<%moduleName%>').component('<%moduleName%>Edit', {
     templateUrl: 'component-<%name%>_edit.html',
-    controller: <%moduleName%>EditController
+    controller: <%moduleName%>EditController,
+    bindings: {
+      model: '<?'
+    }
   })

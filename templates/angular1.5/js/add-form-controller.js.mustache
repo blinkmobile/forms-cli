@@ -1,6 +1,6 @@
-  function <%moduleName%>AddController ($scope, <%moduleName%>Model) {
+  function <%moduleName%>AddController (<%moduleName%>Model) {
     // the form model
-    this.model = this.subform || <%moduleName%>Model || {}
+    this.model = this.model || <%moduleName%>Model || {}
 
     // lifecycle functions
     this.$onInit = () => true
@@ -22,8 +22,13 @@
       collection.push({})
     }
 
-    this.removeSubform = (model) => {
-      model._action = 'remove'
+    this.removeSubform = (model, collection) => {
+      const idx = collection.indexOf(model)
+      if (idx === -1) {
+        return
+      }
+
+      collection.splice(idx, 1)
     }
   }
 
@@ -31,6 +36,6 @@
     templateUrl: 'component-<%name%>_add.html',
     controller: <%moduleName%>AddController,
     bindings: {
-      subform: '<?'
+      model: '<?'
     }
   })
