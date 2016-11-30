@@ -1,10 +1,12 @@
-<label for="<%name%>"><%label%></label>
-<select name="<%name%>"
-        ng-model="$ctrl.model.<%name%>"
-        class="<%rowClass%>"
-        title="<%tooltip%>"
-        <%#multi%>multiple="multiple"<%/multi%>>
-  <%#options%>
-    <option value="<%.%>"><%.%></option>
-  <%/options%>
-</select>
+<div class="row">
+  <label for="<%name%>"><%label%></label>
+  <select name="<%name%>"
+          ng-model="$ctrl.model.<%name%>"
+          class="<%rowClass%>"
+          title="<%tooltip%>"
+          <%#multi%>multiple="multiple"<%/multi%>>
+    <%#options%>
+      <option value="<%.%>"><%.%></option>
+    <%/options%>
+  </select>
+</div>
