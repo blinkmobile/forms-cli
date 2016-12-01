@@ -1,9 +1,11 @@
-<label for="<%name%>"><%label%></label>
-<input  type="number"
-        ng-model="$ctrl.model.<%name%>"
-        name="<%name%>"
-        class="<%rowClass%>"
-        placeholder="<%placeholderText%>"
-        <%#required%>ng-required="true"<%/required%>
-        <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
-        title="<%tooltip%>" />
+<div class="row">
+  <label for="<%name%>"><%label%></label>
+  <input  type="number"
+          ng-model="$ctrl.model.<%name%>"
+          name="<%name%>"
+          class="<%rowClass%>"
+          placeholder="<%placeholderText%>"
+          <%#required%>ng-required="true"<%/required%>
+          <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
+          title="<%tooltip%>" />
+</div>

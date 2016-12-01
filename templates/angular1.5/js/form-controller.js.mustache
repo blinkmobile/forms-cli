@@ -1,4 +1,4 @@
-  function <%moduleName%>EditController (<%moduleName%>Model) {
+  function <%moduleName%>Controller (<%moduleName%>Model) {
     // the form model
     this.model = this.model || <%moduleName%>Model || {}
 
@@ -23,13 +23,18 @@
     }
 
     this.removeSubform = (model, collection) => {
-      model._action = 'remove'
+      const idx = collection.indexOf(model)
+      if (idx === -1) {
+        return
+      }
+
+      collection.splice(idx, 1)
     }
   }
 
-  angular.module('<%moduleName%>').component('<%moduleName%>Edit', {
-    templateUrl: 'component-<%name%>_edit.html',
-    controller: <%moduleName%>EditController,
+  angular.module('<%moduleName%>').component('<%moduleName%>', {
+    templateUrl: 'component-<%name%>.html',
+    controller: <%moduleName%>Controller,
     bindings: {
       model: '<?'
     }
