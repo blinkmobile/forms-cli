@@ -11,13 +11,6 @@
 
     this.save = (model) => console.log('i am saving ', model)
 
-    const textboxContainsShow = () => ($scope.simple_form_add.textbox.$modelValue || '').indexOf('show') > -1
-
-    this.textboxContainsShow_choiceIsChoice1_checkboxIsChecked = function () {
-      const result = textboxContainsShow()
-      return result
-    }
-
     this.addSubform = (collection) => {
       collection.push({})
     }
