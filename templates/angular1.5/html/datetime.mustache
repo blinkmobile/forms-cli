@@ -1,4 +1,5 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>>
+<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
   <label for="<%name%>"><%label%></label>
   <input  type="datetime-local"
           ng-model="$ctrl.model.<%name%>"
