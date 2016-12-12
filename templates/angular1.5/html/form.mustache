@@ -1,4 +1,4 @@
-<ng-form name="<%interaction%>">
+<ng-form name="<%interaction%>" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>>
   <pre>
   {{$ctrl.model}}
   </pre>

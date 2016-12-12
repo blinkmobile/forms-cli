@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>>
   <label for="<%name%>"><%label%></label>
   <input  type="url"
           ng-model="$ctrl.model.<%name%>"

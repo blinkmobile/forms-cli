@@ -42,6 +42,7 @@
     "mustache": "^2.2.1",
     "node-fetch": "^1.6.3",
     "pify": "^2.3.0",
+    "recast": "^0.11.18",
     "transducers-js": "^0.4.174"
   },
   "devDependencies": {

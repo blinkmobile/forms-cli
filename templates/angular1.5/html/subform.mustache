@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>>
   <div ng-repeat="subform in $ctrl.model.<%&name%> | filter:{ '_action': '!remove'}">
     <<%&subFormElement%> model="subform"></<%&subFormElement%>>
     <button class="button-primary" ng-click="$ctrl.removeSubform(subform, $ctrl.model.<%&name%>)">Remove Subform</button>
