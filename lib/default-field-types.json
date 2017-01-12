@@ -15,5 +15,6 @@
   "datetime": "''",
   "file": "''",
   "message": "''",
-  "subForm": "[]"
+  "subForm": "[]",
+  "draw": "undefined"
 }

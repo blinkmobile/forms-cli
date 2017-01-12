@@ -1,0 +1,16 @@
+<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+  <label for="<%name%>"><%label%></label>
+  <bm-signature-pad style="display: block; width: 100%; height: 76px; border: solid 1px #D1D1D1; box-sizing: border-box; margin-bottom: 1.5rem"
+                    ng-model="$ctrl.model.<%name%>"
+                    name="<%name%>"
+                    class="<%rowClass%>"
+                    <%#required%>ng-required="true"<%/required%>
+                    title="<%tooltip%>"
+                    crop="true"
+                    resize="$ctrl.resizeSignaturePad = $fn"></bm-signature-pad>
+
+  <button ng-click="$ctrl.model.<%name%> = undefined">Clear</button>
+</div>
+
+

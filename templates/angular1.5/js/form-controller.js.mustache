@@ -1,12 +1,30 @@
-  function <%moduleName%>Controller (<%moduleName%>Model) {
+<%moduleName%>Controller.$inject = ['<%moduleName%>Model', '$scope', '$window']
+
+function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
     // the form model
     this.model = this.model || <%moduleName%>Model || {}
 
+  // Watch for window resize changes to resize signature pad
+  const windowEle = angular.element($window)
+  const resize = () => {
+    if (angular.isFunction(this.resizeSignaturePad)) {
+      this.resizeSignaturePad()
+    }
+  }
+
     // lifecycle functions
-    this.$onInit = () => true
+  this.$onInit = () => {
+    if (angular.isFunction(this.resizeSignaturePad)) {
+      windowEle.on('resize', resize)
+    }
+  }
     this.$onChanges = (changesObj) => true
     this.$doCheck = () => true
-    this.$onDestroy = () => true
+  this.$onDestroy = () => {
+    if (angular.isFunction(this.resizeSignaturePad)) {
+      windowEle.off('resize', resize)
+    }
+  }
     this.$postLink = () => true
 
     this.save = (model) => console.log('i am saving ', model)
