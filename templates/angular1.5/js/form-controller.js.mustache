@@ -14,17 +14,13 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
 
     // lifecycle functions
   this.$onInit = () => {
-    if (angular.isFunction(this.resizeSignaturePad)) {
       windowEle.on('resize', resize)
     }
-  }
     this.$onChanges = (changesObj) => true
     this.$doCheck = () => true
   this.$onDestroy = () => {
-    if (angular.isFunction(this.resizeSignaturePad)) {
       windowEle.off('resize', resize)
     }
-  }
     this.$postLink = () => true
 
     this.save = (model) => console.log('i am saving ', model)
