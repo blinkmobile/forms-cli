@@ -2,12 +2,13 @@
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
   <label for="<%name%>"><%label%></label>
   <%#options%>
-  <input  type="checkbox"
-          ng-model="$ctrl.model.<%name%>"
-          name="<%name%>"
-          value="<%.%>"
-          class="<%rowClass%>"
-          title="<%tooltip%>" />
-  <span><%.%></span>
+  <label class="<%rowClass%>"
+         title="<%tooltip%>">
+    <input  type="checkbox"
+            ng-checked="$ctrl.model.<%name%>.indexOf('<%.%>') > -1"
+            ng-click="$ctrl.model.<%name%>.indexOf('<%.%>') > -1 ? $ctrl.model.<%name%>.splice($ctrl.model.<%name%>.indexOf('<%.%>'), 1) : $ctrl.model.<%name%>.push('<%.%>')"
+            name="<%name%>"/>
+    <span class="label-body"><%.%></span>
+  </label>
   <%/options%>
 </div>
