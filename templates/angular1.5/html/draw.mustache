@@ -3,14 +3,16 @@
   <label for="<%name%>"><%label%></label>
   <bm-signature-pad style="display: block; width: 100%; height: 76px; border: solid 1px #D1D1D1; box-sizing: border-box; margin-bottom: 1.5rem"
                     ng-model="$ctrl.model.<%name%>"
+                    ng-disabled="$ctrl.<%name%>Disabled"
                     name="<%name%>"
                     class="<%rowClass%>"
                     <%#required%>ng-required="true"<%/required%>
                     title="<%tooltip%>"
                     crop="true"
-                    resize="$ctrl.resizeSignaturePad = $fn"></bm-signature-pad>
+                    image-type="'image/png'"
+                    resize="$ctrl.resizeSignaturePad<%name%> = $fn"></bm-signature-pad>
 
-  <button ng-click="$ctrl.model.<%name%> = undefined">Clear</button>
+  <button ng-click="$ctrl.clearSignaturePad('<%name%>');">Clear</button>
+  <button ng-hide="$ctrl.<%name%>Disabled"
+          ng-click="$ctrl.<%name%>Disabled = true">Done</button>
 </div>
-
-
