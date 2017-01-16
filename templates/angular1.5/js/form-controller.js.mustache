@@ -4,6 +4,10 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
   // the form model
   this.model = this.model || <%moduleName%>Model || {}
 
+  this.toJson = function (obj) {
+    return JSON.stringify(obj, null, 2)
+  }
+
   // lifecycle functions
   this.$onInit = () => {}
   this.$onChanges = (changesObj) => {}
