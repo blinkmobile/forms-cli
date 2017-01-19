@@ -1,34 +1,38 @@
-  function <%moduleName%>Controller (<%moduleName%>Model) {
-    // the form model
-    this.model = this.model || <%moduleName%>Model || {}
+function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
+  // the form model
+  this.model = this.model || <%moduleName%>Model || {}
 
-    // lifecycle functions
-    this.$onInit = () => true
-    this.$onChanges = (changesObj) => true
-    this.$doCheck = () => true
-    this.$onDestroy = () => true
-    this.$postLink = () => true
-
-    this.save = (model) => console.log('i am saving ', model)
-
-    this.addSubform = (collection) => {
-      collection.push({})
-    }
-
-    this.removeSubform = (model, collection) => {
-      const idx = collection.indexOf(model)
-      if (idx === -1) {
-        return
-      }
-
-      collection.splice(idx, 1)
-    }
+  this.toJson = function (obj) {
+    return JSON.stringify(obj, null, 2)
   }
 
-  angular.module('<%moduleName%>').component('<%moduleName%>', {
-    templateUrl: 'component-<%name%>.html',
-    controller: <%moduleName%>Controller,
-    bindings: {
-      model: '<?'
+  // lifecycle functions
+  this.$onInit = () => {}
+  this.$onChanges = (changesObj) => {}
+  this.$doCheck = () => {}
+  this.$onDestroy = () => {}
+  this.$postLink = () => {}
+
+  this.save = (model) => console.log('i am saving ', model)
+
+  this.addSubform = (collection) => {
+    collection.push({})
+  }
+
+  this.removeSubform = (model, collection) => {
+    const idx = collection.indexOf(model)
+    if (idx === -1) {
+      return
     }
-  })
+
+    collection.splice(idx, 1)
+  }
+}
+
+angular.module('<%moduleName%>').component('<%moduleName%>', {
+  templateUrl: 'component-<%name%>.html',
+  controller: <%moduleName%>Controller,
+  bindings: {
+    model: '<?'
+  }
+})
