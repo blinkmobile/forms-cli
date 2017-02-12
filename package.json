@@ -1,6 +1,6 @@
 {
-  "name": "@blinkmobile/forms-investigation",
-  "version": "0.0.1",
+  "name": "@blinkmobile/project-shockwave",
+  "version": "1.0.0-alpha",
   "description": "a test of transducers on a form definition",
   "main": "index.js",
   "directories": {
@@ -10,7 +10,8 @@
     "test": "eslint ava",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
-    "ava": "ava"
+    "ava": "ava",
+    "flow_check": "flow check"
   },
   "author": "Simon Dobie",
   "license": "BSD-3-Clause",
@@ -43,15 +44,19 @@
     "node-fetch": "^1.6.3",
     "pify": "^2.3.0",
     "recast": "^0.11.18",
-    "transducers-js": "^0.4.174"
+    "transducers-js": "^0.4.174",
+    "meow": "^3.7.0",
+    "update-notifier": "^0.7.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "eslint": "^3.2.2",
+    "eslint": "^3.15.0",
     "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-node": "^4.0.1",
     "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
-    "fixpack": "^2.3.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "^2.3.1",
+    "flow-bin": "^0.39.0"
   },
   "keywords": [],
   "engines": {
@@ -60,5 +65,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave.git"
   }
 }
