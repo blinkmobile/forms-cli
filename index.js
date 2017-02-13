@@ -11,7 +11,7 @@ const normalisationTransducer = require('./lib/transducers/normalisation.js').no
 const getAnswerspaceId = require('./lib/utils/answerspace/fetch-answerspace-id.js')
 const getFormDefinition = require('./lib/utils/answerspace/fetch-forms.js')
 
-const logError = (err) => console.log(err)
+const log = require('./lib/logger.js').logger
 
 // make angular elements transforms
 function normalise (options) {
@@ -33,7 +33,7 @@ function compile (options) {
       require('./gulpfile.js')
 
       if (gulp.tasks.build) {
-        console.log('running gulp task(s)')
+        log.info('Running gulp task(s)')
         process.nextTick(() => gulp.start('build'))
       }
     })
@@ -49,4 +49,4 @@ compile({
   },
   answerspace: 'simon',
   outputPath: './output/src/'
-}).catch(logError)
+}).catch((err) => log.error(err))
