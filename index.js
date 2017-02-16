@@ -13,7 +13,7 @@ const help = require('./lib/help.js')
 // this module
 
 const commands = {
-  create: require('./commands/create.js'),
+  create: () => log.error('Not yet implemented'),
   init: () => log.error('Not yet implemented')
 }
 
