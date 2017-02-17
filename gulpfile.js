@@ -20,7 +20,6 @@ const build = './output/build'
 const dest = './output/dest'
 
 gulp.task('blinkForms', () => {
-  console.log('gulp: blinkForms')
   return gulp.src('output/src/**/*.js')
       .pipe(babel({presets: ['es2015']}))
       .pipe(angularFilesort())
@@ -37,7 +36,6 @@ gulp.task('blinkForms', () => {
 })
 
 gulp.task('build', ['blinkForms'], () => {
-  console.log('gulp: build')
   return gulp.src('./templates/angular1.5/index.html')
     .pipe(inject(gulp.src([`${dest}/*.js`, './output/css/*.css'], {read: false})))
     .pipe(gulp.dest(dest))
@@ -49,12 +47,6 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'))
 })
-
-// gulp.task('module', () => {
-//   gulp.src('output/src/**/*-module.js')
-//     .pipe(angularModule())
-//     .pipe(gulp.dest(build))
-// })
 
 gulp.task('concat', () => {
   return gulp.src(`${build}/**/*.js`)

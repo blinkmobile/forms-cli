@@ -1,6 +1,14 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:node/recommended",
     "standard"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": [
+    "node"
   ]
 }

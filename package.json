@@ -1,8 +1,8 @@
 {
-  "name": "@blinkmobile/forms-investigation",
-  "version": "0.0.1",
-  "description": "a test of transducers on a form definition",
-  "main": "index.js",
+  "name": "@blinkmobile/project-shockwave",
+  "version": "1.0.0-alpha",
+  "description": "Transform a BlinkMobile Forms definition into an HTML Form",
+  "main": "bin/index.js",
   "directories": {
     "test": "test"
   },
@@ -10,48 +10,53 @@
     "test": "eslint ava",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
-    "ava": "ava"
+    "ava": "ava",
+    "flow_check": "flow check"
   },
   "author": "Simon Dobie",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "dependencies": {
-    "@blinkmobile/varied-definition": "^1.1.0",
-    "ajv": "^4.8.2",
-    "babel-preset-es2015": "^6.18.0",
-    "co": "^4.6.0",
-    "glob": "^7.1.1",
-    "gulp": "^3.9.1",
-    "gulp-angular-embed-templates": "^2.3.0",
-    "gulp-angular-filesort": "^1.1.1",
+    "@blinkmobile/varied-definition": "1.1.0",
+    "babel-preset-es2015": "6.18.0",
+    "co": "4.6.0",
+    "glob": "7.1.1",
+    "gulp": "3.9.1",
+    "gulp-angular-embed-templates": "2.3.0",
+    "gulp-angular-filesort": "1.1.1",
     "gulp-angular-module": "0.0.2",
-    "gulp-babel": "^6.1.2",
-    "gulp-cached": "^1.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-footer": "^1.0.5",
-    "gulp-header": "^1.8.8",
-    "gulp-inject": "^4.1.0",
-    "gulp-jshint": "^2.0.2",
-    "gulp-ng-annotate": "^2.0.0",
+    "gulp-babel": "6.1.2",
+    "gulp-cached": "1.1.0",
+    "gulp-concat": "2.6.0",
+    "gulp-footer": "1.0.5",
+    "gulp-header": "1.8.8",
+    "gulp-inject": "4.1.0",
+    "gulp-jshint": "2.0.2",
+    "gulp-ng-annotate": "2.0.0",
     "gulp-ng-deporder": "0.0.1",
-    "gulp-remember": "^0.3.1",
-    "gulp-util": "^3.0.7",
-    "jshint": "^2.9.4",
-    "jshint-stylish": "^2.2.1",
-    "lodash.memoize": "^4.1.2",
-    "mkdirp": "^0.5.1",
-    "mustache": "^2.2.1",
-    "node-fetch": "^1.6.3",
-    "pify": "^2.3.0",
-    "recast": "^0.11.18",
-    "transducers-js": "^0.4.174"
+    "gulp-remember": "0.3.1",
+    "gulp-util": "3.0.7",
+    "jshint": "2.9.4",
+    "jshint-stylish": "2.2.1",
+    "lodash.memoize": "4.1.2",
+    "log4js": "1.1.0",
+    "meow": "3.7.0",
+    "mkdirp": "0.5.1",
+    "mustache": "2.2.1",
+    "node-fetch": "1.6.3",
+    "pify": "2.3.0",
+    "recast": "0.11.18",
+    "transducers-js": "0.4.174",
+    "update-notifier": "0.7.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "eslint": "^3.2.2",
+    "eslint": "^3.15.0",
     "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-node": "^4.0.1",
     "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
-    "fixpack": "^2.3.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "^2.3.1",
+    "flow-bin": "^0.39.0"
   },
   "keywords": [],
   "engines": {
@@ -60,5 +65,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave.git"
   }
 }
