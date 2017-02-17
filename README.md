@@ -1,6 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@blinkmobile/project-shockwave.svg?maxAge=2592000)](https://www.npmjs.com/package/@blinkmobile/project-shockwave)
-
-# Blink Forms CLI
+# Blink Forms CLI [![npm](https://img.shields.io/npm/v/@blinkmobile/project-shockwave.svg?maxAge=2592000)](https://www.npmjs.com/package/@blinkmobile/project-shockwave)
 
 Transform a [BlinkMobile Forms definitions](http://blinkmobile.com.au/blink-intelligent-client-bic-forms-interpreter) into a functioning web form.
 
