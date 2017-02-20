@@ -6,4 +6,4 @@ npm-debug.log
 output/
 
 test/simonspace*
-
+.blinkmrc.json

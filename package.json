@@ -16,6 +16,7 @@
   "author": "BlinkMobile",
   "license": "MIT",
   "dependencies": {
+    "@blinkmobile/blinkmrc": "^1.1.0",
     "@blinkmobile/varied-definition": "1.1.0",
     "babel-preset-es2015": "6.18.0",
     "co": "4.6.0",
@@ -40,6 +41,7 @@
     "mkdirp": "0.5.1",
     "mustache": "2.2.1",
     "node-fetch": "1.6.3",
+    "prompt": "^1.0.0",
     "recast": "0.11.18",
     "transducers-js": "0.4.174",
     "update-notifier": "0.7.0"

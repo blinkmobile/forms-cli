@@ -16,7 +16,7 @@ updateNotifier({ pkg }).notify()
 
 const commands = {
   create: require('../commands/create.js'),
-  init: () => log.error('Not yet implemented')
+  init: require('../commands/init.js')
 }
 
 const cli = meow({
