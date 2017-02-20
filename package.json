@@ -13,7 +13,7 @@
     "ava": "ava",
     "flow_check": "flow check"
   },
-  "author": "Simon Dobie",
+  "author": "BlinkMobile",
   "license": "MIT",
   "dependencies": {
     "@blinkmobile/varied-definition": "1.1.0",
@@ -25,15 +25,12 @@
     "gulp-angular-filesort": "1.1.1",
     "gulp-angular-module": "0.0.2",
     "gulp-babel": "6.1.2",
-    "gulp-cached": "1.1.0",
     "gulp-concat": "2.6.0",
     "gulp-footer": "1.0.5",
     "gulp-header": "1.8.8",
     "gulp-inject": "4.1.0",
     "gulp-jshint": "2.0.2",
     "gulp-ng-annotate": "2.0.0",
-    "gulp-ng-deporder": "0.0.1",
-    "gulp-remember": "0.3.1",
     "gulp-util": "3.0.7",
     "jshint": "2.9.4",
     "jshint-stylish": "2.2.1",
@@ -43,7 +40,6 @@
     "mkdirp": "0.5.1",
     "mustache": "2.2.1",
     "node-fetch": "1.6.3",
-    "pify": "2.3.0",
     "recast": "0.11.18",
     "transducers-js": "0.4.174",
     "update-notifier": "0.7.0"

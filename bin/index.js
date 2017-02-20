@@ -15,7 +15,7 @@ const help = require('../lib/help.js')
 updateNotifier({ pkg }).notify()
 
 const commands = {
-  create: () => log.error('Not yet implemented'),
+  create: require('../commands/create.js'),
   init: () => log.error('Not yet implemented')
 }
 
