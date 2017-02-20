@@ -49,7 +49,7 @@ function compile (options) {
     }).then(() => {
       const footer = `
 
-(c) ${(new Date()).getUTCFullYear()} Blink Mobile Interactive`
+(c) ${(new Date()).getUTCFullYear()} Blink Mobile Technologies`
       log.info(finishMessage`${options.framework} ${outputPath}` + footer)
     })
 }
