@@ -47,9 +47,10 @@ function compile (options) {
         }
       })
     }).then(() => {
-      log.info(finishMessage`${options.framework} ${outputPath}
+      const footer = `
 
-(c) 2017 Blink Mobile Interactive`)
+(c) ${(new Date()).getUTCFullYear()} Blink Mobile Interactive`
+      log.info(finishMessage`${options.framework} ${outputPath}` + footer)
     })
 }
 
