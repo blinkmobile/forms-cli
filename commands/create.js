@@ -13,6 +13,8 @@ const normalisationTransducer = require('../lib/transducers/normalisation.js').n
 const getAnswerspaceId = require('../lib/utils/answerspace/fetch-answerspace-id.js')
 const getFormDefinition = require('../lib/utils/answerspace/fetch-forms.js')
 
+const readConfig = require('../lib/config/read-config.js')
+
 const finishMessage = require('../lib/finish-message.js')
 
 // make angular elements transforms
@@ -54,17 +56,6 @@ function compile (options) {
     })
 }
 
-// simulate a user passing running `node index.js` with a config file.
-//
 module.exports = () => {
-  return compile({
-    templates: {
-      viewTemplates: './templates/angular1.5/html/*.mustache',
-      scriptTemplates: './templates/angular1.5/js/*.mustache',
-      schemaTemplates: './templates/json-schema/*.mustache'
-    },
-    answerspace: 'simon',
-    outputPath: './output/src/',
-    framework: 'AngularJS'
-  }).catch((err) => log.error(err))
+  return readConfig().then(compile)
 }
