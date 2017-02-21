@@ -38,3 +38,4 @@ if (!commands[command]) {
 }
 
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
+  .catch((err) => log.error(err))
