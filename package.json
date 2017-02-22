@@ -44,6 +44,7 @@
     "node-fetch": "1.6.3",
     "recast": "0.11.18",
     "recursive-copy": "^2.0.6",
+    "rimraf": "^2.6.0",
     "transducers-js": "0.4.174",
     "update-notifier": "0.7.0"
   },

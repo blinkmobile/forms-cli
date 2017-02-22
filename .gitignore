@@ -8,3 +8,4 @@ output/
 test/simonspace*
 .blinkmrc.json
 bm-forms/
+inquirer.js

@@ -11,7 +11,7 @@ function init () {
     .then(writeConfig)
     .then(writeTemplates)
     .catch((err) => {
-      if (err.message.toLowerCase() === 'cancelled') {
+      if (err && err.message.toLowerCase() === 'cancelled') {
         log.debug('User cancelled operation')
         return Promise.resolve()
       }
