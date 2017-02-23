@@ -22,7 +22,7 @@ function normalise (options) {
   const answerspace = options.answerspace
   return Promise.all([
     getAnswerspaceId(answerspace).then(getFormDefinition),
-    templateService.load(options.templates)
+    templateService.load(options.templatePath)
   ]).then((data) => data[0].map((f) => normalisationTransducer(f)))
 }
 
