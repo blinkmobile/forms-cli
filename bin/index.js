@@ -38,4 +38,13 @@ if (!commands[command]) {
 }
 
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .catch((err) => log.error(err))
+  .catch((err) => {
+    log.error(`
+There was a problem executing '${command}':
+
+${err}
+
+Please fix the error and try again.
+`)
+    process.exitCode = 1
+  })
