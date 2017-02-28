@@ -18,8 +18,9 @@ const readConfig = require('./lib/config/read-config.js')
 gulp.task('blinkForms', () => {
   return readConfig().then((cfg) => {
     const dest = cfg.distPath
+    const src = cfg.outputPath
 
-    return gulp.src('output/src/**/*.js')
+    return gulp.src(`${src}/**/*.js`)
       .pipe(babel({presets: ['es2015']}))
       .pipe(angularFilesort())
       .pipe(embedTemplates())
@@ -34,18 +35,24 @@ gulp.task('blinkForms', () => {
 gulp.task('build', ['blinkForms'], () => {
   return readConfig().then((cfg) => {
     const dest = cfg.distPath
+    const src = cfg.outputPath
+    const templatePath = cfg.templatePath
 
-    gulp.src('./templates/angular1.5/index.html')
-      .pipe(inject(gulp.src([`${dest}/*.js`, './output/css/*.css'], {read: false})))
+    return gulp.src(`${templatePath}/index.html`)
+      .pipe(inject(gulp.src([`${dest}/*.js`, __dirname + '/templates/css/*.css'], {read: false})))
       .pipe(gulp.dest(dest))
   })
 })
 
 gulp.task('lint', () => {
-  return gulp.src('output/src/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'))
+  return readConfig().then((cfg) => {
+    const src = cfg.outputPath
+
+    return gulp.src(`${src}/**/*.js`)
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter('fail'))
+  })
 })
 
 gulp.task('default', ['blinkForms'])

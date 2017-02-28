@@ -1,7 +1,5 @@
 'use strict'
 
-const log = require('../lib/logger.js').logger
-
 // helpers
 const writeSite = require('../lib/write-site.js').writeSite
 const templateService = require('../lib/utils/template-service.js')
@@ -14,8 +12,7 @@ const getAnswerspaceId = require('../lib/utils/answerspace/fetch-answerspace-id.
 const getFormDefinition = require('../lib/utils/answerspace/fetch-forms.js')
 
 const readConfig = require('../lib/config/read-config.js')
-
-const finishMessage = require('../lib/finish-message.js')
+const buildCommand = require('./build.js')
 
 // make angular elements transforms
 function normalise (options) {
@@ -26,36 +23,11 @@ function normalise (options) {
   ]).then((data) => data[0].map((f) => normalisationTransducer(f)))
 }
 
-function compile (options) {
-  const outputPath = options.outputPath
-
+function compile (options, cmdFlags) {
   return normalise(options)
     .then((normalisedForms) => formsTransducer(normalisedForms))
-    .then((formData) => writeSite(outputPath, formData))
-    .then((formData) => {
-      const gulp = require('gulp')
-      require('../gulpfile.js')
-
-      return new Promise((resolve, reject) => {
-        if (gulp.tasks.build) {
-          log.info('Running build task(s)')
-          gulp.start('build', (err) => {
-            if (err) {
-              return reject(err)
-            }
-
-            resolve()
-          })
-        }
-      })
-    }).then(() => {
-      const footer = `
-
-(c) ${(new Date()).getUTCFullYear()} Blink Mobile Technologies`
-      log.info(finishMessage`${options.framework} ${outputPath}` + footer)
-    })
+    .then((formData) => writeSite(options.outputPath, formData))
+    .then((formData) => cmdFlags.build ? buildCommand().then(() => ({formData, options})) : {formData, options})
 }
 
-module.exports = () => {
-  return readConfig().then(compile)
-}
+module.exports = (input, flags) => readConfig().then((config) => compile(config, flags))
