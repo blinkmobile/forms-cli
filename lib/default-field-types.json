@@ -16,5 +16,6 @@
   "file": "''",
   "message": "''",
   "subForm": "[]",
-  "draw": "undefined"
+  "draw": "undefined",
+  "camera": "undefined"
 }

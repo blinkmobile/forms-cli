@@ -1,0 +1,5 @@
+<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+  <label for="<%name%>"><%label%></label>
+  <bm-camera ng-model="$ctrl.model.<%name%>" width="320" height="240"></bm-camera>
+</div>
