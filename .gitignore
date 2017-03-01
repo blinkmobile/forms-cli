@@ -9,3 +9,6 @@ test/simonspace*
 .blinkmrc.json
 bm-forms/
 inquirer.js
+
+forms-location/
+debug.log

@@ -12,12 +12,10 @@ function build () {
   return new Promise((resolve, reject) => {
     const maybe = maybeReject(reject)
 
-    if (gulp.tasks.build) {
-      log.info('Running build task(s)')
-      gulp.start('build', (err) => {
-        maybe(err) && resolve(readConfig().then((config) => ({options: config})))
-      })
-    }
+    log.info('Running build task(s)')
+    gulp.start('build', (err) => {
+      maybe(err) && resolve(readConfig().then((config) => ({options: config})))
+    })
   })
 }
 
