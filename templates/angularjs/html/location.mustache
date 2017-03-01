@@ -1,0 +1,6 @@
+<div class="row"  <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+  <bm-confirm-location-on-map
+      ng-model="$ctrl.model.<%name%>"
+    ></bm-confirm-location-on-map>
+</div>

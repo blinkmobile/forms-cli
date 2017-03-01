@@ -17,5 +17,6 @@
   "message": "''",
   "subForm": "[]",
   "draw": "undefined",
-  "camera": "undefined"
+  "camera": "undefined",
+  "location": "undefined"
 }
