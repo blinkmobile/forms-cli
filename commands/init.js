@@ -3,7 +3,7 @@
 const log = require('../lib/logger.js').logger
 
 const askQuestions = require('../lib/init/ask-questions.js')
-const writeConfig = require('../lib/config/write-config.js')
+const updateConfig = require('../lib/config/update-config.js')
 const readConfig = require('../lib/config/read-config.js')
 const writeTemplates = require('../lib/init/write-templates.js')
 
@@ -11,7 +11,7 @@ function init () {
   const finish = () => readConfig().then((cfg) => ({formData: {}, options: cfg}))
 
   return askQuestions()
-    .then(writeConfig)
+    .then(updateConfig)
     .then(writeTemplates)
     .then(finish)
     .catch((err) => {
