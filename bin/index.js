@@ -46,7 +46,7 @@ if (!commands[command]) {
 const msg = finishMessage(command, cli.flags)
 
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .then(({formData, options} = {}) => log.info(msg`${options.framework} ${options.outputPath} ${options.distPath}`))
+  .then(({formData, options} = {}) => log.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}`))
   .catch((err) => {
     log.error(`
 There was a problem executing '${command}':
