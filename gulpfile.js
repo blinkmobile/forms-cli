@@ -39,7 +39,7 @@ gulp.task('build', ['blinkForms'], () => {
     const templatePath = cfg.templatePath
 
     return gulp.src(`${templatePath}/index.html`)
-      .pipe(inject(gulp.src([`${dest}/*.js`, __dirname + '/templates/css/*.css'], {read: false})))
+      .pipe(inject(gulp.src([`${dest}/*.js`, __dirname + '/templates/css/*.css', __dirname + '/node_modules/skeleton-framework/dist/skeleton.css'], {read: false})))
       .pipe(gulp.dest(dest))
   })
 })
