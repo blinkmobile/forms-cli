@@ -6,7 +6,11 @@ angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkMo
   }
 
   <%moduleName%>Model.prototype.set = function (modelObj) {
-    console.log('setting values!')
+    for(let prop in modelObj) {
+      if (modelObj.hasOwnProperty(prop)) {
+        this[prop] = modelObj[prop]
+      }
+    }
   }
 
   <%moduleName%>Model.prototype.create = function () {
