@@ -18,5 +18,6 @@
   "subForm": "[]",
   "draw": "undefined",
   "camera": "undefined",
-  "location": "undefined"
+  "location": "undefined",
+  "checkboxes": "''"
 }
