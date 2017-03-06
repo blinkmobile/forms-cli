@@ -18,7 +18,8 @@ updateNotifier({ pkg }).notify()
 const commands = {
   create: require('../commands/create.js'),
   build: require('../commands/build.js'),
-  init: require('../commands/init.js')
+  init: require('../commands/init.js'),
+  scope: require('../commands/scope.js')
 }
 
 const cli = meow({
@@ -46,7 +47,7 @@ if (!commands[command]) {
 const msg = finishMessage(command, cli.flags)
 
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .then(({formData, options} = {}) => log.info(msg`${options.framework} ${options.outputPath} ${options.distPath}`))
+  .then(({formData, options} = {formData: {}, options: {}}) => log.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {
     log.error(`
 There was a problem executing '${command}':
