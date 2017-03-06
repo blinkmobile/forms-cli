@@ -46,6 +46,8 @@ if (!commands[command]) {
 
 const msg = finishMessage(command, cli.flags)
 
+cli.flags.debug && log.setLevel('DEBUG')
+
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
   .then(({formData, options} = {formData: {}, options: {}}) => log.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {

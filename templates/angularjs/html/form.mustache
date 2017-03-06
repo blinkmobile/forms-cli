@@ -1,8 +1,5 @@
 <ng-form name="<%interaction%>" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <pre>
-  {{$ctrl.toJson($ctrl.model)}}
-  </pre>
   <%&header%>
   <%&elements%>
   <%&footer%>
