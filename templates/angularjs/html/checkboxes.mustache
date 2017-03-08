@@ -1,15 +1,15 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
+  <label class="bm-label" for="<%name%>"><%label%></label>
   <%#options%>
-  <label class="<%rowClass%>"
-         title="<%tooltip%>">
+  <label class="bm-label <%rowClass%>" title="<%tooltip%>">
     <input  type="checkbox"
             ng-checked="$ctrl.model.<%name%>.indexOf('<%.%>') > -1"
             ng-click="$ctrl.model.<%name%>.indexOf('<%.%>') > -1 ? $ctrl.model.<%name%>.splice($ctrl.model.<%name%>.indexOf('<%.%>'), 1) : $ctrl.model.<%name%>.push('<%.%>')"
-            name="<%name%>"/>
-    <span class="label-body"><%.%></span>
+            name="<%name%>"
+            class="bm-input bm-input__checkbox" />
+    <span class="bm-label__body"><%.%></span>
   </label>
   <%/options%>
-  <%#hint%><span><%hint%></span><%/hint%>
+  <%#hint%><span class="bm-hint bm-hint__checkbox"><%hint%></span><%/hint%>
 </div>

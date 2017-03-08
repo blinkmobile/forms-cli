@@ -1,8 +1,8 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-subforms" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <div ng-repeat="subform in $ctrl.model.<%&name%> | filter:{ '_action': '!remove'}">
+  <div class="bm-subforms__form" ng-repeat="subform in $ctrl.model.<%&name%> | filter:{ '_action': '!remove'}">
     <<%&subFormElement%> model="subform"></<%&subFormElement%>>
-    <button class="button-primary" ng-click="$ctrl.removeSubform(subform, $ctrl.model.<%&name%>)">Remove Subform</button>
+    <button class="bm-button button-primary" ng-click="$ctrl.removeSubform(subform, $ctrl.model.<%&name%>)">Remove Subform</button>
   </div>
-  <button class="button-primary" ng-click="$ctrl.addSubform($ctrl.model.<%&name%>)">Add Subform</button>
+  <button class="bm-button button-primary" ng-click="$ctrl.addSubform($ctrl.model.<%&name%>)">Add Subform</button>
 </div>

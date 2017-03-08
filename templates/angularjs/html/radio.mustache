@@ -1,14 +1,14 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
+  <label class="bm-label" for="<%name%>"><%label%></label>
   <%#options%>
   <input  type="radio"
           ng-model="$ctrl.model.<%name%>"
           name="<%name%>"
           value="<%.%>"
-          class="<%rowClass%>"
+          class="bm-input bm-input__radio <%rowClass%>"
           title="<%tooltip%>" />
   <span><%.%></span>
   <%/options%>
-  <%#hint%><span><%hint%></span><%/hint%>
+  <%#hint%><span class="bm-hint bm-hint__radio"><%hint%></span><%/hint%>
 </div>
