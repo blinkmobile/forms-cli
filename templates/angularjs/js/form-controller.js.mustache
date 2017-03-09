@@ -9,23 +9,32 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
     this.model = this.model || <%moduleName%>Model || {}
 
     this.page = this.page || 0
+    this.onPageChange = this.onPageChange || (() => true)
     <%#pageNumbers%>
     this.pageNumbers = <%pageNumbers%>
     <%/pageNumbers%>
   }
 
-  this.$onChanges = (changesObj) => {
-    console.log('change fn run')
-    console.log(changesObj)
-  }
-  this.$doCheck = (...args) => {
-    console.log('do check args:', args, this)
-  }
+  this.$onChanges = (changesObj) => {}
+  this.$doCheck = () => {}
   this.$onDestroy = () => {}
   this.$postLink = () => {}
 
   this.addSubform = (collection) => {
     collection.push({})
+  }
+
+  this.changePageBy = (inc) => {
+    this.page += inc
+    if (this.page < 0) {
+      this.page = 0
+    }
+
+    if (this.page > this.pageNumbers.length) {
+      this.page = this.pageNumbers.length
+    }
+
+    this.onPageChange({page: this.page})
   }
 
   this.removeSubform = (model, collection) => {
@@ -46,6 +55,7 @@ angular.module('<%moduleName%>').component('<%moduleName%>', {
   controller: <%moduleName%>Controller,
   bindings: {
     model: '<?',
-    page: '<?'
+    page: '<?',
+    onPageChange: '&?'
   }
 })
