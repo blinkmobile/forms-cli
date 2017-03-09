@@ -21,7 +21,7 @@ gulp.task('blinkForms', () => {
     const src = cfg.outputPath
 
     return gulp.src(`${src}/**/*.js`)
-      .pipe(babel({presets: ['es2015']}))
+      .pipe(babel({presets: [__dirname + '/node_modules/babel-preset-es2015']}))
       .pipe(angularFilesort())
       .pipe(embedTemplates())
       .pipe(ngAnnotate())
