@@ -1,12 +1,12 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
-  <textarea class="<%rowClass%>"
+  <label class="bm-label" for="<%name%>"><%label%></label>
+  <textarea class="bm-input bm-input__textarea <%rowClass%>"
             ng-model="$ctrl.model.<%name%>"
             name="<%name%>"
             placeholder="<%placeholderText%>"
             <%#required%>ng-required="true"<%/required%>
             <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
             title="<%tooltip%>"></textarea>
-  <%#hint%><span><%hint%></span><%/hint%>
+  <%#hint%><span class="bm-hint bm-hint__textarea"><%hint%></span><%/hint%>
 </div>

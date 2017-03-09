@@ -1,10 +1,10 @@
-<div class="row"  <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field"  <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
+  <label class="bm-label" for="<%name%>"><%label%></label>
   <input  type="checkbox"
           ng-model="$ctrl.model.<%name%>"
           name="<%name%>"
-          class="<%rowClass%>"
+          class="bm-input bm-input__checkbox <%rowClass%>"
           title="<%tooltip%>" />
-  <%#hint%><span><%hint%></span><%/hint%>
+  <%#hint%><span class="bm-hint bm-hint__checkbox"><%hint%></span><%/hint%>
 </div>

@@ -1,6 +1,6 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
-  <bm-camera ng-model="$ctrl.model.<%name%>" width="320" height="240"></bm-camera>
-  <%#hint%><span><%hint%></span><%/hint%>
+  <label class="bm-label" for="<%name%>"><%label%></label>
+  <bm-camera class="bm-input bm-input__camera" ng-model="$ctrl.model.<%name%>" width="320" height="240"></bm-camera>
+  <%#hint%><span class="bm-hint bm-hint__camera"><%hint%></span><%/hint%>
 </div>

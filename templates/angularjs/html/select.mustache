@@ -1,14 +1,14 @@
-<div class="row" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
+<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
-  <label for="<%name%>"><%label%></label>
+  <label class="bm-label" for="<%name%>"><%label%></label>
   <select name="<%name%>"
           ng-model="$ctrl.model.<%name%>"
-          class="<%rowClass%>"
+          class="bm-input bm-input__select <%rowClass%>"
           title="<%tooltip%>"
           <%#multi%>multiple="multiple"<%/multi%>>
     <%#options%>
       <option value="<%.%>"><%.%></option>
     <%/options%>
   </select>
-  <%#hint%><span><%hint%></span><%/hint%>
+  <%#hint%><span class="bm-hint bm-hint__select"><%hint%></span><%/hint%>
 </div>
