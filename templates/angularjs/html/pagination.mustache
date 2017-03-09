@@ -1,0 +1,9 @@
+<div class="bm-form__pagination" ng-show="$ctrl.pageNumbers">
+  <button class="bm-button bm-button__pagination-previous"
+          ng-click="$ctrl.changePageBy(-1)"
+          ng-disabled="$ctrl.page <= 0">Previous</button>
+  <span class="bm-form__pagination-page-number">Page {{$ctrl.page + 1}} of {{$ctrl.pageNumbers.length}}</span>
+  <button class="bm-button bm-button__pagination-next"
+          ng-click="$ctrl.changePageBy(1)"
+          ng-disabled="$ctrl.page >= $ctrl.pageNumbers.length - 1">Next</button>
+</div>

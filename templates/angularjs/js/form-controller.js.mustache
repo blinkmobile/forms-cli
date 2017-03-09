@@ -1,22 +1,40 @@
 function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
-  // the form model
-  this.model = this.model || <%moduleName%>Model || {}
-
   this.toJson = function (obj) {
     return JSON.stringify(obj, null, 2)
   }
 
   // lifecycle functions
-  this.$onInit = () => {}
+  this.$onInit = function $onInit() {
+    // the form model
+    this.model = this.model || <%moduleName%>Model || {}
+
+    this.page = this.page || 0
+    this.onPageChange = this.onPageChange || (() => true)
+    <%#pageNumbers%>
+    this.pageNumbers = <%pageNumbers%>
+    <%/pageNumbers%>
+  }
+
   this.$onChanges = (changesObj) => {}
   this.$doCheck = () => {}
   this.$onDestroy = () => {}
   this.$postLink = () => {}
 
-  this.save = (model) => console.log('i am saving ', model)
-
   this.addSubform = (collection) => {
     collection.push({})
+  }
+
+  this.changePageBy = (inc) => {
+    this.page += inc
+    if (this.page < 0) {
+      this.page = 0
+    }
+
+    if (this.page > this.pageNumbers.length) {
+      this.page = this.pageNumbers.length
+    }
+
+    this.onPageChange({page: this.page})
   }
 
   this.removeSubform = (model, collection) => {
@@ -30,9 +48,14 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window) {
 }
 
 angular.module('<%moduleName%>').component('<%moduleName%>', {
+  transclude: {
+    pagination: '?pagination'
+  },
   templateUrl: 'component-<%name%>.html',
   controller: <%moduleName%>Controller,
   bindings: {
-    model: '<?'
+    model: '<?',
+    page: '<?',
+    onPageChange: '&?'
   }
 })
