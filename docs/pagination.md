@@ -29,11 +29,11 @@ You can control which page the form shows by binding `page` to a value on your c
 
 ### on-page-change
 
-Type: Function
+Type: Expression
 
 Parameters: page
 
-The parameter must be called page, otherwise nothing will be passed in. This function will be called whenever the component changes the page, eg. when the inbuilt `Previous` and `Next` buttons are clicked
+If you are binding to a function, the parameter must be called `page`, otherwise nothing will be passed in. This function will be called whenever the component changes the page, eg. when the inbuilt `Previous` and `Next` buttons are clicked
 
 ## Customisation
 
