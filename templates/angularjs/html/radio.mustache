@@ -2,13 +2,15 @@
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
   <label class="bm-label" for="<%name%>"><%label%></label>
   <%#options%>
-  <input  type="radio"
-          ng-model="$ctrl.model.<%name%>"
-          name="<%name%>"
-          value="<%.%>"
-          class="bm-input bm-input__radio <%rowClass%>"
-          title="<%tooltip%>" />
-  <span><%.%></span>
+  <label class="bm-label <%rowClass%>" title="<%tooltip%>">
+    <input  type="radio"
+            ng-model="$ctrl.model.<%name%>"
+            name="<%name%>"
+            value="<%.%>"
+            class="bm-input bm-input__radio <%rowClass%>"
+            title="<%tooltip%>" />
+    <span class="bm-label__body><%.%></span>
+  </label>
   <%/options%>
   <%#hint%><span class="bm-hint bm-hint__radio"><%hint%></span><%/hint%>
 </div>
