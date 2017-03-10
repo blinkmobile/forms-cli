@@ -1,6 +1,9 @@
 {
   "name": "@blinkmobile/project-shockwave",
   "version": "1.0.0-alpha",
+  "bin": {
+    "blinkm-forms": "bin/index.js"
+  },
   "description": "Transform a BlinkMobile Forms definition into an HTML Form",
   "main": "bin/index.js",
   "directories": {
