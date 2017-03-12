@@ -11,9 +11,10 @@
                     crop="true"
                     image-type="'image/png'"
                     resize="$ctrl.resizeSignaturePad<%name%> = $fn"></bm-signature-pad>
-
-  <button class="bm-button" ng-click="$ctrl.clearSignaturePad('<%name%>');">Clear</button>
-  <button class="bm-button" ng-hide="$ctrl.<%name%>Disabled"
-          ng-click="$ctrl.<%name%>Disabled = true">Done</button>
+  <div class="bm-button-container bm-signaturepad__button-container">
+    <button class="bm-button" ng-click="$ctrl.clearSignaturePad('<%name%>');">Clear</button>
+    <button class="bm-button" ng-hide="$ctrl.<%name%>Disabled"
+            ng-click="$ctrl.<%name%>Disabled = true">Done</button>
+  </div>
   <%#hint%><span class="bm-hint bm-hint__signature-pad"><%hint%></span><%/hint%>
 </div>
