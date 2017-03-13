@@ -10,7 +10,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "eslint ava",
+    "test": "npm-run-all eslint && ava",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "ava": "ava",
@@ -62,7 +62,9 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.1",
     "fixpack": "^2.3.1",
-    "flow-bin": "^0.39.0"
+    "flow-bin": "^0.39.0",
+    "npm-run-all": "^4.0.2",
+    "proxyquire": "^1.7.11"
   },
   "keywords": [],
   "engines": {
@@ -75,5 +77,8 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave.git"
+  },
+  "ava": {
+    "files": ["test/**/*.test.js"]
   }
 }
