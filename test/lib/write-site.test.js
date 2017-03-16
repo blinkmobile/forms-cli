@@ -5,11 +5,9 @@ const pq = require('proxyquire').noCallThru()
 
 // stubs
 test.beforeEach((t) => {
-  pq('../../lib/write-site.js', {
+  t.context.writeSite = pq('../../lib/write-site.js', {
     './logger.js': require('../stubs/logger.js')
-  })
-
-  t.context.writeSite = require('../../lib/write-site.js').writeSite
+  }).writeSite
 })
 
 test('should return a Promise', (t) => t.context.writeSite('foo', {bar: [() => Promise.resolve(true)]}))

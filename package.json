@@ -64,7 +64,8 @@
     "fixpack": "^2.3.1",
     "flow-bin": "^0.39.0",
     "npm-run-all": "^4.0.2",
-    "proxyquire": "^1.7.11"
+    "proxyquire": "^1.7.11",
+    "sinon": "^2.0.0"
   },
   "keywords": [],
   "engines": {
@@ -79,6 +80,8 @@
     "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave.git"
   },
   "ava": {
-    "files": ["test/**/*.test.js"]
+    "files": [
+      "test/**/*.test.js"
+    ]
   }
 }
