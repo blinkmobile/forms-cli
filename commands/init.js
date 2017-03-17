@@ -12,7 +12,7 @@ function init () {
 
   return askQuestions()
     .then(updateConfig)
-    .then(writeTemplates)
+    .then((cfg) => cfg.framework.toLowerCase() === 'custom' ? cfg : writeTemplates(cfg))
     .then(finish)
     .catch((err) => {
       if (err && err.message.toLowerCase() === 'cancelled') {
