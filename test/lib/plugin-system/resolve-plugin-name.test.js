@@ -16,7 +16,6 @@ test('prefix should not be appended', (t) => {
   t.is(resolve(expected), expected)
 })
 
-
 test('name should be lowercase', (t) => {
   const resolve = require(TEST_SUBJECT)
   const expected = 'bm-plugin-my-plugin'

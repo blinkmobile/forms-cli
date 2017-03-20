@@ -6,10 +6,9 @@ const sinon = require('sinon')
 
 const TEST_SUBJECT = '../../../lib/init/ask-questions.js'
 
-
 test('it should not reject if questions answered', (t) => {
   const init = pq(TEST_SUBJECT, {
-    '../prompt-config.js' : {
+    '../prompt-config.js': {
       prompt: () => Promise.resolve()
     }
   })
@@ -24,7 +23,7 @@ test('it should ask the second set of questions if `.blinkmr.json` does not exis
   promptStub.onCall(1).returns(Promise.resolve())
 
   const init = pq(TEST_SUBJECT, {
-    '../prompt-config.js' : {
+    '../prompt-config.js': {
       prompt: promptStub
     }
   })
@@ -39,7 +38,7 @@ test('it should reject with `cancelled`', (t) => {
   promptStub.onCall(1).returns(Promise.reject('a'))
 
   const init = pq(TEST_SUBJECT, {
-    '../prompt-config.js' : {
+    '../prompt-config.js': {
       prompt: promptStub
     }
   })
