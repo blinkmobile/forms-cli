@@ -1,21 +1,19 @@
 
-node_modules
-npm-debug.log
+**/node_modules
 .eslintcache
 
-output/
-
-test/simonspace*
-.blinkmrc.json
-bm-forms/
-forms-location/
-inquirer.js
-
-forms-location/
+# debug logs
+npm-debug.log
+lerna-debug.log
 debug.log
+
+# dev files
+.blinkmrc.json
 forms.bat
+bm-forms/
 
 # VSCode config directory
 .vscode/
 
+# sublime project files
 *.sublime*

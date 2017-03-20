@@ -4,3 +4,5 @@ templates/
 bm-forms/
 
 gulpfile.js
+
+**/node_modules
