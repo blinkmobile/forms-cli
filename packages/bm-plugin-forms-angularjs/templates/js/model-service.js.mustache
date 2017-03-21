@@ -1,0 +1,21 @@
+angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkModelFactory () {
+  function <%moduleName%>Model () {
+    <%#_elements%>
+    this.<%name%> = <% &value%>
+    <%/_elements%>
+  }
+
+  <%moduleName%>Model.prototype.set = function (modelObj) {
+    for(let prop in modelObj) {
+      if (modelObj.hasOwnProperty(prop)) {
+        this[prop] = modelObj[prop]
+      }
+    }
+  }
+
+  <%moduleName%>Model.prototype.create = function () {
+    return new <%moduleName%>Model()
+  }
+
+  return new <%moduleName%>Model()
+})

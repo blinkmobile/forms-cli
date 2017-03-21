@@ -1,0 +1,7 @@
+<header  <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%> class="bm-header"
+                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+  <H<%headingType%> class="bm-header__title"><%text%></H<%headingType%>>
+  <%#headingSmallText%>
+  <p class="bm-header__subtitle"><%&headingSmallText%></p>
+  <%/headingSmallText%>
+</header>
