@@ -2,7 +2,7 @@
 
 const test = require('ava') // eslint-disable-line node/no-unpublished-require
 
-const toAngularName = require('../lib/transform/to-angular-name.js')
+const toAngularName = require('../../lib/transform/to-angular-name.js')
 
 test('it should match the AngularJS naming conventions', (t) => {
   const expected = 'startsWithLowercaseLetter'

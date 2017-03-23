@@ -6,15 +6,13 @@ const t = require('transducers-js')
 const templateService = require('@blinkmobile/forms-template-helper').service
 const lazyWriter = require('@blinkmobile/forms-template-helper').lazyWriteFile
 
-const ElementTransducer = require('./element-HTML-transformer.js')
+// const elementTransducer = require('./element-HTML-transformer.js')
 const serviceFieldTypes = require('./set-default-value.js')
 const angularise = require('./angularise-definition.js')
 const toAngularName = require('./to-angular-name.js')
 
-// ast related
-const insertConditionalLogic = require('../ast/insert-conditional-logic.js')
-const insertSignatureLogic = require('../ast/insert-signature-logic.js')
-const removeNodeFrom = require('../ast/remove-node-from.js')
+const makeControllerRenderer = require('../renderers/controller-renderer.js')
+const makeHTMLRenderers = require('../renderers/html-renderer.js')
 
 const COMPONENT_PATH = 'components'
 
@@ -25,9 +23,6 @@ const arrAccum = (memo, val) => {
 
 function processForm (form) {
   const jsTemplates = templateService.getByType('js')
-  const htmlTemplates = templateService.getByType('html')
-  const formTemplate = htmlTemplates.form
-  const elementTransducer = ElementTransducer(templateService)
   const formWriters = []
   const formName = form.name
 
@@ -40,42 +35,11 @@ function processForm (form) {
     return memo
   }, [])
 
-  const makeControllerRenderers = (formData) => {
-    const componentPath = path.join(COMPONENT_PATH, `component-${formName}.js`)
-    const template = jsTemplates['form-controller.js']
-    if (pages.length > 1) {
-      formData.pageNumbers = `[${pages.join(', ')}]`
-    }
-
-    let fn = template(formData)
-
-    if (formData._checks.length) {
-      fn = insertConditionalLogic(fn, formData._checks)
-    }
-
-    const drawElements = formData._elements.filter((el) => el.type.toLowerCase() === 'draw')
-    if (drawElements.length) {
-      fn = insertSignatureLogic(fn, drawElements)
-    }
-
-    if (pages.length === 1) {
-      fn = removeNodeFrom('MemberExpression')(fn, (name, node) => node.name === 'changePageBy')
-    }
-
-    return lazyWriter(componentPath, fn)
+  if (pages.length > 1) {
+    form.pageNumbers = `[${pages.join(', ')}]`
   }
 
-  // make the html templates
-  const makeHTMLRenderers = (formData) => {
-    const componentPath = path.join(COMPONENT_PATH, `component-${formName}.html`)
-    formData.elements = elementTransducer(formData._elements, pages).join('')
-    let formHtml = formTemplate(formData)
-    if (formData.pageNumbers && htmlTemplates['pagination']) {
-      const paginationTemplate = htmlTemplates['pagination']
-      formHtml += paginationTemplate(formData)
-    }
-    return lazyWriter(componentPath, formHtml)
-  }
+  form.bmFormsPage = 0
 
   // form module
   const moduleOptions = Object.assign({}, angularise(form))
@@ -112,9 +76,18 @@ function processForm (form) {
   formWriters.push(lazyWriter(`${formName}-model-service.js`, jsTemplates['model-service.js'](moduleOptions)))
 
   // js controller transform
-  formWriters.push(makeControllerRenderers(moduleOptions))
+  const formControllerName = path.join(COMPONENT_PATH, `component-${form.name}.js`)
+  formWriters.push(lazyWriter(formControllerName,
+    makeControllerRenderer({
+      form: moduleOptions,
+      pages: pages.length > 1
+    })))
+
   // // html template transform
-  formWriters.push(makeHTMLRenderers(moduleOptions))
+  const formHTMLname = path.join(COMPONENT_PATH, `component-${form.name}.html`)
+  formWriters.push(formHTMLname, lazyWriter(makeHTMLRenderers({formData: moduleOptions, pages})))
+
+  return formWriters
 }
 
 module.exports = processForm

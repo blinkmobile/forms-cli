@@ -11,8 +11,6 @@ function angularise (formData) {
     }
   })
 
-  formData.bmFormsPage = 0
-
   return formData
 }
 
