@@ -1,8 +1,8 @@
 'use strict'
 
+const mustache = require('mustache')
 const co = require('co')
 
-const mustache = require('./renderer-mustache.js')
 const readContents = require('./read-file-contents.js').readContents
 
 const createRenderer = co.wrap(function * (templatePath) {
@@ -11,5 +11,10 @@ const createRenderer = co.wrap(function * (templatePath) {
 })
 
 module.exports = {
-  createRenderer
+  createRenderer,
+  renderer: (template) => {
+    mustache.parse(template, [ '<%', '%>' ])
+
+    return (el) => mustache.render(template, el)
+  }
 }

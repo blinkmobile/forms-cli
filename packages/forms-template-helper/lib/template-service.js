@@ -3,10 +3,9 @@
 const path = require('path')
 
 const t = require('transducers-js')
-const log = require('../logger.js').logger
 
 const fileHelper = require('./file-list-helper.js')
-const createRendererFn = require('./template-helper.js').createRenderer
+const createRendererFn = require('./renderer-mustache.js').createRenderer
 
 const templates = {}
 
@@ -20,7 +19,6 @@ function loadTemplate (templateType, templatePath) {
   return fileHelper.getFileList(templatePath)
     .then((files) => Promise.all(t.into([], makeRendererDetails, files)))
     .then((templateRenderers) => t.into(templates[templateType], t.identity, templateRenderers))
-    .catch((err) => log.error('Error making template renderer: ', err))
 }
 
 function loadAllTemplates (templateMap) {

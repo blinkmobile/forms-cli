@@ -2,16 +2,14 @@
 
 const glob = require('glob')
 
-const rejectOnError = require('./maybe-reject-on-error.js')
+const maybeRun = require('@blinkmobile/maybe-run')
 
 function getFileList (basePath) {
   return new Promise((resolve, reject) => {
-    const maybe = rejectOnError(reject)
+    const notError = maybeRun(reject)
 
     glob(basePath, (err, files) => {
-      if (maybe(err)) {
-        resolve(files)
-      }
+      notError(err) && resolve(files)
     })
   })
 }

@@ -1,0 +1,35 @@
+{
+  "name": "@blinkmobile/forms-template-helper",
+  "version": "1.0.0-alpha",
+  "description": "Helper utilities for template functions in Blink Forms plugins",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "dependencies": {
+    "transducers-js": "0.4.174",
+    "co": "4.6.0",
+    "mustache": "2.2.1",
+    "mkdirp": "0.5.1",
+    "@blinkmobile/maybe-run": "1.0.0-alpha",
+    "glob": "7.1.1"
+  },
+  "keywords": [
+    "Blink",
+    "Mobile",
+    "BlinkMobile",
+    "template",
+    "Forms",
+    "plugin"
+  ],
+  "author": "Blink Mobile Technologies",
+  "contributors": {
+    "name": "Simon Dobie",
+    "email": "simon@blinkmobile.com.au"
+  },
+  "license": "MIT"
+}

@@ -5,21 +5,19 @@ const path = require('path')
 
 const mkdirp = require('mkdirp')
 
+const maybeRun = require('@blinkmobile/maybe-run')
+
 function writeFileContents (p, contents) {
   return new Promise((resolve, reject) => {
+    const notError = maybeRun(reject)
     const dirname = path.dirname(p)
+
     mkdirp(dirname, (err) => {
-      if (err) {
-        return reject(err)
+      if (notError(err)) {
+        fs.writeFile(p, contents, (err) => {
+          notError(err) && resolve(p)
+        })
       }
-
-      fs.writeFile(p, contents, (err) => {
-        if (err) {
-          return reject(err)
-        }
-
-        resolve(p)
-      })
     })
   })
 }
