@@ -1,15 +1,10 @@
 'use strict'
 
-const resolvePluginName = require('../plugin-system/resolve-plugin-name.js')
-const loadPlugin = require('../plugin-system/load-plugin.js')
+const templateService = require('@blinkmobile/forms-template-helper').service
+const lazyWriter = require('@blinkmobile/forms-template-helper').lazyWriteFile
 
-const templateService = require('../utils/template-service.js')
-const lazyWriter = require('../utils/write-file-contents.js').lazyWriter
-
-function processDefinition (framework) {
-  const pluginName = resolvePluginName(framework)
-  const plugin = loadPlugin(`@blinkmobile/${pluginName}`)
-console.log('plugin = ', JSON.stringify(plugin), pluginName)
+function processDefinition (pluginName) {
+  const plugin = require(pluginName)
   const processForm = plugin.processForm({templateService, lazyWriter})
 
   return (definition) => {

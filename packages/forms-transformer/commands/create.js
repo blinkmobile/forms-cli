@@ -2,8 +2,7 @@
 
 // helpers
 const writeSite = require('../lib/write-site.js').writeSite
-const templateService = require('../lib/utils/template-service.js')
-const lazyWriter = require('../lib/utils/write-file-contents.js').lazyWriter
+const templateService = require('@blinkmobile/forms-template-helper').service
 
 // we will eventually need to be able to dynamically require this (eg for angular2 or react transforms)
 const formsTransducer = require('../lib/transducers/framework.js')
@@ -26,7 +25,7 @@ function normalise (options) {
 }
 
 function compile (options, cmdFlags) {
-  const transformer = formsTransducer(`forms-${options.framework}`)
+  const transformer = formsTransducer(options.framework)
   return normalise(options)
     .then((normalisedForms) => transformer(normalisedForms))
     .then((formData) => writeSite(options.outputPath, formData))
