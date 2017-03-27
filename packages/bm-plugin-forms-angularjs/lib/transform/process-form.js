@@ -84,7 +84,7 @@ function processForm (form) {
 
   // // html template transform
   const formHTMLname = path.join(COMPONENT_PATH, `component-${form.name}.html`)
-  formWriters.push(lazyWriter(formHTMLname, makeHTMLRenderers({formData: moduleOptions, pages})))
+  formWriters.push(lazyWriter(formHTMLname, makeHTMLRenderers({form: moduleOptions, pages})))
 
   return formWriters
 }
