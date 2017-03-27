@@ -69,7 +69,7 @@ test('correct moduleOptions is generated', (t) => {
       'bmCamera',
       'bmLocation',
       'mySubform']
-    t.deepEqual(opts.moduleDependencies, expectedDeps, 'module dependencies are incorrect');
+    t.deepEqual(opts.moduleDependencies, expectedDeps, 'module dependencies are incorrect')
     t.is(opts.bmFormsPage, 0, 'bmFormsPage is not 0')
     t.is(opts.pageNumbers, '[0, 1]', 'pageNumbers is not a string')
   }
@@ -115,5 +115,5 @@ test('correct moduleOptions is generated', (t) => {
     }]
   }
 
-  const result = m(input)
+  m(input)
 })

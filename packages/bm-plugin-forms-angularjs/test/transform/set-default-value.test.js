@@ -4,7 +4,6 @@
 /* eslint-disable node/no-unpublished-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
-const sinon = require('sinon')
 /* eslint-enable node/no-unpublished-require */
 
 const TEST_SUBJECT = '../../lib/transform/set-default-value.js'
@@ -34,7 +33,7 @@ test('it should use keep the current value', (t) => {
 })
 
 test('it should use an invalid date', (t) => {
-  const expected = `new Date("")`
+  const expected = 'new Date("")'
   const m = pq(TEST_SUBJECT, {
     './default-field-types.json': {
       date: expected

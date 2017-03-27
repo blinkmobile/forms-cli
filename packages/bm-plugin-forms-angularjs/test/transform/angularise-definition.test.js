@@ -3,8 +3,6 @@
 // dev dependencies are set at a repo level
 /* eslint-disable node/no-unpublished-require */
 const test = require('ava')
-const pq = require('proxyquire').noCallThru().noPreserveCache()
-const sinon = require('sinon')
 /* eslint-enable node/no-unpublished-require */
 
 const TEST_SUBJECT = '../../lib/transform/angularise-definition.js'
