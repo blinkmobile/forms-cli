@@ -8,7 +8,11 @@
     "flow_check": "flow check",
     "security_check": "nsp check"
   },
-  "author": "BlinkMobile",
+  "author": "Blink Mobile Technologies",
+  "contributors": [{
+    "name": "Simon Dobie",
+    "email": "simon@blinkmobile.com.au"
+  }],
   "license": "MIT",
   "devDependencies": {
     "ava": "^0.16.0",
@@ -39,7 +43,9 @@
   },
   "ava": {
     "files": [
-      "**/test/**/*.test.js"
-    ]
+      "**/test/**/*.test.js",
+      "!**/node_modules"
+    ],
+    "failFast": true
   }
 }
