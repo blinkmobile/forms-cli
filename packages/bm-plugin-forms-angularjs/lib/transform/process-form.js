@@ -25,7 +25,6 @@ function processForm (form) {
   const jsTemplates = templateService.getByType('js')
   const formWriters = []
   const formName = form.name
-
   const pages = form._elements.reduce((memo, el) => {
     if (memo.indexOf(el.page) > -1) {
       return memo
@@ -85,7 +84,7 @@ function processForm (form) {
 
   // // html template transform
   const formHTMLname = path.join(COMPONENT_PATH, `component-${form.name}.html`)
-  formWriters.push(formHTMLname, lazyWriter(makeHTMLRenderers({formData: moduleOptions, pages})))
+  formWriters.push(lazyWriter(formHTMLname, makeHTMLRenderers({formData: moduleOptions, pages})))
 
   return formWriters
 }

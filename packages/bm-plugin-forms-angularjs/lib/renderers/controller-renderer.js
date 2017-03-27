@@ -7,7 +7,7 @@ const insertConditionalLogic = require('../ast/insert-conditional-logic.js')
 const insertSignatureLogic = require('../ast/insert-signature-logic.js')
 const removeNodeFrom = require('../ast/remove-node-from.js')
 
-function makeControllerRenderers ({form, componentBasePath, pages}) {
+function makeControllerRenderers ({form, pages}) {
   const jsTemplates = templateService.getByType('js')
   const template = jsTemplates['form-controller.js']
 

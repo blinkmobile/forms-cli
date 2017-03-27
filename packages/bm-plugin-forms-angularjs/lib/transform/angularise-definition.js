@@ -7,7 +7,7 @@ function angularise (formData) {
   formData.moduleName = toAngularName(formData.name)
   formData._elements.forEach((el) => {
     if (el.type.toLowerCase() === 'subform') {
-      el.subFormElement = el.subForm.replace('_', '-')
+      el.subFormElement = el.subForm.replace(/_/g, '-')
     }
   })
 
