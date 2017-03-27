@@ -11,14 +11,14 @@
     "npm": ">=3"
   },
   "dependencies": {
-    "transducers-js": "0.4.174",
-    "co": "4.6.0",
-    "mustache": "2.2.1",
-    "mkdirp": "0.5.1",
     "@blinkmobile/maybe-run": "1.0.0-alpha",
+    "co": "4.6.0",
     "glob": "7.1.1",
+    "mkdirp": "0.5.1",
+    "mustache": "2.3.0",
     "recursive-copy": "2.0.6",
-    "rimraf": "2.6.0"
+    "rimraf": "2.6.1",
+    "transducers-js": "0.4.174"
   },
   "keywords": [
     "Blink",
@@ -29,9 +29,11 @@
     "plugin"
   ],
   "author": "Blink Mobile Technologies",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Simon Dobie",
       "email": "simon@blinkmobile.com.au"
-  }],
+    }
+  ],
   "license": "MIT"
 }

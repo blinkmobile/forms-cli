@@ -30,8 +30,8 @@
     "@blinkmobile/angular-signature-pad": "1.0.0",
     "@blinkmobile/canvas-manipulation": "1.0.1",
     "transducers-js": "0.4.174",
-    "lodash.groupby": "^4.6.0",
-    "lodash.map": "^4.6.0",
+    "lodash.groupby": "4.6.0",
+    "lodash.map": "4.6.0",
     "recast": "0.12.1"
   }
 }
