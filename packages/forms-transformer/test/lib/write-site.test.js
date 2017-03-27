@@ -24,9 +24,11 @@ test('should write to the correct path', (t) => {
   })
 })
 
-test('should resolve if the form is falsy', (t) => t.context.writeSite('foo', {'bar': undefined}))
+test('should resolve if the form is falsy',
+    (t) => t.context.writeSite('foo', {'bar': undefined}))
 
-test('should reject because form critera not met', (t) => t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions'))
+test('should reject because form critera not met',
+    (t) => t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions'))
 
 test('should wrap a single function in an array', (t) => {
   t.context.writeSite('foo', {

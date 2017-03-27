@@ -16,7 +16,9 @@
     "mustache": "2.2.1",
     "mkdirp": "0.5.1",
     "@blinkmobile/maybe-run": "1.0.0-alpha",
-    "glob": "7.1.1"
+    "glob": "7.1.1",
+    "recursive-copy": "2.0.6",
+    "rimraf": "2.6.0"
   },
   "keywords": [
     "Blink",

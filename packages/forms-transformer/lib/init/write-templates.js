@@ -1,23 +1,18 @@
 'use strict'
 
-const path = require('path')
 const fs = require('fs')
 
-const mkdirp = require('mkdirp')
-const rcopy = require('recursive-copy')
 const inquirer = require('inquirer')
-const rimraf = require('rimraf')
+const maybeRun = require('@blinkmobile/maybe-run')
 
-const TEMPLATE_SRC = path.resolve(path.join(__dirname, '..', '..', 'templates', 'angularjs'))
-
-const rejectOnError = require('../utils/maybe-reject-on-error.js')
+const loadPlugin = require('../plugin-system/load-plugin.js')
 
 function checkTemplatePath (templatePath) {
   return new Promise((resolve, reject) => {
-    const maybe = rejectOnError(resolve) // its not an error if the path doesn't exist!
+    const notError = maybeRun(resolve) // its not an error if the path doesn't exist!
 
     fs.access(templatePath, (err) => {
-      if (maybe(err)) {
+      if (notError(err)) {
         inquirer.prompt({
           name: 'continue',
           type: 'confirm',
@@ -32,24 +27,9 @@ function checkTemplatePath (templatePath) {
 
 function writeTemplates (cfg) {
   const templatePath = cfg.templatePath
+  const plugin = loadPlugin(cfg.framework)
 
-  return checkTemplatePath(templatePath).then(() => {
-    return new Promise((resolve, reject) => {
-      const maybe = rejectOnError(reject)
-
-      rimraf(templatePath, (err) => {
-        if (maybe(err)) {
-          mkdirp(templatePath, (err) => {
-            if (maybe(err)) {
-              fs.access(TEMPLATE_SRC, (err) => {
-                maybe(err) && rcopy(TEMPLATE_SRC, templatePath, (err) => maybe(err) && resolve())
-              })
-            }
-          })
-        }
-      })
-    })
-  })
+  return checkTemplatePath(templatePath).then(() => plugin.writeTemplates(templatePath))
 }
 
 module.exports = writeTemplates
