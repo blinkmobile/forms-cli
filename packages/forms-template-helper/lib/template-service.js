@@ -42,6 +42,6 @@ function makeTemplateHash (templatePath) {
 }
 
 module.exports = {
-  load: (templatePath) => makeTemplateHash(templatePath).then(loadAllTemplates),
+  load: (templatePath) => makeTemplateHash(templatePath).then(loadAllTemplates).then(() => templates),
   getByType: (type) => templates[type]
 }
