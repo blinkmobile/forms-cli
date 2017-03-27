@@ -1,19 +1,13 @@
 'use strict'
 
-const templateService = require('@blinkmobile/forms-template-helper').service
-const lazyWriter = require('@blinkmobile/forms-template-helper').lazyWriteFile
+function processDefinition (processForm) {
+  return (definition) => definition.reduce((memo, form) => {
+    const writers = processForm(form)
+    if (!writers.length) return memo
 
-function processDefinition (pluginName) {
-  const plugin = require(pluginName)
-  const processForm = plugin.processForm({templateService, lazyWriter})
-
-  return (definition) => {
-    return definition.reduce((memo, form) => {
-      const writers = processForm(form)
-
-      return [...memo, ...writers]
-    }, [])
-  }
+    memo[form.name] = writers
+    return memo
+  }, {})
 }
 
 module.exports = processDefinition

@@ -2,9 +2,8 @@
 
 // helpers
 const writeSite = require('../lib/write-site.js').writeSite
-const templateService = require('@blinkmobile/forms-template-helper').service
+const loadPlugin = require('../lib/plugin-system/load-plugin.js')
 
-// we will eventually need to be able to dynamically require this (eg for angular2 or react transforms)
 const formsTransducer = require('../lib/transducers/framework.js')
 const normalisationTransducer = require('../lib/transducers/normalisation.js').normaliseForm
 
@@ -18,15 +17,17 @@ const buildCommand = require('./build.js')
 // make angular elements transforms
 function normalise (options) {
   const answerspace = options.answerspace
-  return Promise.all([
-    getAnswerspaceId(answerspace).then(getFormDefinition),
-    templateService.load(options.templatePath)
-  ]).then((data) => data[0].map((f) => normalisationTransducer(f)))
+  return getAnswerspaceId(answerspace)
+    .then(getFormDefinition)
+    .then((data) => data.map((f) => normalisationTransducer(f)))
 }
 
 function compile (options, cmdFlags) {
-  const transformer = formsTransducer(options.framework)
-  return normalise(options)
+  const plugin = loadPlugin(options.framework)
+  const transformer = formsTransducer(plugin.processForm)
+
+  return plugin.init(options)
+    .then(() => normalise(options))
     .then((normalisedForms) => transformer(normalisedForms))
     .then((formData) => writeSite(options.outputPath, formData))
     .then((formData) => cmdFlags.build ? buildCommand().then(() => ({formData, options})) : {formData, options})

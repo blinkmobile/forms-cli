@@ -18,11 +18,14 @@
     "security_check": "nsp check"
   },
   "author": "BlinkMobile",
+  "contributors": [{
+    "name": "Simon Dobie",
+    "email": "simon@blinkmobile.com.au"
+  }],
   "license": "MIT",
   "dependencies": {
     "@blinkmobile/blinkmrc": "^1.1.0",
     "@blinkmobile/varied-definition": "1.1.0",
-    "@blinkmobile/forms-template-helper": "1.0.0-alpha",
     "@blinkmobile/bm-plugin-forms-angularjs": "1.0.0-alpha",
     "babel-preset-es2015": "6.18.0",
     "glob": "7.1.1",
