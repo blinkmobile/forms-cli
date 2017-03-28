@@ -17,3 +17,5 @@ forms.bat
 
 # VSCode config directory
 .vscode/
+
+*.sublime*
