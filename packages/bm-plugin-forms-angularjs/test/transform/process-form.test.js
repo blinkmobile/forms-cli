@@ -112,6 +112,10 @@ test('correct moduleOptions is generated', (t) => {
       name: 'subform1',
       subForm: 'my_subform',
       page: 0
+    }, {
+      type: 'draw',
+      name: 'draw1',
+      page: 1
     }]
   }
 

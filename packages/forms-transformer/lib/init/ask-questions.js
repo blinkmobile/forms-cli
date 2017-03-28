@@ -18,7 +18,7 @@ const questions = [
 
 function init () {
   return prompt.prompt(configExists)
-                .catch((err) => err.code === 'ENOENT' ? Promise.resolve() : Promise.reject(err))
+                .catch((err) => err.code === 'ENOENT' ? Promise.resolve({overwrite: true}) : Promise.reject(err))
                 .then((answers) => {
                   if (!answers.overwrite) {
                     return Promise.reject(new Error('cancelled'))

@@ -9,7 +9,7 @@ const TEST_SUBJECT = '../../../lib/init/ask-questions.js'
 test('it should not reject if questions answered', (t) => {
   const init = pq(TEST_SUBJECT, {
     '../prompt-config.js': {
-      prompt: () => Promise.resolve()
+      prompt: () => Promise.resolve({overwrite: true})
     }
   })
 
@@ -20,7 +20,7 @@ test('it should ask the second set of questions if `.blinkmr.json` does not exis
   const promptStub = sinon.stub()
 
   promptStub.onCall(0).returns(Promise.reject({code: 'ENOENT'}))
-  promptStub.onCall(1).returns(Promise.resolve())
+  promptStub.onCall(1).returns(Promise.resolve({overwrite: true}))
 
   const init = pq(TEST_SUBJECT, {
     '../prompt-config.js': {
@@ -34,8 +34,7 @@ test('it should ask the second set of questions if `.blinkmr.json` does not exis
 test('it should reject with `cancelled`', (t) => {
   const promptStub = sinon.stub()
 
-  promptStub.onCall(0).returns(Promise.resolve())
-  promptStub.onCall(1).returns(Promise.reject('a'))
+  promptStub.onCall(0).returns(Promise.resolve({overwrite: false}))
 
   const init = pq(TEST_SUBJECT, {
     '../prompt-config.js': {
