@@ -1,0 +1,24 @@
+{
+  "name": "@blinkmobile/maybe-run",
+  "version": "1.0.0-alpha",
+  "description": "Helper function to make dealing with nodejs error a little bit nicer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "error",
+    "callback",
+    "maybe"
+  ],
+  "author": "Simon Dobie",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

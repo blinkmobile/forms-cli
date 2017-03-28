@@ -1,59 +1,19 @@
 {
   "name": "@blinkmobile/project-shockwave",
-  "version": "1.0.0-alpha",
-  "bin": {
-    "blinkm-forms": "bin/index.js"
-  },
-  "description": "Transform a BlinkMobile Forms definition into an HTML Form",
-  "main": "bin/index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "npm-run-all eslint && ava",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
     "ava": "ava",
-    "flow_check": "flow check"
+    "flow_check": "flow check",
+    "security_check": "nsp check"
   },
-  "author": "BlinkMobile",
+  "author": "Blink Mobile Technologies",
+  "contributors": [{
+    "name": "Simon Dobie",
+    "email": "simon@blinkmobile.com.au"
+  }],
   "license": "MIT",
-  "dependencies": {
-    "@blinkmobile/blinkmrc": "^1.1.0",
-    "@blinkmobile/varied-definition": "1.1.0",
-    "babel-preset-es2015": "6.18.0",
-    "co": "4.6.0",
-    "glob": "7.1.1",
-    "gulp": "3.9.1",
-    "gulp-angular-embed-templates": "2.3.0",
-    "gulp-angular-filesort": "1.1.1",
-    "gulp-angular-module": "0.0.2",
-    "gulp-babel": "6.1.2",
-    "gulp-concat": "2.6.0",
-    "gulp-footer": "1.0.5",
-    "gulp-header": "1.8.8",
-    "gulp-inject": "4.1.0",
-    "gulp-jshint": "2.0.2",
-    "gulp-ng-annotate": "2.0.0",
-    "gulp-util": "3.0.7",
-    "inquirer": "3.0.5",
-    "jshint": "2.9.4",
-    "jshint-stylish": "2.2.1",
-    "lodash.groupby": "^4.6.0",
-    "lodash.map": "^4.6.0",
-    "lodash.memoize": "4.1.2",
-    "log4js": "1.1.0",
-    "meow": "3.7.0",
-    "mkdirp": "0.5.1",
-    "mustache": "2.2.1",
-    "node-fetch": "1.6.3",
-    "recast": "0.11.22",
-    "recursive-copy": "2.0.6",
-    "rimraf": "2.6.0",
-    "skeleton-framework": "^1.0.10",
-    "transducers-js": "0.4.174",
-    "update-notifier": "0.7.0"
-  },
   "devDependencies": {
     "ava": "^0.16.0",
     "eslint": "^3.15.0",
@@ -63,7 +23,9 @@
     "eslint-plugin-standard": "^2.0.1",
     "fixpack": "^2.3.1",
     "flow-bin": "^0.39.0",
+    "lerna": "2.0.0-beta.38",
     "npm-run-all": "^4.0.2",
+    "nsp": "^2.6.3",
     "proxyquire": "^1.7.11",
     "sinon": "^2.0.0"
   },
@@ -81,7 +43,9 @@
   },
   "ava": {
     "files": [
-      "test/**/*.test.js"
-    ]
+      "**/test/**/*.test.js",
+      "!**/node_modules"
+    ],
+    "failFast": true
   }
 }
