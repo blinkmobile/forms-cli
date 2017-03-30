@@ -7,6 +7,7 @@
 const meow = require('meow')
 const updateNotifier = require('update-notifier')
 const log = require('../lib/logger.js').logger
+const DidYouMean = require('did-you-mean')
 
 // local modules
 
@@ -17,10 +18,15 @@ const finishMessage = require('../lib/finish-message.js')
 // this module
 updateNotifier({ pkg }).notify()
 
+const didYouMean = new DidYouMean('create build init plugin scope')
+didYouMean.ignoreCase()
+didYouMean.setThreshold(5)
+
 const commands = {
   create: require('../commands/create.js'),
   build: require('../commands/build.js'),
   init: require('../commands/init.js'),
+  plugin: require('../commands/plugin.js'),
   scope: require('../commands/scope.js')
 }
 
@@ -43,6 +49,8 @@ if (!command) {
 
 if (!commands[command]) {
   log.fatal(`unknown command: ${command}`)
+  const alt = didYouMean.get(command)
+  alt && log.info(`Did you mean: ${alt} ?`)
   cli.showHelp(1)
 }
 
@@ -54,6 +62,7 @@ commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
   .then(({formData, options} = {formData: {}, options: {}}) => log.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {
     log.error(`
+
 There was a problem executing '${command}':
 
 ${err} ${cli.flags.debug ? err.stack : ''}
