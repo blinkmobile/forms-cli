@@ -24,14 +24,28 @@
     "access": "public"
   },
   "dependencies": {
-    "@blinkmobile/forms-template-helper": "1.0.0-alpha",
-    "@blinkmobile/angular-location": "1.0.0",
     "@blinkmobile/angular-camera": "1.0.0",
+    "@blinkmobile/angular-location": "1.0.0",
     "@blinkmobile/angular-signature-pad": "1.0.0",
     "@blinkmobile/canvas-manipulation": "1.0.1",
-    "transducers-js": "0.4.174",
+    "@blinkmobile/forms-template-helper": "1.0.0-alpha",
+    "@blinkmobile/maybe-run": "1.0.0-alpha",
+    "find-up": "^2.1.0",
+    "gulp": "3.9.1",
+    "gulp-angular-embed-templates": "2.3.0",
+    "gulp-angular-filesort": "1.1.1",
+    "gulp-angular-module": "0.0.2",
+    "gulp-babel": "6.1.2",
+    "gulp-concat": "2.6.1",
+    "gulp-footer": "1.0.5",
+    "gulp-header": "1.8.8",
+    "gulp-inject": "4.2.0",
+    "gulp-jshint": "2.0.4",
+    "gulp-ng-annotate": "2.0.0",
+    "gulp-util": "3.0.8",
     "lodash.groupby": "4.6.0",
     "lodash.map": "4.6.0",
-    "recast": "0.12.1"
+    "recast": "0.12.1",
+    "transducers-js": "0.4.174"
   }
 }
