@@ -6,13 +6,25 @@ const askQuestions = require('../lib/init/ask-questions.js')
 const updateConfig = require('../lib/config/update-config.js')
 const readConfig = require('../lib/config/read-config.js')
 const writeTemplates = require('../lib/init/write-templates.js')
+const addPlugin = require('../lib/plugin-system/add-plugin.js')
 
-function init () {
+function init (commands, flags) {
   const finish = () => readConfig().then((cfg) => ({formData: {}, options: cfg}))
+
+  if (flags.templates) {
+    return readConfig().then((cfg) => writeTemplates(cfg)).then(finish)
+  }
 
   return askQuestions()
     .then(updateConfig)
-    .then((cfg) => cfg.framework.toLowerCase() === 'custom' ? cfg : writeTemplates(cfg))
+    .then((cfg) => {
+      if (cfg.framework.toLowerCase() === 'custom') {
+        return cfg
+      }
+
+      // TODO: this will only work once plugins are published
+      return addPlugin(cfg.framework).then(() => writeTemplates(cfg))
+    })
     .then(finish)
     .catch((err) => {
       if (err && err.message.toLowerCase() === 'cancelled') {
