@@ -32,6 +32,9 @@
     "@blinkmobile/varied-definition": "1.1.0",
     "babel-preset-es2015": "6.24.0",
     "did-you-mean": "0.0.1",
+    "execa": "0.6.3",
+    "find-up": "^2.1.0",
+    "get-stream": "3.0.0",
     "glob": "7.1.1",
     "inquirer": "3.0.6",
     "lodash.groupby": "4.6.0",
@@ -40,7 +43,6 @@
     "log4js": "1.1.1",
     "meow": "3.7.0",
     "node-fetch": "1.6.3",
-    "skeleton-framework": "1.0.10",
     "transducers-js": "0.4.174",
     "update-notifier": "2.1.0"
   },
