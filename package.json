@@ -9,10 +9,12 @@
     "security_check": "nsp check"
   },
   "author": "Blink Mobile Technologies",
-  "contributors": [{
-    "name": "Simon Dobie",
-    "email": "simon@blinkmobile.com.au"
-  }],
+  "contributors": [
+    {
+      "name": "Simon Dobie",
+      "email": "simon@blinkmobile.com.au"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "ava": "^0.16.0",
