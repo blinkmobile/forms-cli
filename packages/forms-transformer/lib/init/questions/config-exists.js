@@ -9,5 +9,5 @@ module.exports = {
   type: 'confirm',
   message: 'Forms configuration already present in your .blinkmrc.json file. Are you sure you want to overwrite it?',
   default: false,
-  when: () => configStore.load().then((cfg) => !!cfg.forms).catch(() => false)
+  when: () => configStore.load().then((cfg) => !!cfg).catch(() => false)
 }
