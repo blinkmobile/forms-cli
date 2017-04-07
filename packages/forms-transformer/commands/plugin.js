@@ -6,11 +6,12 @@ const logger = require('../lib/logger.js').logger
 const help = require('../lib/plugin-system/help.js')
 const readConfig = require('../lib/config/read-config.js')
 
-const didYouMean = new DidYouMean('add remove info')
+const didYouMean = new DidYouMean('add remove info templates')
 didYouMean.ignoreCase()
 
 const commands = {
   add: require('../lib/plugin-system/add-plugin.js'),
+  templates: require('../lib/plugin-system/extract-templates.js'),
   remove: () => Promise.reject(new Error('command "remove" not implemented')),
   info: () => Promise.reject(new Error('command "info" not implemented'))
 }

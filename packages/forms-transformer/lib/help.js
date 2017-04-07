@@ -3,7 +3,7 @@ Usage: bm forms <command>
 
 Where command is one of:
 
-  init, create, build
+  init, create, build, plugin
 
 Initialising the builder properties
 
@@ -31,5 +31,10 @@ Building the Library distribution file
 
   build         => builds the library file from the source folder
 
+Plugins
+
+  Front end frameworks are supported via plugins to the Forms Builder.
+
+  plugin        => display the help for plugin commands
 
 `

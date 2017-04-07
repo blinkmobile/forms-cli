@@ -24,5 +24,6 @@ Adding a plugin
 
   info                  =>  Displays information about the installed plugin
 
-
+  templates             =>  Extract the template files into the template path
+                            specified in \`.blinkmrc.json\`
 `

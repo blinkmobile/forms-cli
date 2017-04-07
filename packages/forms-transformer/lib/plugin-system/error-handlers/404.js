@@ -1,17 +1,16 @@
 'use strict'
 
 function handle404 (errString) {
-  const nameMatch = errString.match(/Not found\s*:\s*(.+?)\n/i)
+  const nameMatch = errString.match(/404\s+'(.+?)' is not in the npm registry/i)
 
-  let name = ''
+  let name = 'plugin'
   if (nameMatch) {
     name = nameMatch[1]
   }
 
   return `
-${name} could not be found by npm. It must be manually installed:
-  - \`bm forms plugin add <repo-or-address>\`
-  - alternatively via npm: \`npm install <repo-or-address>\`
+${name} could not be found by npm.
+Please check the address is valid and try again.
 `
 }
 

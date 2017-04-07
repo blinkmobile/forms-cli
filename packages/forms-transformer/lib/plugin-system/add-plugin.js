@@ -16,15 +16,16 @@ function addPlugin (pluginPath) {
   return findUp('package.json').then((pkgJsonPath) => {
     logger.info(`Installing ${pluginPath}`)
 
-    const e = execa.shell(`npm install ${pkgJsonPath ? '--save' : ''} ${pluginPath}`)
-    const outputStream = e.stdout
+    const e = execa.shell(`npm install ${pkgJsonPath ? '--save ' : ''}${pluginPath}`)
 
-    return e.then(() => getStream(outputStream))
-      .then((data) => {
-        outputStream.pipe(process.stdout)
+    return e.then(getStream(e.stdout))
+      .then((output) => {
+        logger.info(`
+${output}`)
         return readConfig()
       }).catch((err) => {
-        handleNPMerror(err)
+        logger.debug(JSON.stringify(err))
+        handleNPMerror(err.stderr)
         return readConfig()
       })
   })

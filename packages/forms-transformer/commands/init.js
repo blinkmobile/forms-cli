@@ -5,15 +5,11 @@ const log = require('../lib/logger.js').logger
 const askQuestions = require('../lib/init/ask-questions.js')
 const updateConfig = require('../lib/config/update-config.js')
 const readConfig = require('../lib/config/read-config.js')
-const writeTemplates = require('../lib/init/write-templates.js')
 const addPlugin = require('../lib/plugin-system/add-plugin.js')
+const extractTemplates = require('../lib/plugin-system/extract-templates.js')
 
 function init (commands, flags) {
   const finish = () => readConfig().then((cfg) => ({formData: {}, options: cfg}))
-
-  if (flags.templates) {
-    return readConfig().then((cfg) => writeTemplates(cfg)).then(finish)
-  }
 
   return askQuestions()
     .then(updateConfig)
@@ -23,7 +19,7 @@ function init (commands, flags) {
       }
 
       // TODO: this will only work once plugins are published
-      return addPlugin(cfg.framework).then(() => writeTemplates(cfg))
+      return addPlugin(cfg.framework).then(extractTemplates)
     })
     .then(finish)
     .catch((err) => {
