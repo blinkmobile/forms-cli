@@ -6,10 +6,10 @@ const sinon = require('sinon')
 
 const TEST_SUBJECT = '../../../lib/plugin-system/add-plugin.js'
 
-test('should reject if no plugin path is supplied', (t) => {
+test('should reject if no plugin path is supplied', async (t) => { // eslint-disable-line node/no-unsupported-features
   const addPlugin = require(TEST_SUBJECT)
 
-  t.throws(addPlugin(), 'add: Plugin path not specified.')
+  await t.throws(addPlugin(), 'add: Plugin path not specified.') // eslint-disable-line node/no-unsupported-features
 })
 
 test('should call execa with the save option', (t) => {

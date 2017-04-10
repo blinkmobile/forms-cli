@@ -6,7 +6,7 @@ const sinon = require('sinon')
 
 const TEST_SUBJECT = '../../../lib/plugin-system/extract-templates.js'
 
-test('should reject when cfg is invalid', (t) => {
+test('should reject when cfg is invalid', async (t) => { // eslint-disable-line node/no-unsupported-features
   const readCfgStub = sinon.stub()
   readCfgStub.onFirstCall().returns(Promise.resolve(undefined))
   readCfgStub.onSecondCall().returns(Promise.resolve({}))
@@ -16,9 +16,11 @@ test('should reject when cfg is invalid', (t) => {
     '../config/read-config.js': readCfgStub
   })
 
-  t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
-  t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
-  t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
+  /* eslint-disable node/no-unsupported-features */
+  await t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
+  await t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
+  await t.throws(extractTemplates(), 'Template Path not found in .blinkmrc.json. Please run `bm forms init`')
+  /* eslint-enable node/no-unsupported-features */
 })
 
 test('should call writeTemplates with the full config object', (t) => {
