@@ -27,7 +27,6 @@
   "license": "MIT",
   "dependencies": {
     "@blinkmobile/blinkmrc": "1.1.0",
-    "@blinkmobile/bm-plugin-forms-angularjs": "1.0.0-alpha",
     "@blinkmobile/maybe-run": "1.0.0-alpha",
     "@blinkmobile/varied-definition": "1.1.0",
     "babel-preset-es2015": "6.24.0",
