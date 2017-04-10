@@ -3,26 +3,33 @@
 // dev dependencies are set at a repo level
 /* eslint-disable node/no-unpublished-require */
 const test = require('ava')
+const sinon = require('sinon')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
 /* eslint-enable node/no-unpublished-require */
 
 const TEST_SUBJECT = '../lib/file-list-helper.js'
 
 test('ensures the base path has a slash (to get folders only)', (t) => {
-  const m = pq(TEST_SUBJECT, {})
   const expected = 'path/'
+  const input = 'path'
 
-  m.getFileList = (p) => t.is(p, expected)
+  const globStub = sinon.stub()
 
-  m.getFolderList('path')
+  globStub.withArgs(expected).callsArgWith(1, null, expected)
+
+  const m = pq(TEST_SUBJECT, {
+    'glob': globStub
+  })
+
+  return m.getFolderList(input).then((result) => t.is(result, expected))
 })
 
-test('rejects when glob has an error', (t) => {
+test('rejects when glob has an error', async (t) => { // eslint-disable-line  node/no-unsupported-features
   const m = pq(TEST_SUBJECT, {
     'glob': (p, cb) => cb(new Error('error'))
   })
 
-  t.throws(m.getFileList('blah'), 'error')
+  await t.throws(m.getFileList('blah'), 'error') // eslint-disable-line  node/no-unsupported-features
 })
 
 test('resolves with file list', (t) => {
