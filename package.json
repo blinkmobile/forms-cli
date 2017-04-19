@@ -6,8 +6,7 @@
     "fixpack": "fixpack",
     "ava": "ava",
     "flow_check": "flow check",
-    "security_check": "nsp check",
-    "postinstall": "lerna bootstrap"
+    "security_check": "nsp check"
   },
   "author": "Blink Mobile Technologies",
   "contributors": [

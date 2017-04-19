@@ -4,6 +4,7 @@ before_script:
   - npm install --global npm
   - npm install --global lerna@2.0.0-beta.38
   - npm install
+  - lerna bootstrap
 test:
   image: 'node:6'
   script:
