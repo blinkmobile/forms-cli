@@ -4,18 +4,24 @@ const DidYouMean = require('did-you-mean')
 
 const logger = require('../lib/logger.js').logger
 const help = require('../lib/plugin-system/help.js')
+const readConfig = require('../lib/config/read-config.js')
 
-const didYouMean = new DidYouMean('add remove info')
+const didYouMean = new DidYouMean('add remove info templates')
 didYouMean.ignoreCase()
 
 const commands = {
-  add: () => Promise.reject(new Error('command "add" not implemented')),
+  add: require('../lib/plugin-system/add-plugin.js'),
+  templates: require('../lib/plugin-system/extract-templates.js'),
   remove: () => Promise.reject(new Error('command "remove" not implemented')),
   info: () => Promise.reject(new Error('command "info" not implemented'))
 }
 
-function plugin (cmd) {
-  cmd = cmd[0]
+function plugin (input) {
+  const cmd = input[0]
+  const pluginName = input[1]
+
+  const finish = () => readConfig().then((cfg) => ({formData: {}, options: cfg}))
+
   if (!cmd) {
     logger.info(help)
 
@@ -30,12 +36,12 @@ function plugin (cmd) {
     if (alt) {
       msg = `${msg}
 
-Did you mean: plugin ${didYouMean.get(cmd)} ?`
+Did you mean: plugin ${alt} ?`
     }
     return Promise.reject(new Error(msg))
   }
 
-  return fn()
+  return fn(pluginName).then(finish)
 }
 
 module.exports = plugin

@@ -68,7 +68,7 @@ function processForm (form) {
   }, [])
 
   if (moduleOptions.moduleDependencies.length) {
-    moduleOptions.dependencyString = `'${moduleOptions.moduleDependencies.join(', ')}'`
+    moduleOptions.dependencyString = `'${moduleOptions.moduleDependencies.join('\', \'')}'`
   }
   // add the angular module to the output
   formWriters.push(lazyWriter(`${formName}-module.js`, jsTemplates['form-module.js'](moduleOptions)))

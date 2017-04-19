@@ -27,5 +27,5 @@ test('it should reject with an error', (t) => {
     }
   })
 
-  t.throws(m.readContents('file'), expected)
+  return t.throws(m.readContents('file'), expected)
 })

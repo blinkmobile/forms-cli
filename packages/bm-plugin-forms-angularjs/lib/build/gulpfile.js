@@ -17,7 +17,7 @@ function blinkForms () {
   const dest = process.env.dest
   const src = process.env.src
 
-  const pkgPath = findUp.sync('package.json')
+  const pkgPath = findUp.sync('.blinkmrc.json')
 
   return gulp.src(`${src}/**/*.js`)
     .pipe(babel({presets: [path.join(path.dirname(pkgPath), 'node_modules', 'babel-preset-es2015')]}))
@@ -33,9 +33,10 @@ function blinkForms () {
 function build () {
   const dest = process.env.dest
   const templatePath = process.env.templatePath
+  const pkgPath = findUp.sync('.blinkmrc.json')
 
   return gulp.src(`${templatePath}/index.html`)
-    .pipe(inject(gulp.src([`${dest}/*.js`, path.join(__dirname, 'templates', 'css', '*.css'), path.join(__dirname, 'node_modules', 'skeleton-framework', 'dist', 'skeleton.css')], {read: false})))
+    .pipe(inject(gulp.src([`${dest}/*.js`, path.join(path.dirname(pkgPath), 'node_modules', 'skeleton-framework', 'dist', 'skeleton.css')], {read: false})))
     .pipe(gulp.dest(dest))
 }
 

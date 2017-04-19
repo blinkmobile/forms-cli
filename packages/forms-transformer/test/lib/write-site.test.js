@@ -10,13 +10,13 @@ test.beforeEach((t) => {
   }).writeSite
 })
 
-test('should return a Promise', (t) => t.context.writeSite('foo', {bar: [() => Promise.resolve(true)]}))
+test('should return a Promise', (t) => t.context.writeSite('foo', {bar: [() => Promise.resolve(true)]}).then(() => t.pass()).catch(() => t.fail()))
 
 test('should write to the correct path', (t) => {
   const path = require('path')
   const expected = path.join('foo', 'bar')
 
-  t.context.writeSite('foo', {
+  return t.context.writeSite('foo', {
     bar: [(p) => {
       t.is(p, expected, 'should be `foo/bar`')
       t.pass()
@@ -25,10 +25,10 @@ test('should write to the correct path', (t) => {
 })
 
 test('should resolve if the form is falsy',
-    (t) => t.context.writeSite('foo', {'bar': undefined}))
+    (t) => t.context.writeSite('foo', {'bar': undefined}).then(() => t.pass()).catch(() => t.fail()))
 
 test('should reject because form critera not met',
-    (t) => t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions'))
+    async (t) => await t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions')) // eslint-disable-line  node/no-unsupported-features
 
 test('should wrap a single function in an array', (t) => {
   t.context.writeSite('foo', {

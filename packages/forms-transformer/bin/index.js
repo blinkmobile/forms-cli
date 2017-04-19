@@ -37,7 +37,8 @@ const cli = meow({
   string: ['create', 'init', 'build'],
   boolean: true,
   default: {
-    build: true
+    build: true,
+    templates: false
   }
 })
 
@@ -65,7 +66,9 @@ commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
 
 There was a problem executing '${command}':
 
-${err} ${cli.flags.debug ? err.stack : ''}
+${err}
+
+${cli.flags.debug ? err.stack : ''}
 
 Please fix the error and try again.
 `)

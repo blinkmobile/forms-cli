@@ -13,10 +13,10 @@ test('it should not reject if questions answered', (t) => {
     }
   })
 
-  return init()
+  return init().then((result) => t.pass())
 })
 
-test('it should ask the second set of questions if `.blinkmr.json` does not exist', (t) => {
+test('it should ask the second set of questions if `.blinkmrc.json` does not exist', (t) => {
   const promptStub = sinon.stub()
 
   promptStub.onCall(0).returns(Promise.reject({code: 'ENOENT'}))
@@ -28,10 +28,10 @@ test('it should ask the second set of questions if `.blinkmr.json` does not exis
     }
   })
 
-  return init()
+  return init().then((result) => t.pass())
 })
 
-test('it should reject with `cancelled`', (t) => {
+test('it should reject with `cancelled`', async (t) => { // eslint-disable-line  node/no-unsupported-features
   const promptStub = sinon.stub()
 
   promptStub.onCall(0).returns(Promise.resolve({overwrite: false}))
@@ -42,5 +42,5 @@ test('it should reject with `cancelled`', (t) => {
     }
   })
 
-  t.throws(init(), 'cancelled')
+  await t.throws(init(), 'cancelled') // eslint-disable-line  node/no-unsupported-features
 })

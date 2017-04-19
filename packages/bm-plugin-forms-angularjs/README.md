@@ -9,5 +9,6 @@ via selecting `AngularJS` during `bm forms init` or manually:
 
 ```
 cd path/to/project
-bm forms plugin add AngularJS
+bm forms plugin add @blinkmobile/bm-plugin-forms-angularjs
+bm forms plugin templates
 ```
