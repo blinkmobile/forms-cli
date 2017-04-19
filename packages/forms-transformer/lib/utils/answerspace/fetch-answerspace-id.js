@@ -1,16 +1,16 @@
 'use strict'
 
 const fetch = require('node-fetch')
-const log = require('../../logger.js').logger
 
+const debugLogger = require('../../logger/loggers.js').debugLogger
 const parseUrl = require('./parse-answerspace-url.js').toConfigUrl
 
 const INVALID_ANSWERSPACE = 'answerSpace or EPS url is not valid. Please ensure it is the full url, including https://'
 
 function fetchAnswerspaceId (answerspaceUrl) {
   const configUrl = parseUrl(answerspaceUrl)
-  log.debug(`Supplied answerspace url: ${answerspaceUrl}`)
-  log.debug(`Answerspace URL = ${configUrl}`)
+  debugLogger.debug(`Supplied answerspace url: ${answerspaceUrl}`)
+  debugLogger.debug(`Config URL = ${configUrl}`)
 
   return fetch(configUrl)
           .then((res) => res.json())
@@ -22,6 +22,7 @@ function fetchAnswerspaceId (answerspaceUrl) {
               return answerspaceKeys[0].substr(1)
             }
 
+            debugLogger.error(`Invalid Answerspace URL: ${configUrl}`)
             return Promise.reject(new Error(INVALID_ANSWERSPACE))
           })
 }

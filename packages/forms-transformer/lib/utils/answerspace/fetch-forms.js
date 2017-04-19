@@ -1,13 +1,13 @@
 'use strict'
 
-const log = require('../../logger.js').logger
+const debugLogger = require('../../logger/loggers.js').debugLogger
 
 const fetch = require('node-fetch')
 
 function fetchForms (aid) {
   const configUrl = `https://blinkm.co/_R_/common/3/xhr/GetForm.php?_v=3&_aid=${aid}`
 
-  log.info('Retrieving form details')
+  debugLogger.debug(`Retrieving form details from ${configUrl}`)
 
   return fetch(configUrl)
     .then((res) => res.json())

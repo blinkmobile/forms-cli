@@ -1,5 +1,8 @@
 'use strict'
 
+const debugLogger = require('../lib/logger/loggers.js').debugLogger
+const userLogger = require('../lib/logger/loggers.js').userLogger
+
 // helpers
 const writeSite = require('../lib/write-site.js').writeSite
 const loadPlugin = require('../lib/plugin-system/load-plugin.js')
@@ -23,6 +26,11 @@ function normalise (options) {
 }
 
 function compile (options, cmdFlags) {
+  userLogger.info('Creating Form Source files')
+
+  debugLogger.debug('Start Transformation')
+  debugLogger.debug(`.blinkmrc.json: ${JSON.stringify(options)}`)
+
   const plugin = loadPlugin(options.framework)
   const transformer = formsTransducer(plugin.processForm)
 

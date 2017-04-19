@@ -2,7 +2,7 @@
 
 const DidYouMean = require('did-you-mean')
 
-const logger = require('../lib/logger.js').logger
+const logger = require('../lib/logger/loggers.js').userLogger
 const help = require('../lib/plugin-system/help.js')
 const readConfig = require('../lib/config/read-config.js')
 
@@ -31,7 +31,7 @@ function plugin (input) {
   const fn = commands[cmd]
 
   if (!fn) {
-    let msg = `unknown command: plugin ${cmd}`
+    let msg = `unknown command: "plugin ${cmd}"`
     const alt = didYouMean.get(cmd)
     if (alt) {
       msg = `${msg}

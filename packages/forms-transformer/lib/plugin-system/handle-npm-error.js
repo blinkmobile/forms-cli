@@ -1,6 +1,7 @@
 'use strict'
 
-const logger = require('../logger.js').logger
+const logger = require('../logger/loggers.js').userLogger
+const debugLogger = require('../logger/loggers.js').debugLogger
 const handle404 = require('./error-handlers/404.js')
 
 function handleNPMerror (errText) {
@@ -8,8 +9,9 @@ function handleNPMerror (errText) {
 
   if (!errCodeMatch) {
     // We cant pull a code out of NPM output so print the error
-    logger.error('Could not match error message')
-    logger.error(`Raw NPM error message:
+    debugLogger.debug('Could not match error message')
+    debugLogger.error(errText)
+    logger.error(`Unexpected NPM error:
 ${errText}
 
 `)
@@ -17,6 +19,7 @@ ${errText}
   }
 
   const errCode = errCodeMatch[1]
+  debugLogger.error(`NPM Error Code: ${errCode}`)
   switch (errCode) {
     case '404': {
       logger.info(handle404(errText))
