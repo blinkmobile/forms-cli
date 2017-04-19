@@ -28,8 +28,8 @@ To create a web app using forms, we recommend using npm to manage your dependenc
 Start with a folder for your project, and inside that create a folder to hold the forms components
 
 ```
-+-my-project
- +-my-forms
+|--my-project
+|  |-my-forms
 ```
 
 cd into `my-project` and run `npm init` followed by `git init`. This will setup your `package.json` and initialize a git repository
@@ -39,30 +39,31 @@ cd into `my-project` and run `npm init` followed by `git init`. This will setup 
 If the defaults are used you should end up with a folder structure that matches the following
 
 ```
-+-my-project/
- +-.git/
- +-node_modules/
- +-my-forms/
-  +-templates/
- - .blinkmrc.json
- - package.json
+|--my-project/
+|--.git/
+|--node_modules/
+|--my-forms/
+|  |--templates/
+|--.blinkmrc.json
+|--package.json
 ```
 
 The plugin that forms builder will use to provide the templates and transformation code lives inside `my-project/node_modules`. This works the same as [babel plugins](https://babeljs.io/docs/plugins/#plugin-preset-paths)
 
 The plugin is referenced in `.blinkmrc.json` by name:
 
-```
+```json
 {
   "forms": {
     "answerspace": "https://blinkm.co/demo",
     "distPath": "my-forms/dist",
-    "framework": "@blinkmobile/bm-plugin-forms-angularjs",  // plugin is found in node_modules/@blinkmobile/bm-plugin-forms-angularjs/
+    "framework": "@blinkmobile/bm-plugin-forms-angularjs",
     "outputPath": "my-forms/src",
     "templatePath": "my-forms/templates"
   }
 }
 ```
+The "framework" value means the plugin is found in `node_modules/@blinkmobile/bm-plugin-forms-angularjs/`
 
 Currently we only support loading the the plugin via `node_modules`.
 
@@ -72,15 +73,16 @@ We recommend running `bm forms create` before editing the templates so you can s
 
 You will now have `my-forms/src` and `my-forms/dist` :
 
-+-my-project/
- +-.git/
- +-node_modules/
- +-my-forms/
-  +-dist
-  +-src
-  +-templates/
- - .blinkmrc.json
- - package.json
+```
+|--my-project/
+|  |--.git/
+|  |--node_modules/
+|  |--my-forms/
+|  |  |--dist
+|  |  |--src
+|  |  |--templates/
+|  |--.blinkmrc.json
+|  |--package.json
 ```
 
 Depending on the framework plugin used, the `my-forms/dist/` folder will contain your form components. For more details on the output of the plugins, please see the plugins `docs/` folder.

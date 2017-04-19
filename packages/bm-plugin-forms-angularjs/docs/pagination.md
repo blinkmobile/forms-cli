@@ -2,7 +2,6 @@
 
 The Blink Forms Builder has the ability to specify "pages" with a form. This functionality has been carried over to the Forms Library Builder.
 
-The Front end framework used determines how pagination is handled. For now we only support AngularJS 1.5+, therefore all information in this file applies to it.
 
 ## Implementation
 
