@@ -39,7 +39,7 @@ function processForm (form) {
   }
 
   form.bmFormsPage = 0
-console.log(form)
+console.log(JSON.stringify(form))
   // form module
   const moduleOptions = Object.assign({}, angularise(form))
 
@@ -84,6 +84,9 @@ console.log(form)
       form: moduleOptions,
       pages: pages.length > 1
     })))
+
+  // submit to bmp service
+  formWriters.push(lazyWriter('form-submit-to-bmp-service.js', jsTemplates['form-submit-to-bmp-service.js'](moduleOptions)))
 
   // // html template transform
   const formHTMLname = path.join(COMPONENT_PATH, `component-${form.name}.html`)

@@ -47,7 +47,7 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, formSub
   }
 
   this.onSaveClick = (model) => {
-    return formSubmitToBMPService(model)
+    return formSubmitToBMPService('<%name%>', model)
   }
 }
 

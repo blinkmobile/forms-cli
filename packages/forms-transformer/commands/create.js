@@ -1,5 +1,7 @@
 'use strict'
 
+const url = require('url')
+
 const debugLogger = require('../lib/logger/loggers.js').debugLogger
 const userLogger = require('../lib/logger/loggers.js').userLogger
 
@@ -17,12 +19,27 @@ const getFormDefinition = require('../lib/utils/answerspace/fetch-forms.js')
 const readConfig = require('../lib/config/read-config.js')
 const buildCommand = require('./build.js')
 
+const hostName = (_, answerspaceUrl) => {
+  const u = url.parse(answerspaceUrl)
+
+  return `${u.protocol}//${u.host}`
+}
+
 // make angular elements transforms
 function normalise (options) {
   const answerspace = options.answerspace
+  const answerspaceDetails = {
+    answerspaceName: answerspace,
+    platformURL: hostName`${answerspace}`
+  }
+
   return getAnswerspaceId(answerspace)
-    .then(getFormDefinition.bind(null, answerspace))
-    .then((data) => data.map((f) => normalisationTransducer(f)))
+    .then((id) => {
+      answerspaceDetails.answerspaceId = id
+
+      return getFormDefinition(answerspace, id)
+    })
+    .then((data) => data.map((f) => normalisationTransducer(f, answerspaceDetails)))
 }
 
 function compile (options, cmdFlags) {
