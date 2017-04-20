@@ -1,0 +1,31 @@
+function formSubmitToBMPService ($http, $httpParamSerializerJQLike, BLINK_PLATFORM_URL, BLINK_FORMS_URL, BLINK_ANSWERSPACE_NAME, BLINK_ANSWERSPACE_ID) {
+  const blinkConfig = {
+    'answerSpaceId': BLINK_ANSWERSPACE_ID,
+    'answerSpace': BLINK_ANSWERSPACE_NAME
+  }
+
+  function doSubmit (formName, formData) {
+    const request = {
+      method: 'POST',
+      url: BLINK_PLATFORM_URL + BLINK_FORMS_URL.SAVE_RECORD,
+      params: {
+        schema: 3,
+        _asid: BLINK_ANSWERSPACE_ID,
+        _fn: formName,
+        _action: formData._id ? '' : 'add'
+      },
+      paramSerializer: $httpParamSerializerJQLike,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Blink-Config': JSON.stringify(blinkConfig)
+      },
+      data: $httpParamSerializerJQLike(formData)
+    }
+
+    return $http(request)
+  }
+
+  return doSubmit
+}
+
+angular.module('<%moduleName%>').service('formSubmitToBMPService', formSubmitToBMPService)

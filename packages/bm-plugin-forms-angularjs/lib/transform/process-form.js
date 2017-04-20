@@ -39,7 +39,7 @@ function processForm (form) {
   }
 
   form.bmFormsPage = 0
-
+console.log(form)
   // form module
   const moduleOptions = Object.assign({}, angularise(form))
 
