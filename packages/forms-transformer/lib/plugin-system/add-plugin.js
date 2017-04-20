@@ -20,7 +20,7 @@ function addPlugin (pluginPath) {
     return e.then(getStream(e.stdout))
       .then((output) => {
         userLogger.info(`
-${output}`)
+${output.stdout}`)
       }).catch((err) => {
         handleNPMerror(err.stderr)
         return Promise.reject(err)
