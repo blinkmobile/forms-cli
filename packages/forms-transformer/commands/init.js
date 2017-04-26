@@ -1,6 +1,6 @@
 'use strict'
 
-const log = require('../lib/logger.js').logger
+const debugLogger = require('../lib/logger/loggers.js').debugLogger
 
 const askQuestions = require('../lib/init/ask-questions.js')
 const updateConfig = require('../lib/config/update-config.js')
@@ -24,7 +24,7 @@ function init (commands, flags) {
     .then(finish)
     .catch((err) => {
       if (err && err.message.toLowerCase() === 'cancelled') {
-        log.debug('User cancelled operation')
+        debugLogger.debug('User cancelled operation')
         return Promise.resolve(finish())
       }
 

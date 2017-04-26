@@ -6,7 +6,9 @@
 
 const meow = require('meow')
 const updateNotifier = require('update-notifier')
-const log = require('../lib/logger.js').logger
+const loggers = require('../lib/logger/loggers.js')
+const userLogger = loggers.userLogger
+const errorLogger = loggers.errorLogger
 const DidYouMean = require('did-you-mean')
 
 // local modules
@@ -48,29 +50,27 @@ if (!command) {
   cli.showHelp(1)
 }
 
+loggers.init(cli.flags.debug)
+
 if (!commands[command]) {
-  log.fatal(`unknown command: ${command}`)
+  userLogger.info(`  unknown command: ${command}`)
   const alt = didYouMean.get(command)
-  alt && log.info(`Did you mean: ${alt} ?`)
+  alt && userLogger.info(`  Did you mean: ${alt} ?`)
   cli.showHelp(1)
 }
 
 const msg = finishMessage(command, cli.flags)
 
-cli.flags.debug && log.setLevel('DEBUG')
-
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .then(({formData, options} = {formData: {}, options: {}}) => log.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
+  .then(({formData, options} = {formData: {}, options: {}}) => userLogger.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {
-    log.error(`
-
-There was a problem executing '${command}':
+    userLogger.info(`There was a problem executing '${command}':
 
 ${err}
 
-${cli.flags.debug ? err.stack : ''}
-
 Please fix the error and try again.
-`)
+`
+)
+    errorLogger.error(err)
     process.exitCode = 1
   })

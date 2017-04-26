@@ -1,8 +1,8 @@
 'use strict'
 
 const t = require('transducers-js')
-const log = require('../logger.js').logger
 
+const debugLogger = require('../logger/loggers.js').debugLogger
 const accum = require('../accumulators/object-accum.js')
 const arrayAccum = require('../accumulators/array-accum.js')
 const fixChoice = require('../transforms/fix-choice.js')
@@ -69,18 +69,10 @@ function normaliseFields (fields) {
 }
 
 function normaliseArrays (form) {
-  log.debug(`====================== start original form # ${form.name}`)
-  log.debug(JSON.stringify(form))
-  log.debug(`====================== end original form # ${form.name}`)
-
   form._elements = normaliseFields(extractDefault(form._elements)) || []
   form._checks = extractDefault(form._checks) || []
   form._actions = extractDefault(form._actions) || []
   form._behaviours = extractDefault(form._behaviours) || []
-
-  log.debug(`====================== start extracted form # ${form.name}`)
-  log.debug(JSON.stringify(form))
-  log.debug(`====================== end extracted form  # ${form.name}`)
 
   return addConditionalsToElements(form)
 }
@@ -88,7 +80,10 @@ function normaliseArrays (form) {
 function normaliseForm (definition) {
   const xf = t.comp(t.filter(getDefaultForm), t.map((f) => f[1]), t.map((f) => normaliseArrays(f)))
 
-  return t.transduce(xf, accum, {}, definition)
+  const result = t.transduce(xf, accum, {}, definition)
+  debugLogger.debug(`normalised Form: ${JSON.stringify(result)}`)
+
+  return result
 }
 
 module.exports = {normaliseForm, normaliseArrays}

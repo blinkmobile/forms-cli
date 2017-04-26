@@ -2,7 +2,7 @@
 
 const path = require('path')
 
-const log = require('./logger.js').logger
+const debugLogger = require('./logger/loggers.js').debugLogger
 
 function writeSite (basePath, formData) {
   const formNames = Object.keys(formData)
@@ -14,7 +14,7 @@ function writeSite (basePath, formData) {
     }
 
     if (!Array.isArray(form) && typeof form !== 'function') {
-      log.error('Form is not a function or an Array of functions')
+      debugLogger.debug('Form is not a function or an Array of functions')
       return Promise.reject(new Error('Form must be a single function or an Array of functions'))
     }
 
@@ -22,7 +22,7 @@ function writeSite (basePath, formData) {
       form = [form]
     }
     const formPath = path.join(basePath, formName)
-
+    debugLogger.debug(`Writing form to ${formPath}`)
     return Promise.all(form.map((writer) => writer(formPath)))
   }))
 }

@@ -19,7 +19,7 @@ module.exports = {
   },
   filter: (input) => {
     if (scope && !/^http/i.test(input)) {
-      const uri = new url.URL(input, scope)
+      const uri = url.parse(url.resolve(scope, input))
       input = uri.href
     }
 

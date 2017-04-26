@@ -2,8 +2,9 @@ before_script:
   - apt-get update -qq
   - apt-get install -qy libelf1
   - npm install --global npm
-  - npm install --global yarn
+  - npm install --global lerna@2.0.0-beta.38
   - npm install
+  - lerna bootstrap
 test:
   image: 'node:6'
   script:

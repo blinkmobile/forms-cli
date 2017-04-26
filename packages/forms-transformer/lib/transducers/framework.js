@@ -1,11 +1,11 @@
 'use strict'
 
-const log = require('../logger.js').logger
+const debugLogger = require('../logger/loggers.js').debugLogger
 
 function processDefinition (processForm) {
   return (definition) => definition.reduce((memo, form) => {
-    log.debug('start process form definition')
-    log.debug(form)
+    debugLogger.debug('start framework processing of form definition')
+
     const writers = processForm(form)
     if (!writers.length) return memo
 
