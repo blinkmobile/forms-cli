@@ -6,8 +6,10 @@ function processDefinition (processForm) {
   return (definition) => definition.reduce((memo, form) => {
     debugLogger.debug('start framework processing of form definition')
 
-    const writers = processForm(form)
-    if (!writers.length) return memo
+    let writers = processForm(form)
+    if (!Array.isArray(writers)) {
+      writers = [writers]
+    }
 
     memo[form.name] = writers
     return memo
