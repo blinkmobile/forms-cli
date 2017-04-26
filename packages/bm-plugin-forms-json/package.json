@@ -18,7 +18,7 @@
   "author": "Blink Mobile Technologies",
   "license": "MIT",
   "dependencies": {
-    "@blinkmobile/forms-template-helper": "../forms-template-helper"
+    "@blinkmobile/forms-template-helper": "1.0.0-alpha"
   },
   "engines": {
     "node": ">=6",
