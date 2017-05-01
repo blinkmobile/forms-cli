@@ -8,8 +8,12 @@ You should be familiar with the AngularJS [component architechture](https://docs
 
 When the forms transformer is used, this plugin will create two files in the specified `dist/` folder.
 
-- `bm-forms.js` - The concatenated forms component code, including the input html
+- `blink-forms-bundle.js` - The concatenated forms component code, including the input html
 - `index.html` - An example on how to include it in a simple web app.
+
+There will also be a `components` folder which will contain the concatenated component files, should you wish to include them in your own build process.
+
+It is important to note that these files are a convienence. The aim of the transformer is be as unobtrusive as possible, and while the contents of `dist/` will get you up and running, you are not forced to use them. You may wish to use webpack or roll up or any other build system. This is why the transformer also generates the source files.
 
 ## Angular Modules and components
 
@@ -28,7 +32,5 @@ To use the forms, in your template html, use the custom element syntax:
 ```html
 <div class="form-container">
   <report-form model="$ctrl.myFormModel"></report-form>
-
-  <input type="submit" ng-click="$ctrl.submit($ctrl.myFormModel)">
 </div>
 ```
