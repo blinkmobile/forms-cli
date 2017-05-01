@@ -1,4 +1,4 @@
-function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, formSubmitToBMPService) {
+function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, <%moduleName%>SubmitToBMPService) {
   this.toJson = function (obj) {
     return JSON.stringify(obj, null, 2)
   }
@@ -47,7 +47,7 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, formSub
   }
 
   this.onSaveClick = (model) => {
-    return formSubmitToBMPService('<%name%>', model)
+    return <%moduleName%>SubmitToBMPService('<%name%>', model)
   }
 }
 

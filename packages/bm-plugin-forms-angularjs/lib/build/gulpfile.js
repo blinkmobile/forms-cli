@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+const fs = require('fs')
 
 const gulp = require('gulp')
 const babel = require('gulp-babel')
@@ -11,37 +12,119 @@ const footer = require('gulp-footer')
 const ngAnnotate = require('gulp-ng-annotate')
 const angularFilesort = require('gulp-angular-filesort')
 const inject = require('gulp-inject')
+const browserify = require('browserify')
+const source = require('vinyl-source-stream')
+const buffer = require('vinyl-buffer')
+const through = require('through2')
+const globby = require('globby')
+const merge = require('merge-stream')
+
 const findUp = require('find-up')
+
+function makeModule (p, dest, pkgPath) {
+  return gulp.src(`${p}/**/**.js`)
+    .pipe(babel({presets: [path.join(path.dirname(pkgPath), 'node_modules', 'babel-preset-es2015')]}))
+    .pipe(angularFilesort())
+    .pipe(embedTemplates())
+    .pipe(ngAnnotate())
+    .pipe(concat(`${path.basename(p)}.js`))
+    .pipe(header(`(function (angular) {
+
+`))
+    .pipe(footer('\n})(window.angular);'))
+    .pipe(gulp.dest(`${dest}/components`))
+}
+
+const dirs = (p) => fs.readdirSync(p).filter((f) => fs.statSync(`${p}/${f}`).isDirectory())
 
 function blinkForms () {
   const dest = process.env.dest
   const src = process.env.src
 
   const pkgPath = findUp.sync('.blinkmrc.json')
+  const streams = dirs(src).map((p) => makeModule(`${src}/${p}`, dest, pkgPath))
 
-  return gulp.src(`${src}/**/*.js`)
-    .pipe(babel({presets: [path.join(path.dirname(pkgPath), 'node_modules', 'babel-preset-es2015')]}))
-    .pipe(angularFilesort())
-    .pipe(embedTemplates())
-    .pipe(ngAnnotate())
-    .pipe(concat('bm-forms.js'))
-    .pipe(header('(function (angular) {\n'))
-    .pipe(footer('\n})(window.angular);'))
+  return merge(...streams)
+}
+
+// unfortunately it seems many of these deps are not built to be bundled.
+// come back to this later
+function vendors () {
+  const dest = process.env.dest
+  const src = process.env.src
+
+  // files that need to be bundled via browserify
+  const moduleFiles = [
+    `${src}/../node_modules/uuid/`,
+    `${src}/../node_modules/@blinkmobile/angular-camera/`,
+    `${src}/../node_modules/@blinkmobile/angular-location/lib/index.js`,
+    `${src}/../node_modules/getusermedia/`,
+    `${src}/../node_modules/signature_pad/`,
+    `${src}/../node_modules/@blinkmobile/canvas-manipulation`,
+    `${src}/../node_modules/@blinkmobile/angular-signature-pad`
+  ]
+
+  const b = browserify({
+    entries: globby.sync(moduleFiles),
+    debug: true
+  })
+
+  return b.bundle()
+    .pipe(through())
+    .pipe(source('vendor/vendor.js'))
+    .pipe(buffer())
     .pipe(gulp.dest(dest))
 }
 
-function build () {
+// once we have made the component files, we need to run it through browserify to
+// get any modules used by the components into one file.
+function bundle () {
+  const src = process.env.src
+  const dest = process.env.dest
+
+  // files that need to be bundled via browserify
+  // these are files used in the angular source eg uuid generator
+  const usedModules = [`${src}/../node_modules/uuid/index.js`]
+  const mods = [...usedModules, `${dest}/components/*.js`]
+
+  const b = browserify({
+    entries: globby.sync(mods),
+    debug: true
+  })
+
+  return b.bundle()
+    .pipe(through())
+    .pipe(source('blink-forms-bundle.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest(dest))
+}
+
+// creates a sample HTML file to illustrate a basic way of including the
+// components in a web page.
+function createHTML () {
   const dest = process.env.dest
   const templatePath = process.env.templatePath
   const pkgPath = findUp.sync('.blinkmrc.json')
+  const filesToInject = [
+    `${dest}/*.js`,
+    path.join(path.dirname(pkgPath), 'node_modules', 'skeleton-framework', 'dist', 'skeleton.css')
+  ]
 
   return gulp.src(`${templatePath}/index.html`)
-    .pipe(inject(gulp.src([`${dest}/*.js`, path.join(path.dirname(pkgPath), 'node_modules', 'skeleton-framework', 'dist', 'skeleton.css')], {read: false})))
+    .pipe(inject(gulp.src(filesToInject, {read: false})))
     .pipe(gulp.dest(dest))
 }
 
-gulp.task('blinkForms', blinkForms)
+// vendors task currently produces invalid output. the individual modules
+// need to be fixed up so that we can enable bundling of our external modules
+gulp.task('vendors', vendors)
 
-gulp.task('build', ['blinkForms'], build)
+// see https://medium.com/@dave_lunny/task-dependencies-in-gulp-b885c1ab48f0
+// and https://github.com/gulpjs/gulp/issues/67
+// for a good explaination on why you have to specify the
+// dependencies on all gulp tasks
+gulp.task('blinkForms', blinkForms)
+gulp.task('bundle', ['blinkForms'], bundle)
+gulp.task('build', ['bundle', 'blinkForms'], createHTML)
 
 gulp.task('default', ['build'])
