@@ -85,6 +85,9 @@ function processForm (form) {
       pages: pages.length > 1
     })))
 
+  // submit to bmp service
+  formWriters.push(lazyWriter('form-submit-to-bmp-service.js', jsTemplates['form-submit-to-bmp-service.js'](moduleOptions)))
+
   // // html template transform
   const formHTMLname = path.join(COMPONENT_PATH, `component-${form.name}.html`)
   formWriters.push(lazyWriter(formHTMLname, makeHTMLRenderers({form: moduleOptions, pages})))

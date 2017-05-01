@@ -81,8 +81,8 @@ function normaliseArrays (form) {
   return addConditionalsToElements(form)
 }
 
-function normaliseForm (definition) {
-  const xf = t.comp(t.filter(getDefaultForm), t.map((f) => f[1]), t.map((f) => normaliseArrays(f)))
+function normaliseForm (definition, answerspaceDetails) {
+  const xf = t.comp(t.filter(getDefaultForm), t.map((f) => f[1]), t.map((f) => Object.assign({}, f, answerspaceDetails)), t.map((f) => normaliseArrays(f)))
 
   const result = t.transduce(xf, accum, {}, definition)
   debugLogger.debug(`normalised Form: ${JSON.stringify(result)}`)

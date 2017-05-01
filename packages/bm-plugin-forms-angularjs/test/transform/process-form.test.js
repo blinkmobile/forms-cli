@@ -30,7 +30,8 @@ test('should return an array of functions', (t) => {
 
   serviceGetByTypeStub.returns({
     'form-module.js': () => 'form-module.js',
-    'model-service.js': () => 'model-service.js'
+    'model-service.js': () => 'model-service.js',
+    'form-submit-to-bmp-service.js': () => 'form-submit-to-bmp-service.js'
   })
   const m = pq(TEST_SUBJECT, {
     [CTRL_RENDERER_NAME]: t.context.stubs.controllerRendererStub,
@@ -76,7 +77,8 @@ test('correct moduleOptions is generated', (t) => {
 
   serviceGetByTypeStub.returns({
     'form-module.js': checkModule,
-    'model-service.js': () => 'model-service.js'
+    'model-service.js': () => 'model-service.js',
+    'form-submit-to-bmp-service.js': () => 'form-submit-to-bmp-service.js'
   })
   const m = pq(TEST_SUBJECT, {
     [CTRL_RENDERER_NAME]: t.context.stubs.controllerRendererStub,

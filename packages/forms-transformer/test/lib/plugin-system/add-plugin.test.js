@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('ava')
-const pq = require('proxyquire').noCallThru()
+const pq = require('proxyquire').noCallThru().noPreserveCache()
 const sinon = require('sinon')
 
 const TEST_SUBJECT = '../../../lib/plugin-system/add-plugin.js'
@@ -13,15 +13,15 @@ test('should reject if no plugin path is supplied', async (t) => { // eslint-dis
 })
 
 test('should call execa with the save option', (t) => {
-  const expected = 'npm install --save plugin'
+  const expected = 'npm install --save undefined'
   const findUpStub = sinon.stub()
   findUpStub.returns(Promise.resolve('node_modules/'))
 
   const execaStub = sinon.stub()
-  execaStub.returns(Promise.resolve())
+  execaStub.returns(Promise.resolve({stdout: 'abc'}))
 
   const getStreamStub = sinon.stub()
-  getStreamStub.returns(Promise.resolve())
+  getStreamStub.returns(Promise.resolve({stdout: 'def'}))
 
   const addPlugin = pq(TEST_SUBJECT, {
     'execa': {shell: execaStub},
@@ -29,19 +29,19 @@ test('should call execa with the save option', (t) => {
     'get-stream': getStreamStub
   })
 
-  return addPlugin('plugin').then(() => t.true(execaStub.calledWith(expected)))
+  return addPlugin('undefined').then(() => t.true(execaStub.calledWith(expected)))
 })
 
 test('should call execa without the save option', (t) => {
-  const expected = 'npm install plugin'
+  const expected = 'npm install undefined'
   const findUpStub = sinon.stub()
   findUpStub.returns(Promise.resolve(null))
 
   const execaStub = sinon.stub()
-  execaStub.returns(Promise.resolve())
+  execaStub.returns(Promise.resolve({stdout: 'abc'}))
 
   const getStreamStub = sinon.stub()
-  getStreamStub.returns(Promise.resolve())
+  getStreamStub.returns(Promise.resolve({stdout: 'def'}))
 
   const addPlugin = pq(TEST_SUBJECT, {
     'execa': {shell: execaStub},
@@ -49,7 +49,7 @@ test('should call execa without the save option', (t) => {
     'get-stream': getStreamStub
   })
 
-  return addPlugin('plugin').then(() => t.true(execaStub.calledWith(expected)))
+  return addPlugin('undefined').then(() => t.true(execaStub.calledWith(expected)))
 })
 
 test('should call handleNPMerror if npm errors', (t) => {

@@ -1,0 +1,46 @@
+const uuid = require('uuid/v4')
+
+function <%moduleName%>SubmitToBMPService ($http, $httpParamSerializerJQLike, BLINK_PLATFORM_URL, BLINK_FORMS_URL, BLINK_ANSWERSPACE_NAME, BLINK_ANSWERSPACE_ID) {
+  const blinkConfig = {
+    'answerSpaceId': BLINK_ANSWERSPACE_ID,
+    'answerSpace': BLINK_ANSWERSPACE_NAME
+  }
+
+  function removeEmptyData (formData) {
+    const result = {}
+    angular.forEach(formData, (value, name) => {
+      if (!value || (angular.isDate(value) && isNaN(value.valueOf()))) {
+        return
+      }
+      result[name] = value
+    })
+
+    return result
+  }
+
+  function doSubmit (formName, formData) {
+    formData._uuid = formData._uuid || uuid()
+    formData._submittedTime = (new Date).getTime()
+    const request = {
+      method: 'POST',
+      url: BLINK_PLATFORM_URL + BLINK_FORMS_URL.SAVE_RECORD,
+      params: {
+        schema: 3,
+        _asid: BLINK_ANSWERSPACE_ID,
+        _fn: formName,
+        _action: formData._id ? 'edit' : 'add'
+      },
+      paramSerializer: $httpParamSerializerJQLike,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      data: $httpParamSerializerJQLike(removeEmptyData(formData))
+    }
+
+    return $http(request)
+  }
+
+  return doSubmit
+}
+
+angular.module('<%moduleName%>').service('<%moduleName%>SubmitToBMPService', <%moduleName%>SubmitToBMPService)
