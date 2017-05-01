@@ -1,6 +1,6 @@
 # Blink Forms Forms JSON Renderer
 
-Renders a Blink Mobile  Form Definition to a normalised JSON structure, then writes that structure to files. For use with the Forms Transformer.
+Renders a Blink Mobile Form Definition to a normalised JSON structure, then writes that structure to files. For use with the Forms Transformer.
 
 ## Installation
 
