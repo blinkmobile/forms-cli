@@ -8,7 +8,7 @@ module.exports = {
   type: 'list',
   default: 0,
   choices: function (answers) {
-    return ['AngularJS', 'Custom']
+    return ['AngularJS', 'JSON', 'Custom']
   },
   filter: function (input) {
     if (input.toLowerCase() === 'custom') {

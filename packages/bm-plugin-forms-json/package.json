@@ -1,0 +1,36 @@
+{
+  "name": "@blinkmobile/bm-plugin-forms-json",
+  "version": "1.0.0-alpha",
+  "description": "Transforms the BMP Forms JSON to JSON files",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "eslint": "eslint --fix --cache .",
+    "ava": "ava"
+  },
+  "keywords": [
+    "Blink",
+    "Mobile",
+    "Technologies",
+    "Forms",
+    "Transform"
+  ],
+  "author": "Blink Mobile Technologies",
+  "license": "MIT",
+  "dependencies": {
+    "@blinkmobile/forms-template-helper": "1.0.0-alpha"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    {
+      "name": "Simon Dobie",
+      "email": "simon@blinkmobile.com.au"
+    }
+  ]
+}

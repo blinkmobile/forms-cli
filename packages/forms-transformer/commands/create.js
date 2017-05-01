@@ -21,7 +21,7 @@ const buildCommand = require('./build.js')
 function normalise (options) {
   const answerspace = options.answerspace
   return getAnswerspaceId(answerspace)
-    .then(getFormDefinition)
+    .then(getFormDefinition.bind(null, answerspace))
     .then((data) => data.map((f) => normalisationTransducer(f)))
 }
 

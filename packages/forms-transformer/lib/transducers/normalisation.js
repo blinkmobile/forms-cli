@@ -47,6 +47,10 @@ function addConditionalsToElements (form) {
         return
       }
       const el = e.filter((el) => el.name === action.target)[0]
+      if (!el) {
+        return
+      }
+
       if (action.properties.hidden) {
         el.hideWhen = el.hideWhen || fnName
       } else {
