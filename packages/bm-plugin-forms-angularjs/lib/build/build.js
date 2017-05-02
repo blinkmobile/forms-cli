@@ -8,7 +8,7 @@ function build (cfg) {
   return new Promise((resolve, reject) => {
     const notError = maybeRun(reject)
 
-    process.env.src = cfg.outputPath
+    process.env.src = cfg.sourcePath
     process.env.dest = cfg.distPath
     process.env.templatePath = cfg.templatePath
 

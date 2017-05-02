@@ -20,4 +20,4 @@ $ bm forms init
 
 When prompted, select "JSON" from the list of plugins.
 
-The resulting JSON files will be written to the `outputPath` (component source) folder in `my-project`
+The resulting JSON files will be written to the `sourcePath` (component source) folder in `my-project`

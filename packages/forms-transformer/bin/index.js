@@ -62,7 +62,7 @@ if (!commands[command]) {
 const msg = finishMessage(command, cli.flags)
 
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .then(({formData, options} = {formData: {}, options: {}}) => userLogger.info(msg`${options.framework}${options.outputPath}${options.distPath}${options.templatePath}${options.scope}`))
+  .then(({formData, options} = {formData: {}, options: {}}) => userLogger.info(msg`${options.framework}${options.sourcePath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {
     userLogger.info(`There was a problem executing '${command}':
 

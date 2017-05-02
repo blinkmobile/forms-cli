@@ -27,7 +27,7 @@ const hostName = (_, answerspaceUrl) => {
 
 // make angular elements transforms
 function normalise (options) {
-  const answerspace = options.answerspace
+  const answerspace = options.definitionSource
   const answerspaceDetails = {
     answerspaceName: answerspace,
     platformURL: hostName`${answerspace}`
@@ -54,7 +54,7 @@ function compile (options, cmdFlags) {
   return plugin.init(options)
     .then(() => normalise(options))
     .then((normalisedForms) => transformer(normalisedForms))
-    .then((formData) => writeSite(options.outputPath, formData))
+    .then((formData) => writeSite(options.sourcePath, formData))
     .then((formData) => cmdFlags.build ? buildCommand().then(() => ({formData, options})) : {formData, options})
 }
 

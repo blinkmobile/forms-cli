@@ -8,7 +8,7 @@ const readConfig = require('../../config/read-config.js')
 let scope
 
 module.exports = {
-  name: 'answerspace',
+  name: 'definitionSource',
   message: 'What is your answerSpace or EPS url?',
   type: 'input',
   default: () => {
