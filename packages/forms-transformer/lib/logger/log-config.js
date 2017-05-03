@@ -47,7 +47,7 @@ function init ({isDebugMode, isStdErrEnabled}) {
       filename: 'blink-forms-debug.log',
       category: [CATEGORIES.DEBUG, CATEGORIES.ERROR],
       maxLogSize: 2 * 1024 * 1024, // = 2Mb
-      numBackups: 1, // keep five backup files
+      numBackups: 1, // keep 1 backup file
       compress: true, // compress the backups
       encoding: 'utf-8',
       layout: {
