@@ -3,9 +3,9 @@
 const path = require('path')
 
 module.exports = {
-  name: 'sourcePath',
-  message: 'Which folder should I write the component source to?',
+  name: 'definitionSource',
+  message: 'Which folder has the JSON files?',
   type: 'input',
-  default: './bm-forms-src',
+  default: './form-json',
   filter: (input) => path.posix.relative('.', input) || '.'
 }

@@ -44,3 +44,4 @@ test('it should reject with `cancelled`', async (t) => { // eslint-disable-line 
 
   await t.throws(init(), 'cancelled') // eslint-disable-line  node/no-unsupported-features
 })
+

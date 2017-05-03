@@ -7,7 +7,7 @@ const TEST_SUBJECT = '../../../../lib/init/questions/template-folder.js'
 test('default should return the dirname + `templates`', (t) => {
   const question = require(TEST_SUBJECT)
   const expected = 'folder/templates'
-  const input = {outputPath: 'folder/source'}
+  const input = {sourcePath: 'folder/source'}
 
   t.is(question.default(input), expected)
 })
