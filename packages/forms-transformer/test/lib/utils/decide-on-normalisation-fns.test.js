@@ -15,7 +15,7 @@ test('it should select bmp normalisation', (t) => {
   })
 
   decide({definitionSource: 'http://blinkm.co/simon'})()
-  t.is(bmpSpy.callCount, 1)
+  t.is(bmpSpy.callCount, expected)
 })
 
 test('it should select bmp normalisation when eps url is used', (t) => {
