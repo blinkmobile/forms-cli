@@ -34,19 +34,20 @@ test('should return the scope', (t) => {
 
 // filter function
 
-test('should return the input', (t) => {
-  const expected = 'non-existant'
+test('should return the full answerspace url', (t) => {
+  const input = 'non-existant'
+  const expected = `${expectedHost}/${input}`
 
   const question = pq(TEST_SUBJECT, {
-    '../../utils/answerspace/fetch-answerspace-id.js': fetchAnswerspaceResolve,
-    '../../config/read-config.js': readConfigReject
+    '../../utils/answerspace/fetch-answerspace-id.js': fetchAnswerspaceResolve
   })
 
-  return question.filter(expected).then((result) => t.is(result, expected))
+  return question.filter(input).then((result) => t.is(result, expected))
 })
 
 test('should return the full URL', (t) => {
   const expected = `${expectedHost}/non-existant`
+  const input = 'non-existant'
 
   const question = pq(TEST_SUBJECT, {
     '../../utils/answerspace/fetch-answerspace-id.js': fetchAnswerspaceResolve,
@@ -55,7 +56,7 @@ test('should return the full URL', (t) => {
 
   const checkResult = (result) => t.is(result, expected)
   return question.default()
-    .then(() => question.filter('non-existant').then(checkResult))
+    .then(() => question.filter(input).then(checkResult))
 })
 
 test('should return the full URL, ignoring the scope', (t) => {
