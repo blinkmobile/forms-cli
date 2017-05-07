@@ -4,7 +4,6 @@ const DidYouMean = require('did-you-mean')
 
 const logger = require('../lib/logger/loggers.js').userLogger
 const help = require('../lib/plugin-system/help.js')
-const readConfig = require('../lib/config/read-config.js')
 
 const didYouMean = new DidYouMean('add remove info templates')
 didYouMean.ignoreCase()
