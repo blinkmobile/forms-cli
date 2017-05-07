@@ -20,8 +20,6 @@ function plugin (input) {
   const cmd = input[0]
   const pluginName = input[1]
 
-  const finish = () => readConfig().then((cfg) => ({formData: {}, options: cfg}))
-
   if (!cmd) {
     logger.info(help)
 
@@ -41,7 +39,7 @@ Did you mean: plugin ${alt} ?`
     return Promise.reject(new Error(msg))
   }
 
-  return fn(pluginName).then(finish)
+  return fn(pluginName)
 }
 
 module.exports = plugin
