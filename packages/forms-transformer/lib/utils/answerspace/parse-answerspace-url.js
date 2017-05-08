@@ -28,5 +28,6 @@ function toConfigUrl (answerspaceUrl) {
 }
 
 module.exports = {
-  toConfigUrl
+  toConfigUrl,
+  toBMPUrl: (answerspace) => toUrlObj(answerspace).href
 }
