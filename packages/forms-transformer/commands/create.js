@@ -24,7 +24,7 @@ function create (options, cmdFlags) {
     .then((formData) => writeSite(options.sourcePath, formData))
     .then((formData) => {
       userLogger.info(`Finished creating framework source files.
-Source Location: ${path.resolve(options.sourcePath)}
+Source files location: ${path.resolve(options.sourcePath)}
 `)
       if (cmdFlags.build) {
         return buildCommand()
