@@ -15,7 +15,6 @@ const DidYouMean = require('did-you-mean')
 
 const pkg = require('../package.json')
 const help = require('../lib/help.js')
-const finishMessage = require('../lib/finish-message.js')
 
 // this module
 updateNotifier({ pkg }).notify()
@@ -59,16 +58,15 @@ if (!commands[command]) {
   cli.showHelp(1)
 }
 
-const msg = finishMessage(command, cli.flags)
-
 commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
-  .then(({formData, options} = {formData: {}, options: {}}) => userLogger.info(msg`${options.framework}${options.sourcePath}${options.distPath}${options.templatePath}${options.scope}`))
   .catch((err) => {
     userLogger.info(`There was a problem executing '${command}':
 
 ${err}
 
 Please fix the error and try again.
+
+For more information, run the command with the \`--debug\` flag and check the \`./blink-forms-debug.log\` file.
 `
 )
     errorLogger.error(err)
