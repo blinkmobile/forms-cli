@@ -1,5 +1,5 @@
 {
-  "name": "@blinkmobile/project-shockwave",
+  "name": "@blinkmobile/forms-cli",
   "scripts": {
     "test": "npm-run-all eslint && ava",
     "eslint": "eslint --fix --cache .",
