@@ -4,7 +4,7 @@
   "description": "Helper utilities for template functions in Blink Forms plugins",
   "main": "index.js",
   "files" : [
-    "lib/",
+    "lib/"
   ],
   "scripts": {
     "test": ""

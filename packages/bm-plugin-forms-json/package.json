@@ -3,8 +3,8 @@
   "version": "1.0.0-alpha",
   "description": "Transforms the BMP Forms JSON to JSON files",
   "main": "index.js",
-  "files" : [
-    "lib/",
+  "files": [
+    "lib/"
   ],
   "scripts": {
     "test": "ava",
@@ -15,9 +15,9 @@
     "Blink",
     "Mobile",
     "Technologies",
-  ],
     "Forms",
     "Transform"
+  ],
   "author": "Blink Mobile Technologies",
   "license": "MIT",
   "dependencies": {
