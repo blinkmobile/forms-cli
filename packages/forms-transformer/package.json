@@ -11,9 +11,7 @@
   },
   "files" : [
     "bin/",
-    "docs/",
     "lib/",
-    "templates/",
     "commands/"
   ],
   "scripts": {
