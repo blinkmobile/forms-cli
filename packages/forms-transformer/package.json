@@ -5,10 +5,15 @@
     "blinkm-forms": "bin/index.js"
   },
   "description": "Transform a BlinkMobile Forms definition into an HTML Form",
-  "main": "bin/index.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
+  "files" : [
+    "docs/",
+    "lib/",
+    "templates/"
+  ],
   "scripts": {
     "test": "npm-run-all eslint && ava",
     "eslint": "eslint --fix --cache .",

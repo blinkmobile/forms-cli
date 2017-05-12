@@ -3,6 +3,10 @@
   "version": "1.0.0-alpha",
   "description": "Helper utilities for template functions in Blink Forms plugins",
   "main": "index.js",
+
+  "files" : [
+    "lib/",
+  ],
   "scripts": {
     "test": ""
   },
