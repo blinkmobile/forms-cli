@@ -32,5 +32,6 @@
       "name": "Simon Dobie",
       "email": "simon@blinkmobile.com.au"
     }
-  ]
+  ],
+  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/bm-plugin-forms-json"
 }

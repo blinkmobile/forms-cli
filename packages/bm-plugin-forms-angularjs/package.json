@@ -3,10 +3,7 @@
   "version": "1.0.0-alpha",
   "description": "AngularJS Plugin for Blink Mobile Technologies Forms transformer",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://git.blinkm.co/blinkmobile-internal/project-shockwave/plugins/bm-plugin-forms-angularjs"
-  },
+  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/bm-plugin-forms-angularjs",
   "keywords": [
     "Blink",
     "Mobile",

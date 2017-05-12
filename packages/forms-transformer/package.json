@@ -1,5 +1,5 @@
 {
-  "name": "@blinkmobile/project-shockwave",
+  "name": "@blinkmobile/forms-cli",
   "version": "1.0.0-alpha",
   "bin": {
     "blinkm-forms": "bin/index.js"
@@ -54,8 +54,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave/packages/forms-transformer"
-  }
+  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/forms-transformer"
 }

@@ -35,5 +35,6 @@
       "email": "simon@blinkmobile.com.au"
     }
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/forms-template-helper"
 }
