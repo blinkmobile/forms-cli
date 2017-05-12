@@ -38,6 +38,9 @@
       "email": "simon@blinkmobile.com.au"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/forms-template-helper"
 }
