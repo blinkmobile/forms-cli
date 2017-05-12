@@ -42,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.blinkm.co:40022/blinkmobile-internal/project-shockwave.git"
+    "url": "ssh://git@github.com:blinkmobile/forms-cli.git"
   },
   "ava": {
     "files": [
