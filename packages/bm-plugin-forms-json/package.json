@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/bm-plugin-forms-json",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.0",
   "description": "Transforms the BMP Forms JSON to JSON files",
   "main": "index.js",
   "files": [
@@ -21,7 +21,7 @@
   "author": "Blink Mobile Technologies",
   "license": "MIT",
   "dependencies": {
-    "@blinkmobile/forms-template-helper": "1.0.0-alpha"
+    "@blinkmobile/forms-template-helper": "^1.0.0-alpha.0"
   },
   "engines": {
     "node": ">=6",

@@ -1,9 +1,9 @@
 {
   "name": "@blinkmobile/forms-template-helper",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.0",
   "description": "Helper utilities for template functions in Blink Forms plugins",
   "main": "index.js",
-  "files" : [
+  "files": [
     "lib/"
   ],
   "scripts": {
@@ -14,7 +14,7 @@
     "npm": ">=3"
   },
   "dependencies": {
-    "@blinkmobile/maybe-run": "1.0.0-alpha",
+    "@blinkmobile/maybe-run": "^1.0.0-alpha.0",
     "co": "4.6.0",
     "glob": "7.1.1",
     "mkdirp": "0.5.1",
