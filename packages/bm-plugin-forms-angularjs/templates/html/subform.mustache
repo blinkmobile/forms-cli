@@ -1,7 +1,7 @@
 <div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
                   <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
   <div class="bm-subforms" ng-repeat="subform in $ctrl.model.<%&name%> | filter:{ '_action': '!remove'}">
-    <<%&subFormElement%> model="subform"></<%&subFormElement%>>
+    <<%&subFormElement%> model="subform" is-sub-form="true"></<%&subFormElement%>>
     <button class="bm-button button-primary" ng-click="$ctrl.removeSubform(subform, $ctrl.model.<%&name%>)">Remove Subform</button>
   </div>
   <button class="bm-button button-primary" ng-click="$ctrl.addSubform($ctrl.model.<%&name%>)">Add Subform</button>
