@@ -8,7 +8,7 @@ function setDefaultValue (el) {
     case 'date':
     case 'datetime':
     case 'time':
-      el.value = `new Date("")` // eslint-disable-line quotes
+      el.value = 'new Date(' + (el.value === 'now' ? '' : undefined) + ')' // eslint-disable-line quotes
   }
   return el
 }

@@ -33,7 +33,7 @@ test('it should use keep the current value', (t) => {
 })
 
 test('it should use an invalid date', (t) => {
-  const expected = 'new Date("")'
+  const expected = 'new Date(undefined)'
   const m = pq(TEST_SUBJECT, {
     './default-field-types.json': {
       date: expected
@@ -45,5 +45,21 @@ test('it should use an invalid date', (t) => {
   result = m({type: 'datetime'})
   t.is(result.value, expected)
   result = m({type: 'time'})
+  t.is(result.value, expected)
+})
+
+test('it should use an valid date', (t) => {
+  const expected = 'new Date()'
+  const m = pq(TEST_SUBJECT, {
+    './default-field-types.json': {
+      date: expected
+    }
+  })
+
+  let result = m({type: 'date', value: 'now'})
+  t.is(result.value, expected)
+  result = m({type: 'datetime', value: 'now'})
+  t.is(result.value, expected)
+  result = m({type: 'time', value: 'now'})
   t.is(result.value, expected)
 })
