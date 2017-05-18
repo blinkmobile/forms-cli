@@ -8,6 +8,7 @@ const arrayAccum = require('../accumulators/array-accum.js')
 const fixChoice = require('../transforms/fix-choice.js')
 const fixHeadings = require('../transforms/fix-headings.js')
 const fixCamera = require('../transforms/fix-camera.js')
+const fixId = require('../transforms/fix-id.js')
 const setDefaultValues = require('../transforms/set-defaults.js')
 
 const getDefaultForm = (f) => f[0].toLowerCase() === 'default'
@@ -67,6 +68,7 @@ function normaliseFields (fields) {
                     t.map(fixChoice),
                     t.map(fixHeadings),
                     t.map(fixCamera),
+                    t.map(fixId),
                     t.map(setDefaultValues))
 
   return t.transduce(xf, arrayAccum, [], fields)
