@@ -5,5 +5,5 @@
   <%&footer%>
 
   <ng-transclude ng-transclude-slot="pagination"></ng-transclude>
-  <button ng-click="$ctrl.onSaveClick($ctrl.model)">Submit</button>
+  <button ng-click="$ctrl.onSaveClick($ctrl.model)" ng-show="!$ctrl.isSubForm">Submit</button>
 </ng-form>
