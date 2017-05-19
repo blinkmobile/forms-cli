@@ -1,6 +1,6 @@
 'use strict'
 
-function fixCameraElements (el) {
+function fixIdElements (el) {
   if (el.type === 'text' && el.name === 'id') {
     el.type = 'hidden'
   }
@@ -8,4 +8,4 @@ function fixCameraElements (el) {
   return el
 }
 
-module.exports = fixCameraElements
+module.exports = fixIdElements
