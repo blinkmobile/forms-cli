@@ -57,10 +57,12 @@ angular.module('<%moduleName%>').component('<%moduleName%>', {
   },
   templateUrl: 'component-<%name%>.html',
   controller: <%moduleName%>Controller,
+  controllerAs: '<%moduleName%>',
   bindings: {
     model: '<?',
     page: '<?',
     onPageChange: '&?',
-    isSubForm: '<?'
+    isSubForm: '<?',
+    subFormIndex: '<?'
   }
 })
