@@ -5,7 +5,7 @@
   <label class="bm-label <%rowClass%>" title="<%tooltip%>">
     <input  type="radio"
             ng-model="<%moduleName%>.model.<%name%>"
-            name="<%moduleName%>_{{<%moduleName%>.subFormIndex + '_' || '_'}}<%name%>"
+            name="<%moduleName%>_{{<%moduleName%>.subFormIndex}}_<%name%>"
             value="<%.%>"
             class="bm-input bm-input__radio <%rowClass%>"
             title="<%tooltip%>" />
