@@ -1,11 +1,11 @@
-<div class="bm-form__field" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
-                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+<div class="bm-form__field" <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <label class="bm-label" for="<%name%>"><%label%></label>
   <%#options%>
   <label class="bm-label <%rowClass%>" title="<%tooltip%>">
     <input  type="radio"
-            ng-model="$ctrl.model.<%name%>"
-            name="<%name%>"
+            ng-model="<%moduleName%>.model.<%name%>"
+            name="<%moduleName%>_{{<%moduleName%>.subFormIndex}}_<%name%>"
             value="<%.%>"
             class="bm-input bm-input__radio <%rowClass%>"
             title="<%tooltip%>" />

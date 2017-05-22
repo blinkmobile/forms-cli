@@ -1,9 +1,9 @@
-<ng-form name="<%interaction%>" class="bm-form" <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
-                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+<ng-form name="<%interaction%>" class="bm-form" <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <%&header%>
   <%&elements%>
   <%&footer%>
 
   <ng-transclude ng-transclude-slot="pagination"></ng-transclude>
-  <button ng-click="$ctrl.onSaveClick($ctrl.model)" ng-show="!$ctrl.isSubForm">Submit</button>
+  <button ng-click="<%moduleName%>.onSaveClick(<%moduleName%>.model)" ng-show="!<%moduleName%>.isSubForm">Submit</button>
 </ng-form>

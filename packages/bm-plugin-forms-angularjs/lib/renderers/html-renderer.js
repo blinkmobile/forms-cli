@@ -7,7 +7,7 @@ function makeHTMLRenderers ({form, pages}) {
   const htmlTemplates = templateService.getByType('html')
   const formTemplate = htmlTemplates.form
 
-  form.elements = elementTransducer(form._elements, pages).join('')
+  form.elements = elementTransducer(form._elements, pages, form.moduleName).join('')
 
   let formHtml = formTemplate(form)
   if (pages && pages.length > 1 && htmlTemplates['pagination']) {

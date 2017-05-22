@@ -6,12 +6,27 @@ function <%moduleName%>SubmitToBMPService ($http, $httpParamSerializerJQLike, BL
     'answerSpace': BLINK_ANSWERSPACE_NAME
   }
 
+  const isSubform = (value) => Array.isArray(value) && value.length > 0 && typeof value[0] === 'object'
+  const isLocation = (value) => angular.isObject(value) && value.latitude && value.longitude
+
   function removeEmptyData (formData) {
     const result = {}
     angular.forEach(formData, (value, name) => {
+      if (isSubform(value)) {
+        value = value.map((el) => removeEmptyData(el))
+      }
       if (!value || (angular.isDate(value) && isNaN(value.valueOf()))) {
         return
       }
+
+      if (name === '$$hashKey') {
+        return
+      }
+
+      if (isLocation(value)) {
+        value = JSON.stringify(value)
+      }
+
       result[name] = value
     })
 

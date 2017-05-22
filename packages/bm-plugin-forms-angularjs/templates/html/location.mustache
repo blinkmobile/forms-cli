@@ -1,8 +1,8 @@
-<div class="bm-form__field"  <%#showWhen%>ng-show="$ctrl.<%showWhen%>()"<%/showWhen%>
-                  <%#hideWhen%>ng-hide="$ctrl.<%hideWhen%>()"<%/hideWhen%>>
+<div class="bm-form__field"  <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
+                  <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <label class="bm-label" for="<%name%>"><%label%></label>
   <bm-confirm-location-on-map
-      ng-model="$ctrl.model.<%name%>"
+      ng-model="<%moduleName%>.model.<%name%>"
       class="bm-input__location"
     ></bm-confirm-location-on-map>
   <%#hint%><span class="bm-hint bm-hint__location"><%hint%></span><%/hint%>
