@@ -24,14 +24,14 @@ const transformPage = (elements) => {
   return t.transduce(xf, accum, [], elements)
 }
 
-function elementTransducer (allElements, pages) {
+function elementTransducer (allElements, pages, moduleName) {
   if (pages.length === 1) {
     return transformPage(allElements)
   }
 
   const elementsByPage = groupBy(allElements, (el) => el.page)
 
-  return map(elementsByPage, (els, pageIndex) => paginate`${transformPage(els).join('')}${pageIndex}`)
+  return map(elementsByPage, (els, pageIndex) => paginate`${transformPage(els).join('')}${pageIndex}${moduleName}`)
 }
 
 module.exports = elementTransducer

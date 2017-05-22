@@ -1,7 +1,7 @@
 'use strict'
 
-function paginate (strings, html, page) {
-  return `<div class='bm-forms__pagination' ng-show='$ctrl.page === ${page}'>
+function paginate (_, html, page, moduleName) {
+  return `<div class='bm-forms__pagination' ng-show='${moduleName}.page === ${page}'>
   ${html}
 </div>`
 }
