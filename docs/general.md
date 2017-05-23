@@ -7,6 +7,7 @@ Currently only works with [Blink Forms definitions](http://blinkmobile.com.au/bl
 ## Supported Frameworks
 
 - AngularJS 1.5+
+- JSON
 
 
 ## Overview
@@ -55,10 +56,10 @@ The plugin is referenced in `.blinkmrc.json` by name:
 ```json
 {
   "forms": {
-    "answerspace": "https://blinkm.co/demo",
+    "definitionSource": "https://blinkm.co/demo",
     "distPath": "my-forms/dist",
     "framework": "@blinkmobile/bm-plugin-forms-angularjs",
-    "outputPath": "my-forms/src",
+    "sourcePath": "my-forms/src",
     "templatePath": "my-forms/templates"
   }
 }
@@ -70,6 +71,8 @@ Currently we only support loading the the plugin via `node_modules`.
 `my-forms/templates` contains templates used by the transforms in the plugin. You can modify them to include any html/javascript you want, once you are done editing they can be committed to your VCS. For more information on editing the templates, see the template documentation.
 
 We recommend running `bm forms create` before editing the templates so you can see what a default form will look like.
+
+It is important to note that `bm forms create` will overwrite anything in the `sourcePath` folder. If you have modified anything in the `sourcePath` folder, running `bm forms create` will remove it.
 
 You will now have `my-forms/src` and `my-forms/dist` :
 
