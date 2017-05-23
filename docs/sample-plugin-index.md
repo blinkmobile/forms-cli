@@ -1,6 +1,6 @@
 # Sample plugin index.js
 
-Below is the entrypoint for the [AngularJS Plugin](packages/bm-plugin-forms-angularjs)
+Below is the entrypoint for the [AngularJS Plugin](../packages/bm-plugin-forms-angularjs)
 
 
 ```
