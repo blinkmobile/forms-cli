@@ -12,7 +12,7 @@ const commands = {
   add: require('../lib/plugin-system/add-plugin.js'),
   templates: require('../lib/plugin-system/extract-templates.js'),
   remove: () => Promise.reject(new Error('command "remove" not implemented')),
-  info: () => Promise.reject(new Error('command "info" not implemented'))
+  info: require('../lib/plugin-system/plugin-info.js')
 }
 
 function plugin (input) {

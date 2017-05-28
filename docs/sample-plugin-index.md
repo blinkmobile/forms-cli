@@ -3,7 +3,7 @@
 Below is the entrypoint for the [AngularJS Plugin](../packages/bm-plugin-forms-angularjs)
 
 
-```
+```javascript
 'use strict'
 
 const path = require('path')
