@@ -1,5 +1,7 @@
-<ng-form name="<%interaction%>" class="bm-form" <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
-                  <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
+<ng-form name="<%moduleName%>Form" class="bm-form"
+         ng-model-options="{ debounce: 500 }"
+         <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
+         <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <%&header%>
   <%&elements%>
   <%&footer%>

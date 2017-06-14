@@ -3,11 +3,12 @@
   <label class="bm-label" for="<%name%>"><%label%></label>
   <input  type="text"
           ng-model="<%moduleName%>.model.<%name%>"
+          local-forage="{key: '<%name%>', name: '<%moduleName%>', scopeKey: '<%moduleName%>.model.<%name%>', defaultValue: <%moduleName%>.model.<%name%> }"
           name="<%name%>"
           class="bm-input bm-input__text <%rowClass%>"
           placeholder="<%placeholderText%>"
           <%#required%>ng-required="true"<%/required%>
-          <%#characterLimit%>ng-maxlength="<%characterLimit%>"<%/characterLimit%>
+          <%#characterLimit%>maxlength="<%characterLimit%>"<%/characterLimit%>
           title="<%tooltip%>" />
   <%#hint%><span class="bm-hint bm-hint__text"><%hint%></span><%/hint%>
 </div>
