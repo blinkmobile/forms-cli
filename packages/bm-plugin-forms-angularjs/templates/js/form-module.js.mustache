@@ -4,10 +4,10 @@ angular.module('<%moduleName%>', ['LocalForageModule'<%#dependencyString%>, <%&d
         .constant('BLINK_PLATFORM_URL', '<%&platformURL%>')
         .constant('BLINK_FORMS_URL', {
           SAVE_RECORD: '/_api/interaction/run/forms/submit.php'
-        }).config(['$localForageProvider', function($localForageProvider){
-          $localForageProvider.config({
-            name        : '<%moduleName%>',
-            storeName   : 'tempStore', // name of the table
+        }).run(['$localForage', function ($localForage) {
+          $localForage.createInstance({
+              name        : '<%moduleName%>',
+              storeName   : 'tempStore',
             description : 'Blink Forms Temporary storage'
-          });
+          })
         }])

@@ -1,8 +1,22 @@
-angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkModelFactory () {
-  function <%moduleName%>Model () {
+const uuid = require('uuid/v4')
+
+angular.module('<%moduleName%>').factory('<%moduleName%>Model',
+['$localForage',
+function BlinkModelFactory ($localForage) {
+  function <%moduleName%>Model (modelObj) {
+    modelObj ? this.set(modelObj) : this.reset()
+  }
+
+  <%moduleName%>Model.prototype.defaults = function () {
+    const defaults = { }
     <%#_elements%>
-    this.<%name%> = <% &value%>
+    defaults.<%name%> = <% &value%>
     <%/_elements%>
+    return defaults
+  }
+
+  <%moduleName%>Model.prototype.reset = function () {
+    this.set(this.defaults())
   }
 
   <%moduleName%>Model.prototype.set = function (modelObj) {
@@ -13,9 +27,28 @@ angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkMo
     }
   }
 
-  <%moduleName%>Model.prototype.create = function () {
-    return new <%moduleName%>Model()
+  <%moduleName%>Model.prototype.create = function (modelObj) {
+    const model = new <%moduleName%>Model()
+    model.set(modelObj)
+
+    return model
+  }
+
+  <%moduleName%>Model.prototype.saveDraft = function (model) {
+    if (!model._uuid) {
+      model._uuid = uuid()
+    }
+
+    return $localForage.setItem(model._uuid, model)
+  }
+
+  <%moduleName%>Model.prototype.loadDraft = function (uuid) {
+    return $localForage.getItem(uuid).then((item) => {
+      this.set(item)
+
+      return this
+    })
   }
 
   return new <%moduleName%>Model()
-})
+}])

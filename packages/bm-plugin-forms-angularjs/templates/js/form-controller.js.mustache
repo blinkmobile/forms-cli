@@ -1,4 +1,4 @@
-function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, <%moduleName%>SubmitToBMPService) {
+function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, $localForage, <%moduleName%>SubmitToBMPService) {
   this.toJson = function (obj) {
     return JSON.stringify(obj, null, 2)
   }
@@ -46,8 +46,16 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, <%modul
     collection.splice(idx, 1)
   }
 
-  this.onSaveClick = (model) => {
+  this.onSubmitClick = (model) => {
     return <%moduleName%>SubmitToBMPService('<%name%>', model)
+  }
+
+  this.onSaveDraftClick = (model) => {
+    model.saveDraft && model.saveDraft(model)
+  }
+
+  this.onClearClick = (model) => {
+    model.reset()
   }
 }
 

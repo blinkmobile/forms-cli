@@ -7,7 +7,14 @@
   <%&footer%>
 
   <ng-transclude ng-transclude-slot="pagination"></ng-transclude>
-  <button ng-click="<%moduleName%>.onSaveClick(<%moduleName%>.model)"
+  <button ng-click="<%moduleName%>.onSubmitClick(<%moduleName%>.model)"
           ng-hide="<%moduleName%>.isSubForm"
           ng-disabled="<%moduleName%>Form.$invalid">Submit</button>
+
+  <button ng-click="<%moduleName%>.onClearClick(<%moduleName%>.model)"
+          ng-hide="<%moduleName%>.isSubForm">Clear Form</button>
+
+  <button ng-click="<%moduleName%>.onSaveDraftClick(<%moduleName%>.model)"
+          ng-hide="<%moduleName%>.isSubForm">Save Draft</button>
+
 </ng-form>
