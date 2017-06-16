@@ -1,9 +1,13 @@
-<ng-form name="<%interaction%>" class="bm-form" <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
-                  <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
+<ng-form name="<%moduleName%>Form" class="bm-form"
+         ng-model-options="{ debounce: 500, allowInvalid:true }"
+         <%#showWhen%>ng-show="<%moduleName%>.<%showWhen%>()"<%/showWhen%>
+         <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <%&header%>
   <%&elements%>
   <%&footer%>
 
   <ng-transclude ng-transclude-slot="pagination"></ng-transclude>
-  <button ng-click="<%moduleName%>.onSaveClick(<%moduleName%>.model)" ng-show="!<%moduleName%>.isSubForm">Submit</button>
+  <button ng-click="<%moduleName%>.onSaveClick(<%moduleName%>.model)"
+          ng-hide="<%moduleName%>.isSubForm"
+          ng-disabled="<%moduleName%>Form.$invalid">Submit</button>
 </ng-form>

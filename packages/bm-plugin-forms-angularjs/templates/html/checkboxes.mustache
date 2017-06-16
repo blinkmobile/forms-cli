@@ -6,6 +6,7 @@
     <input  type="checkbox"
             ng-checked="<%moduleName%>.model.<%name%>.indexOf('<%.%>') > -1"
             ng-click="<%moduleName%>.model.<%name%>.indexOf('<%.%>') > -1 ? <%moduleName%>.model.<%name%>.splice(<%moduleName%>.model.<%name%>.indexOf('<%.%>'), 1) : <%moduleName%>.model.<%name%>.push('<%.%>')"
+            local-forage="{key: '<%name%>', name: '<%moduleName%>', scopeKey: '<%moduleName%>.model.<%name%>', defaultValue: <%moduleName%>.model.<%name%> }"
             name="<%name%>"
             class="bm-input bm-input__checkbox" />
     <span class="bm-label__body"><%.%></span>

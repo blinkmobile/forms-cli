@@ -13,7 +13,7 @@ function extractDefaults (el) {
     case 'checkboxes':
     case 'select':
       if (el.multi) {
-        el.value = `[${JSON.stringify(el.defaultValue)}]`
+        el.value = el.defaultValue ? `[${JSON.stringify(el.defaultValue)}]` : '[]'
       } else {
         el.value = el.defaultValue ? JSON.stringify(el.defaultValue) : undefined
       }

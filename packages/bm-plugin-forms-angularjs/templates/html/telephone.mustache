@@ -3,6 +3,7 @@
   <label class="bm-label" for="<%name%>"><%label%></label>
   <input  type="tel"
           ng-model="<%moduleName%>.model.<%name%>"
+          local-forage="{key: '<%name%>', name: '<%moduleName%>', scopeKey: '<%moduleName%>.model.<%name%>', defaultValue: <%moduleName%>.model.<%name%>}"
           name="<%name%>"
           class="bm-input bm-input__tel <%rowClass%>"
           placeholder="<%placeholderText%>"

@@ -63,7 +63,7 @@ function processForm (form) {
     if (type && memo.indexOf(type) === -1) {
       memo.push(type)
     }
-    el.moduleName = formName
+    el.moduleName = moduleOptions.moduleName
     return memo
   }, [])
 
