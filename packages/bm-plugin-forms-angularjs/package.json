@@ -41,7 +41,6 @@
     "gulp-footer": "1.0.5",
     "gulp-header": "1.8.8",
     "gulp-inject": "4.2.0",
-    "gulp-jshint": "2.0.4",
     "gulp-ng-annotate": "2.0.0",
     "gulp-util": "3.0.8",
     "lodash.groupby": "4.6.0",
@@ -52,6 +51,7 @@
     "skeleton-framework": "1.0.10",
     "through2": "^2.0.3",
     "transducers-js": "0.4.174",
+    "uuid": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-named": "^1.1.0",
     "vinyl-source-stream": "^1.1.0"

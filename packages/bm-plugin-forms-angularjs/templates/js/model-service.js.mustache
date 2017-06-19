@@ -1,8 +1,9 @@
+'use strict'
+
 const uuid = require('uuid/v4')
 
 angular.module('<%moduleName%>').factory('<%moduleName%>Model',
-['$localForage',
-function BlinkModelFactory ($localForage) {
+function BlinkModelFactory () {
   function <%moduleName%>Model (modelObj) {
     modelObj ? this.set(modelObj) : this.reset()
   }
@@ -28,27 +29,10 @@ function BlinkModelFactory ($localForage) {
   }
 
   <%moduleName%>Model.prototype.create = function (modelObj) {
-    const model = new <%moduleName%>Model()
-    model.set(modelObj)
+    const model = new <%moduleName%>Model(modelObj)
 
     return model
   }
 
-  <%moduleName%>Model.prototype.saveDraft = function (model) {
-    if (!model._uuid) {
-      model._uuid = uuid()
-    }
-
-    return $localForage.setItem(model._uuid, model)
-  }
-
-  <%moduleName%>Model.prototype.loadDraft = function (uuid) {
-    return $localForage.getItem(uuid).then((item) => {
-      this.set(item)
-
-      return this
-    })
-  }
-
   return new <%moduleName%>Model()
-}])
+}]

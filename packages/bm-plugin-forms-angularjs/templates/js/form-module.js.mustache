@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module('<%moduleName%>', ['LocalForageModule'<%#dependencyString%>, <%&dependencyString%><%/dependencyString%>])
         .constant('BLINK_ANSWERSPACE_NAME', '<%&answerspaceName%>')
         .constant('BLINK_ANSWERSPACE_ID', '<%&answerspaceId%>')
@@ -6,8 +8,8 @@ angular.module('<%moduleName%>', ['LocalForageModule'<%#dependencyString%>, <%&d
           SAVE_RECORD: '/_api/interaction/run/forms/submit.php'
         }).run(['$localForage', function ($localForage) {
           $localForage.createInstance({
-              name        : '<%moduleName%>',
-              storeName   : 'tempStore',
+            name        : '<%moduleName%>',
+            storeName   : 'bmTempStore',
             description : 'Blink Forms Temporary storage'
           })
         }])
