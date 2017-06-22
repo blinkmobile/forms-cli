@@ -20,8 +20,8 @@
 
   <script>
   angular.module('forms', ['bmDraftQueue'])
-         .config(['draftQueueProvider', function (draftQueueProvider) {
-            draftQueueProvider.config({appName: 'demoApp'})
+         .config(['bmDraftQueueServiceProvider', function (bmDraftQueueServiceProvider) {
+            bmDraftQueueServiceProvider.config({appName: 'demoApp'})
          }])
   angular.bootstrap(document, ['forms'])
   </script>
