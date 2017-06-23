@@ -9,19 +9,23 @@ const sinon = require('sinon')
 
 const TEST_SUBJECT = '../../lib/transform/process-form.js'
 const CTRL_RENDERER_NAME = '../renderers/controller-renderer.js'
+const MODEL_SERVICE_RENDERER_NAME = '../renderers/model-service-renderer.js'
 const HTML_RENDERER_NAME = '../renderers/html-renderer.js'
 const SERVICE_NAME = '@blinkmobile/forms-template-helper'
 
 test.beforeEach('setup', (t) => {
   const controllerRendererStub = sinon.stub()
   const htmlRendererStub = sinon.stub()
+  const modelServiceRenderer = sinon.stub()
 
   controllerRendererStub.returns('controller')
   htmlRendererStub.returns('html')
+  modelServiceRenderer.returns('model-service')
 
   t.context.stubs = {
     controllerRendererStub: controllerRendererStub,
-    htmlRendererStub: htmlRendererStub
+    htmlRendererStub: htmlRendererStub,
+    modelServiceRenderer: modelServiceRenderer
   }
 })
 
@@ -36,6 +40,7 @@ test('should return an array of functions', (t) => {
   const m = pq(TEST_SUBJECT, {
     [CTRL_RENDERER_NAME]: t.context.stubs.controllerRendererStub,
     [HTML_RENDERER_NAME]: t.context.stubs.htmlRendererStub,
+    [MODEL_SERVICE_RENDERER_NAME]: t.context.stubs.modelServiceRenderer,
     [SERVICE_NAME]: {
       service: {
         getByType: serviceGetByTypeStub
@@ -83,6 +88,7 @@ test('correct moduleOptions is generated', (t) => {
   const m = pq(TEST_SUBJECT, {
     [CTRL_RENDERER_NAME]: t.context.stubs.controllerRendererStub,
     [HTML_RENDERER_NAME]: t.context.stubs.htmlRendererStub,
+    [MODEL_SERVICE_RENDERER_NAME]: t.context.stubs.modelServiceRenderer,
     [SERVICE_NAME]: {
       service: {
         getByType: serviceGetByTypeStub

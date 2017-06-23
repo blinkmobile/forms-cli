@@ -3,10 +3,16 @@
 const uuid = require('uuid/v4')
 
 angular.module('<%moduleName%>').factory('<%moduleName%>Model',
-function BlinkModelFactory () {
+[<%#subFormModelServices%><%&subFormDependencyList%>,<%/subFormModelServices%>
+function BlinkModelFactory (<%#subFormModelServices%><%&subFormModelServices%><%/subFormModelServices%>) {
   function <%moduleName%>Model (modelObj) {
     modelObj ? this.set(modelObj) : this.reset()
   }
+
+  const subFormTypes = {}
+  <%#subForms%>
+  subFormTypes.<%.%> = <%.%>Model
+  <%/subForms%>
 
   <%moduleName%>Model.prototype.defaults = function () {
     const defaults = { }
@@ -34,5 +40,14 @@ function BlinkModelFactory () {
     return model
   }
 
+  <%moduleName%>Model.prototype.createSubForm = function (type) {
+    const ctor = subFormTypes[type]
+    if (!ctor) {
+      return
+    }
+
+    return ctor.create()
+  }
+
   return new <%moduleName%>Model()
-})
+}])

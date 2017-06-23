@@ -12,6 +12,7 @@ const angularise = require('./angularise-definition.js')
 const toAngularName = require('./to-angular-name.js')
 
 const makeControllerRenderer = require('../renderers/controller-renderer.js')
+const makeModelServiceRenderer = require('../renderers/model-service-renderer.js')
 const makeHTMLRenderers = require('../renderers/html-renderer.js')
 
 const COMPONENT_PATH = 'components'
@@ -42,12 +43,25 @@ function processForm (form) {
 
   // form module
   const moduleOptions = Object.assign({}, angularise(form))
+  moduleOptions.subForms = form._elements.reduce((memo, el) => {
+    if (el.type.toLowerCase() === 'subform') {
+      memo.push(toAngularName(el.subForm))
+    }
+
+    return memo
+  }, [])
+
+  if (moduleOptions.subForms.length) {
+    moduleOptions.subFormModelServices = moduleOptions.subForms.join('Model, ') + 'Model'
+    moduleOptions.subFormDependencyList = `'${moduleOptions.subForms.join('Model\', \'')}Model'`
+  }
 
   moduleOptions.moduleDependencies = form._elements.reduce((memo, el) => {
     let type = null
     switch (el.type.toLowerCase()) {
       case 'subform':
         type = toAngularName(el.subForm)
+        el.subForm = type
         break
       case 'draw':
         type = 'bmSignaturePad'
@@ -75,7 +89,7 @@ function processForm (form) {
 
   // add the model service to the output
   moduleOptions._elements = t.transduce(t.map(serviceFieldTypes), arrAccum, [], form._elements)
-  formWriters.push(lazyWriter(`${formName}-model-service.js`, jsTemplates['model-service.js'](moduleOptions)))
+  formWriters.push(lazyWriter(`${formName}-model-service.js`, makeModelServiceRenderer(moduleOptions)))
 
   // js controller transform
   const formControllerName = path.join(COMPONENT_PATH, `component-${form.name}.js`)
