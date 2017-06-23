@@ -99,9 +99,10 @@ test('it should call removeNodeFrom', (t) => {
     form: {
       name: 'form',
       _checks: [],
-      _elements: [{type: 'draw'}]
+      _elements: [{type: 'draw'}],
+      subForms: ['subforms']
     },
-    page: true
+    pages: false
   }
   const getByType = sinon.stub()
   getByType.returns({
@@ -122,4 +123,35 @@ test('it should call removeNodeFrom', (t) => {
 
   m(input)
   t.true(removeNodeFromStub.called)
+})
+
+test('it should remove subform logic', (t) => {
+  const input = {
+    form: {
+      name: 'form',
+      _checks: [],
+      _elements: [{type: 'draw'}],
+      subForms: []
+    },
+    pages: true
+  }
+  const getByType = sinon.stub()
+  getByType.returns({
+    'form-controller.js': (f) => {
+      return f.name
+    }
+  })
+  const removeNodeFromStub = sinon.stub()
+  removeNodeFromStub.returns((t) => t)
+  const m = pq(TEST_SUBJECT, {
+    '../ast/remove-node-from.js': removeNodeFromStub,
+    '@blinkmobile/forms-template-helper': {
+      service: {
+        getByType
+      }
+    }
+  })
+
+  m(input)
+  t.true(removeNodeFromStub.calledTwice)
 })
