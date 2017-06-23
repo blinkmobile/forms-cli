@@ -1,4 +1,4 @@
-function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, <%moduleName%>SubmitToBMPService) {
+function <%moduleName%>Controller (<%moduleName%>Model, draftQueue, $scope, $window, $localForage, <%moduleName%>SubmitToBMPService) {
   this.toJson = function (obj) {
     return JSON.stringify(obj, null, 2)
   }
@@ -46,8 +46,19 @@ function <%moduleName%>Controller (<%moduleName%>Model, $scope, $window, <%modul
     collection.splice(idx, 1)
   }
 
-  this.onSaveClick = (model) => {
+  this.onSubmitClick = (model) => {
     return <%moduleName%>SubmitToBMPService('<%name%>', model)
+  }
+
+  this.onSaveDraftClick = (model) => draftQueue.setItem(model, '<%moduleName%>')
+
+  this.onClearClick = (model) => {
+    if (model._uuid) {
+      // remove item from temporary storage
+      return $localForage.removeItem(model._uuid).then(() => model.reset())
+    }
+
+    model.reset()
   }
 }
 

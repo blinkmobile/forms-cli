@@ -1,8 +1,23 @@
-angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkModelFactory () {
-  function <%moduleName%>Model () {
+'use strict'
+
+const uuid = require('uuid/v4')
+
+angular.module('<%moduleName%>').factory('<%moduleName%>Model',
+function BlinkModelFactory () {
+  function <%moduleName%>Model (modelObj) {
+    modelObj ? this.set(modelObj) : this.reset()
+  }
+
+  <%moduleName%>Model.prototype.defaults = function () {
+    const defaults = { }
     <%#_elements%>
-    this.<%name%> = <% &value%>
+    defaults.<%name%> = <% &value%>
     <%/_elements%>
+    return defaults
+  }
+
+  <%moduleName%>Model.prototype.reset = function () {
+    this.set(this.defaults())
   }
 
   <%moduleName%>Model.prototype.set = function (modelObj) {
@@ -13,9 +28,11 @@ angular.module('<%moduleName%>').factory('<%moduleName%>Model', function BlinkMo
     }
   }
 
-  <%moduleName%>Model.prototype.create = function () {
-    return new <%moduleName%>Model()
+  <%moduleName%>Model.prototype.create = function (modelObj) {
+    const model = new <%moduleName%>Model(modelObj)
+
+    return model
   }
 
   return new <%moduleName%>Model()
-})
+}]

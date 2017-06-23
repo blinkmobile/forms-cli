@@ -1,7 +1,6 @@
 <!doctype html>
-<html ng-app="">
-
-<head>
+<html>
+  <head>
     <!-- inject:css -->
     <!-- endinject -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -13,9 +12,18 @@
     <script src="/node_modules/@blinkmobile/angular-signature-pad/dist/angular-signature-pad.js"></script>
     <script src="/node_modules/localforage/dist/localforage.js"></script>
     <script src="/node_modules/angular-localforage/dist/angular-localForage.js"></script>
+    <script src="/node_modules/@blinkmobile/angularjs-draft-queue/dist/bm-angularjs-draft-queue.js"></script>
     <!-- inject:js -->
     <!-- endinject -->
   </head>
   <body>
+
+  <script>
+  angular.module('forms', ['bmDraftQueue'])
+         .config(['draftQueueProvider', function (draftQueueProvider) {
+            draftQueueProvider.config({appName: 'demoApp'})
+         }])
+  angular.bootstrap(document, ['forms'])
+  </script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <label class="bm-label" for="<%name%>"><%label%></label>
   <bm-signature-pad style="display: block; width: 100%; height: 76px; border: solid 1px #D1D1D1; box-sizing: border-box; margin-bottom: 1.5rem"
                     ng-model="<%moduleName%>.model.<%name%>"
-                    local-forage="{key: '<%name%>', name: '<%moduleName%>', scopeKey: '<%moduleName%>.model.<%name%>', defaultValue: <%moduleName%>.model.<%name%>}"
+                    local-forage="{name: '<%moduleName%>',key: '<%name%>', name: '<%moduleName%>', scopeKey: '<%moduleName%>.model.<%name%>', defaultValue: <%moduleName%>.model.<%name%>}"
                     ng-disabled="<%moduleName%>.<%name%>Disabled"
                     name="<%name%>"
                     class="bm-input bm-input__signature-pad <%rowClass%>"
