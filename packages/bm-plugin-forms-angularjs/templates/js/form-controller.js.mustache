@@ -1,4 +1,4 @@
-function <%moduleName%>Controller (<%moduleName%>Model, draftQueue, $scope, $window, $localForage, <%moduleName%>SubmitToBMPService) {
+function <%moduleName%>Controller (<%moduleName%>Model, bmDraftQueueService, $scope, $window, $localForage, <%moduleName%>SubmitToBMPService) {
   this.toJson = function (obj) {
     return JSON.stringify(obj, null, 2)
   }
@@ -13,6 +13,16 @@ function <%moduleName%>Controller (<%moduleName%>Model, draftQueue, $scope, $win
     <%#pageNumbers%>
     this.pageNumbers = <%pageNumbers%>
     <%/pageNumbers%>
+    if (this.autosave) {
+      Object.keys(this.model).forEach((key) => {
+        $localForage.bind($scope, {
+          key: key,
+          name: '<%moduleName%>',
+          scopeKey: `model.${key}`,
+          defaultValue: this.model[key]
+        })
+      })
+    }
   }
 
   this.$onChanges = (changesObj) => {}
@@ -50,7 +60,7 @@ function <%moduleName%>Controller (<%moduleName%>Model, draftQueue, $scope, $win
     return <%moduleName%>SubmitToBMPService('<%name%>', model)
   }
 
-  this.onSaveDraftClick = (model) => draftQueue.setItem(model, '<%moduleName%>')
+  this.onSaveDraftClick = (model) => bmDraftQueueService.setItem(model, '<%moduleName%>')
 
   this.onClearClick = (model) => {
     if (model._uuid) {
@@ -74,6 +84,7 @@ angular.module('<%moduleName%>').component('<%moduleName%>', {
     page: '<?',
     onPageChange: '&?',
     isSubForm: '<?',
-    subFormIndex: '<?'
+    subFormIndex: '<?',
+    autosave: '<?'
   }
 })
