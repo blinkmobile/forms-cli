@@ -1,5 +1,7 @@
 # Blink Forms CLI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/blinkmobile/forms-cli.svg)](https://greenkeeper.io/)
+
 A tool that takes a Blink Forms definition and converts it into a HTML form for inclusion in a web project.
 
 Currently only works with [Blink Forms definitions](http://blinkmobile.com.au/blink-intelligent-client-bic-forms-interpreter) or our [normalised JSON definition](docs/normalised-json-structure.md)
