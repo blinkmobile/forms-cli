@@ -4,5 +4,5 @@
     <<%&subFormElement%> model="subform" is-sub-form="true" sub-form-index="$index" autosave="false"></<%&subFormElement%>>
     <button class="bm-button button-primary" ng-click="<%moduleName%>.removeSubform(subform, <%moduleName%>.model.<%&name%>)">Remove Subform</button>
   </div>
-  <button class="bm-button button-primary" ng-click="<%moduleName%>.addSubform(<%moduleName%>.model.<%&name%>)">Add Subform</button>
+  <button class="bm-button button-primary" ng-click="<%moduleName%>.addSubform('<%name%>', '<%subForm%>')">Add Subform</button>
 </div>

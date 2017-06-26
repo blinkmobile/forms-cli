@@ -1,9 +1,11 @@
 'use strict'
 const path = require('path')
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noPreserveCache()
 const sinon = require('sinon')
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../lib/plugin-system/plugin-info.js'
 

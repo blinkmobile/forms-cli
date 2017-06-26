@@ -1,8 +1,10 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
 const sinon = require('sinon')
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../lib/init/ask-questions.js'
 
@@ -19,7 +21,7 @@ test('it should not reject if questions answered', (t) => {
 test('it should ask the second set of questions if `.blinkmrc.json` does not exist', (t) => {
   const promptStub = sinon.stub()
 
-  promptStub.onCall(0).returns(Promise.reject({code: 'ENOENT'}))
+  promptStub.onCall(0).returns(Promise.reject({code: 'ENOENT'})) // eslint-disable-line prefer-promise-reject-errors
   promptStub.onCall(1).returns(Promise.resolve({overwrite: true}))
 
   const init = pq(TEST_SUBJECT, {
@@ -44,4 +46,3 @@ test('it should reject with `cancelled`', async (t) => { // eslint-disable-line 
 
   await t.throws(init(), 'cancelled') // eslint-disable-line  node/no-unsupported-features
 })
-

@@ -8,7 +8,6 @@ function processDefinition (processForm) {
     debugLogger.debug('input')
     debugLogger.debug(JSON.stringify(form))
 
-
     let writers = processForm(form)
     if (!Array.isArray(writers)) {
       writers = [writers]

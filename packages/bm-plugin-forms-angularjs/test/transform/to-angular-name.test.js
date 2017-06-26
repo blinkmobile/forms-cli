@@ -1,6 +1,6 @@
 'use strict'
 
-const test = require('ava') // eslint-disable-line node/no-unpublished-require
+const test = require('ava') // eslint-disable-line node/no-unpublished-require, node/no-extraneous-require
 
 const toAngularName = require('../../lib/transform/to-angular-name.js')
 

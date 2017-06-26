@@ -46,7 +46,7 @@
     "lodash.groupby": "4.6.0",
     "lodash.map": "4.6.0",
     "merge-stream": "^1.0.1",
-    "recast": "0.12.1",
+    "recast": "0.12.5",
     "signature_pad": "2.0.0",
     "skeleton-framework": "1.0.10",
     "through2": "^2.0.3",

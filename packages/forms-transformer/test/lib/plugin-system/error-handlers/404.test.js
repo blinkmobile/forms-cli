@@ -1,7 +1,8 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
-
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 const TEST_SUBJECT = '../../../../lib/plugin-system/error-handlers/404.js'
 
 test('it should return a generic message if name cant be extracted', (t) => {

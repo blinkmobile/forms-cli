@@ -30,8 +30,17 @@ function <%moduleName%>Controller (<%moduleName%>Model, bmDraftQueueService, $sc
   this.$onDestroy = () => {}
   this.$postLink = () => {}
 
-  this.addSubform = (collection) => {
-    collection.push({})
+  this.addSubform = (prop, subFormType) => {
+    this.model[prop].push(<%moduleName%>Model.createSubForm(subFormType))
+  }
+
+  this.removeSubform = (model, collection) => {
+    const idx = collection.indexOf(model)
+    if (idx === -1) {
+      return
+    }
+
+    collection.splice(idx, 1)
   }
 
   this.changePageBy = (inc) => {
@@ -45,15 +54,6 @@ function <%moduleName%>Controller (<%moduleName%>Model, bmDraftQueueService, $sc
     }
 
     this.onPageChange({page: this.page})
-  }
-
-  this.removeSubform = (model, collection) => {
-    const idx = collection.indexOf(model)
-    if (idx === -1) {
-      return
-    }
-
-    collection.splice(idx, 1)
   }
 
   this.onSubmitClick = (model) => {

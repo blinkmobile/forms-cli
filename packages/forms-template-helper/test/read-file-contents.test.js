@@ -1,10 +1,10 @@
 'use strict'
 
 // dev dependencies are set at a repo level
-/* eslint-disable node/no-unpublished-require */
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
-/* eslint-enable node/no-unpublished-require */
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../lib/read-file-contents.js'
 

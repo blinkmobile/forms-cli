@@ -1,7 +1,9 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../../lib/init/questions/config-exists.js'
 
@@ -12,7 +14,7 @@ const blinkmrcResolve = {
 }
 
 const blinkmrcReject = {
-  projectConfig: () => ({load: () => Promise.reject()})
+  projectConfig: () => ({load: () => Promise.reject(new Error('blah'))})
 }
 
 test('should resolve with true', (t) => {
