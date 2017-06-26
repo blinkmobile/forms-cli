@@ -26,6 +26,12 @@ function makeControllerRenderers ({form, pages}) {
     fn = removeNodeFrom('MemberExpression')(fn, (name, node) => node.name === 'changePageBy')
   }
 
+  if (form.subForms && !form.subForms.length) {
+    fn = ['addSubform', 'removeSubform'].reduce((fn, fnName) => {
+      return removeNodeFrom('MemberExpression')(fn, (name, node) => node.name === fnName)
+    }, fn)
+  }
+
   return fn
 }
 
