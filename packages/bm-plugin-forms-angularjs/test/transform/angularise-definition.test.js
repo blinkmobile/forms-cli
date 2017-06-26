@@ -1,9 +1,9 @@
 'use strict'
 
 // dev dependencies are set at a repo level
-/* eslint-disable node/no-unpublished-require */
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
-/* eslint-enable node/no-unpublished-require */
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../lib/transform/angularise-definition.js'
 

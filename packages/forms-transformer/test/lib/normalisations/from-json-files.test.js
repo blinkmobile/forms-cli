@@ -1,8 +1,10 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
 const sinon = require('sinon')
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../lib/normalisations/from-json-files.js'
 

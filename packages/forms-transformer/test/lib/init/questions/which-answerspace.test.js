@@ -1,7 +1,9 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru()
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../../lib/init/questions/which-answerspace.js'
 
@@ -10,7 +12,7 @@ const expectedHost = 'https://blinkm.co'
 // stubs
 
 const readConfigResolve = () => Promise.resolve({scope: expectedHost})
-const readConfigReject = () => Promise.reject()
+const readConfigReject = () => Promise.reject(new Error('blah'))
 const fetchAnswerspaceResolve = () => Promise.resolve()
 
 // default message function

@@ -1,8 +1,10 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru().noPreserveCache()
 const sinon = require('sinon')
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../lib/plugin-system/add-plugin.js'
 
@@ -58,7 +60,7 @@ test('should call handleNPMerror if npm errors', (t) => {
   findUpStub.returns(Promise.resolve(null))
 
   const execaStub = sinon.stub()
-  execaStub.returns(Promise.reject({stderr: expected}))
+  execaStub.returns(Promise.reject({stderr: expected})) // eslint-disable-line prefer-promise-reject-errors
 
   const getStreamStub = sinon.stub()
   getStreamStub.returns(Promise.resolve())

@@ -1,8 +1,10 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const sinon = require('sinon')
 const pq = require('proxyquire').noCallThru()
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 const TEST_SUBJECT = '../../../lib/utils/decide-on-normalisation-fns.js'
 

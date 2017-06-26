@@ -1,7 +1,9 @@
 'use strict'
 
+/* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 const pq = require('proxyquire').noCallThru()
+/* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 // stubs
 test.beforeEach((t) => {
@@ -28,7 +30,7 @@ test('should resolve if the form is falsy',
     (t) => t.context.writeSite('foo', {'bar': undefined}).then(() => t.pass()).catch(() => t.fail()))
 
 test('should reject because form critera not met',
-    async (t) => await t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions')) // eslint-disable-line  node/no-unsupported-features
+    async (t) => t.throws(t.context.writeSite('foo', {bar: 'kablam!'}), 'Form must be a single function or an Array of functions')) // eslint-disable-line  node/no-unsupported-features
 
 test('should wrap a single function in an array', (t) => {
   t.context.writeSite('foo', {
