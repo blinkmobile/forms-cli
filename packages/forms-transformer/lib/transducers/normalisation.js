@@ -65,11 +65,11 @@ function addConditionalsToElements (form) {
 
 function normaliseFields (fields) {
   const xf = t.comp(t.filter((el) => UNSUPPORTED_FIELDS.indexOf(el.type) === -1),
-                    t.map(fixChoice),
-                    t.map(fixHeadings),
-                    t.map(fixCamera),
-                    t.map(fixId),
-                    t.map(setDefaultValues))
+    t.map(fixChoice),
+    t.map(fixHeadings),
+    t.map(fixCamera),
+    t.map(fixId),
+    t.map(setDefaultValues))
 
   return t.transduce(xf, arrayAccum, [], fields)
 }

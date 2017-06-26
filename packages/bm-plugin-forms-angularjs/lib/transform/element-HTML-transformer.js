@@ -19,7 +19,7 @@ const accum = (memo, val) => {
 
 const transformPage = (elements) => {
   const xf = t.comp(t.map(elementHTMLRenderer(templateService.getByType('html'))),
-                    t.map(removeEmptyLines))
+    t.map(removeEmptyLines))
 
   return t.transduce(xf, accum, [], elements)
 }

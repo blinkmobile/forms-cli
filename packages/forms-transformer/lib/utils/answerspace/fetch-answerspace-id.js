@@ -13,18 +13,18 @@ function fetchAnswerspaceId (answerspaceUrl) {
   debugLogger.debug(`Config URL = ${configUrl}`)
 
   return fetch(configUrl)
-          .then((res) => res.json())
-          .catch(() => Promise.reject(new Error(INVALID_ANSWERSPACE))) // makes inquirier print a better error than what fetch.json() does
-          .then((config) => {
-            const answerspaceKeys = Object.keys(config).filter((key) => key[0].toLowerCase() === 'a')
+    .then((res) => res.json())
+    .catch(() => Promise.reject(new Error(INVALID_ANSWERSPACE))) // makes inquirier print a better error than what fetch.json() does
+    .then((config) => {
+      const answerspaceKeys = Object.keys(config).filter((key) => key[0].toLowerCase() === 'a')
 
-            if (answerspaceKeys.length === 1) {
-              return answerspaceKeys[0].substr(1)
-            }
+      if (answerspaceKeys.length === 1) {
+        return answerspaceKeys[0].substr(1)
+      }
 
-            debugLogger.error(`Invalid Answerspace URL: ${configUrl}`)
-            return Promise.reject(new Error(INVALID_ANSWERSPACE))
-          })
+      debugLogger.error(`Invalid Answerspace URL: ${configUrl}`)
+      return Promise.reject(new Error(INVALID_ANSWERSPACE))
+    })
 }
 
 module.exports = fetchAnswerspaceId
