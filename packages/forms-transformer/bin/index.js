@@ -68,7 +68,7 @@ Please fix the error and try again.
 
 For more information, run the command with the \`--debug\` flag and check the \`./blink-forms-debug.log\` file.
 `
-)
+    )
     errorLogger.error(err)
     process.exitCode = 1
   })

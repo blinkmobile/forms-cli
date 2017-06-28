@@ -19,21 +19,21 @@ const questions = [
 
 function init () {
   return prompt.prompt(configExists)
-                .catch((err) => err.code === 'ENOENT' ? Promise.resolve({overwrite: true}) : Promise.reject(err))
-                .then((answers) => {
-                  if (answers.overwrite === false) {
-                    return Promise.reject(new Error('cancelled'))
-                  }
+    .catch((err) => err.code === 'ENOENT' ? Promise.resolve({overwrite: true}) : Promise.reject(err))
+    .then((answers) => {
+      if (answers.overwrite === false) {
+        return Promise.reject(new Error('cancelled'))
+      }
 
-                  return prompt.prompt(inputSource).then((answers) => {
-                    let q = jsonPath
-                    if (answers.inputSource === 'answerspace') {
-                      q = whichAnswerspace
-                    }
+      return prompt.prompt(inputSource).then((answers) => {
+        let q = jsonPath
+        if (answers.inputSource === 'answerspace') {
+          q = whichAnswerspace
+        }
 
-                    return prompt.prompt([q, ...questions])
-                  })
-                })
+        return prompt.prompt([q, ...questions])
+      })
+    })
 }
 
 module.exports = init
