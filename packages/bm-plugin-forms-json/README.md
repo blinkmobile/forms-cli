@@ -7,7 +7,7 @@ Renders a Blink Mobile Form Definition to a normalised JSON structure, then writ
 Make sure you have the Forms transformer extention to the Blink Mobile Technologies CLI installed:
 
 ```
-npm install -g @blinkmobile/cli @blinkmobile/project-shockwave
+npm install -g @blinkmobile/cli @blinkmobile/forms-cli
 ```
 
 Create your `.blinkmrc.json` in your project folder

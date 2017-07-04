@@ -7,5 +7,12 @@ module.exports = {
   message: 'Which folder has the JSON files (globs accepted)?',
   type: 'input',
   default: './form-json',
-  filter: (input) => path.posix.relative('.', input) || '.'
+  filter: (input) => {
+    let result = path.posix.relative('.', input) || '.'
+    if (/\.json$/.test(result)) {
+      return result
+    }
+
+    return `${result}/**/*.json`
+  }
 }

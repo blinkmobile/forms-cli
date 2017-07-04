@@ -15,7 +15,8 @@ function normalise (fileList) {
       const json = JSON.parse(fs.readFileSync(jsonPath, options))
       memo.push(json)
     } catch (err) {
-      debugLogger.debug(`Could not parse json from ${jsonPath}`)
+      debugLogger.debug(`Could not parse json from ${jsonPath}:
+${err}`)
     }
     return memo
   }, [])
