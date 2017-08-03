@@ -2,14 +2,14 @@
                   <%#hideWhen%>ng-hide="<%moduleName%>.<%hideWhen%>()"<%/hideWhen%>>
   <label class="bm-label" for="<%name%>"><%label%></label>
   <%#options%>
-  <label class="bm-label <%rowClass%>" title="<%tooltip%>">
+  <label class="bm-label <%rowClass%>" title="<%tooltip%>" for="<%moduleName%>_{{<%moduleName%>.subFormIndex}}_<%name%>_<%id%>">
     <input  type="radio"
             ng-model="<%moduleName%>.model.<%name%>"
-            name="<%moduleName%>_{{<%moduleName%>.subFormIndex}}_<%name%>"
-            value="<%.%>"
+            name="<%moduleName%>_{{<%moduleName%>.subFormIndex}}_<%name%>_<%id%>"
+            value="<%id%>"
             class="bm-input bm-input__radio <%rowClass%>"
             title="<%tooltip%>" />
-    <span class="bm-label__body"><%.%></span>
+    <span class="bm-label__body"><%value%></span>
   </label>
   <%/options%>
   <%#hint%><span class="bm-hint bm-hint__radio"><%hint%></span><%/hint%>

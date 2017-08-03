@@ -10,6 +10,7 @@ function <%moduleName%>Controller (<%moduleName%>Model, bmDraftQueueService, $sc
 
     this.page = this.page || 0
     this.onPageChange = this.onPageChange || (() => true)
+    this.onSubmit = this.onSubmit || (({model}) => <%moduleName%>SubmitToBMPService('<%name%>', model))
     <%#pageNumbers%>
     this.pageNumbers = <%pageNumbers%>
     <%/pageNumbers%>
@@ -57,7 +58,7 @@ function <%moduleName%>Controller (<%moduleName%>Model, bmDraftQueueService, $sc
   }
 
   this.onSubmitClick = (model) => {
-    return <%moduleName%>SubmitToBMPService('<%name%>', model)
+    return this.onSubmit({model})
   }
 
   this.onSaveDraftClick = (model) => bmDraftQueueService.setItem(model, '<%moduleName%>')
@@ -83,6 +84,7 @@ angular.module('<%moduleName%>').component('<%moduleName%>', {
     model: '<?',
     page: '<?',
     onPageChange: '&?',
+    onSubmit: '&?',
     isSubForm: '<?',
     subFormIndex: '<?',
     autosave: '<?'
