@@ -20,5 +20,6 @@
   "camera": "''",
   "location": "{}",
   "checkboxes": "[]",
-  "hidden": "null"
+  "hidden": "null",
+  "radio": "''"
 }
