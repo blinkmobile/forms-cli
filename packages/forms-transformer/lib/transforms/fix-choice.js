@@ -12,7 +12,11 @@ module.exports = function (el) {
     return el
   }
   if (el.options && el.type !== 'checkbox') {
-    el.options = Object.keys(el.options)
+    const keys = Object.keys(el.options)
+    el.options = keys.reduce((arr, key) => {
+      arr.push({value: el.options[key], id: key.replace(/\s/g, '')})
+      return arr
+    }, [])
 
     let row = 0
     while (row < choiceMatrix.length) {
@@ -26,5 +30,6 @@ module.exports = function (el) {
       row++
     }
   }
+
   return el
 }
