@@ -18,7 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "0.22.0",
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^8.0.0",
     "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.6.0",
