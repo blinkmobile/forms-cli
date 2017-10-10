@@ -7,5 +7,6 @@ module.exports = {
   service: require('./lib/template-service.js'),
   writeFile: require('./lib/write-file-contents.js').writeFileContents,
   lazyWriteFile: require('./lib/write-file-contents.js').lazyWriter,
-  writeTemplates: require('./lib/write-templates.js')
+  writeTemplates: require('./lib/write-templates.js'),
+  makeTemplateStore: require('./lib/make-template-store')
 }

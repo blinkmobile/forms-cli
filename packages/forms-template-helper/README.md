@@ -18,8 +18,14 @@ Then require the module where needed and use the exposed API functions
 
 The template helper exposes the following functions via an object. The majority of function are wrapped by the functions provided by "service", but are exposed for convenience
 
-### service <a id="service"></a>
+### makeTemplateStore <a id="maketemplatestore"></a>
 
+makeTemplateStore(templatePath: string) => Promise<TemplateStore>
+
+Reads the folder/file structure from `templatePath` and creates the Templates. Templates in the root `templatePath` are the default templates. Folders represent forms, with the templates contained in the folders overriding the default templates of the same name.
+
+### service <a id="service"></a>
+Deprecated. Will be removed before next release
 Object containing two functions that wrap most the below functions.
 
 - load (templatePath) => Promise(&lt;Array&lt;MustacheRenderers>)
