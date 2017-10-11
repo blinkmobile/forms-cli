@@ -7,11 +7,10 @@ class TemplateStore {
     return 'default'
   }
 
-  add (template, formName) {
+  add (template, formName = TemplateStore.DEFAULT_STORE_NAME) {
     if ((template instanceof Template) === false) {
       throw new Error('Only objects of type `Template` can be stored in a template store')
     }
-    formName = formName || TemplateStore.DEFAULT_STORE_NAME
 
     if (!this[formName]) {
       this[formName] = new Map()
@@ -21,7 +20,8 @@ class TemplateStore {
   }
 
   getTemplates (formName = TemplateStore.DEFAULT_STORE_NAME) {
-    return this[formName]
+    return formName === TemplateStore.DEFAULT_STORE_NAME
+      ? this[formName] : new Map([...this[TemplateStore.DEFAULT_STORE_NAME], ...this[formName]])
   }
 }
 
