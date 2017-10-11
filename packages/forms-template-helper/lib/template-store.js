@@ -2,6 +2,21 @@
 
 const Template = require('./template.js')
 
+class TemplateMap extends Map {
+  get (el) {
+    const {name, type} = el
+    if (name && this.has(name)) {
+      return super.get(name)
+    }
+
+    if (type && this.has(type)) {
+      return super.get(type)
+    }
+
+    return super.get(el)
+  }
+}
+
 class TemplateStore {
   static get DEFAULT_STORE_NAME () {
     return 'default'
@@ -20,8 +35,8 @@ class TemplateStore {
   }
 
   getTemplates (formName = TemplateStore.DEFAULT_STORE_NAME) {
-    return formName === TemplateStore.DEFAULT_STORE_NAME
-      ? this[formName] : new Map([...this[TemplateStore.DEFAULT_STORE_NAME], ...this[formName]])
+    return new TemplateMap(formName === TemplateStore.DEFAULT_STORE_NAME
+      ? [...this[formName]] : [...this[TemplateStore.DEFAULT_STORE_NAME], ...this[formName]])
   }
 }
 

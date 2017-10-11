@@ -43,9 +43,9 @@ test('form1 store has the correct templates', (t) => {
   return m(path.join(__dirname, 'fixtures'))
     .then((templates) => {
       const templateStore = templates.form1
-      t.is(templateStore.size, 2)
+      t.is(templateStore.size, 3)
 
-      const n = ['textbox', 'select']
+      const n = ['textbox', 'select', 'name']
       n.forEach((templateName) => {
         const template = templateStore.get(templateName)
         t.not(template, undefined)
