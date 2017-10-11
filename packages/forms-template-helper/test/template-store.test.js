@@ -31,3 +31,20 @@ test('stores a template namespaced to a form', (t) => {
   ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'select.mustache')), formName)
   t.is(ts[formName].size, 1)
 })
+
+test('merges namespaced templates and default templates', (t) => {
+  const ts = new TemplateStore()
+  const formName = 'newForm'
+
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'select.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'textbox.mustache')))
+
+  const formTemplates = ts.getTemplates(formName)
+  t.is(formTemplates.size, 2)
+  t.true(formTemplates.has('select'))
+  t.true(formTemplates.has('textbox'))
+
+  const textboxTemplate = formTemplates.get('textbox')
+  t.is(textboxTemplate.templatePath, path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache'))
+})
