@@ -48,3 +48,39 @@ test('merges namespaced templates and default templates', (t) => {
   const textboxTemplate = formTemplates.get('textbox')
   t.is(textboxTemplate.templatePath, path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache'))
 })
+
+test('retrieves template based on element meta data', (t) => {
+  const ts = new TemplateStore()
+  const formName = 'newForm'
+
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'select.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'name.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'textbox.mustache')))
+
+  const formTemplates = ts.getTemplates(formName)
+  t.is(formTemplates.size, 3)
+  t.true(formTemplates.has('select'))
+  t.true(formTemplates.has('textbox'))
+  t.true(formTemplates.has('name'))
+
+  const nameTemplate = formTemplates.get({name: 'name', type: 'textbox'})
+  t.is(nameTemplate.templatePath, path.join(__dirname, 'fixtures', 'form1', 'name.mustache'))
+
+  const textboxTemplate = formTemplates.get({type: 'textbox'})
+  t.is(textboxTemplate.templatePath, path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache'))
+})
+
+test('returns undefined if the object doesnt have type or name fields', (t) => {
+  const ts = new TemplateStore()
+  const formName = 'newForm'
+
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'select.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'textbox.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'form1', 'name.mustache')), formName)
+  ts.add(new Template(path.join(__dirname, 'fixtures', 'textbox.mustache')))
+
+  const formTemplates = ts.getTemplates(formName)
+  t.is(formTemplates.get({foo: 'bar'}), undefined)
+  t.is(formTemplates.get([]), undefined)
+})
