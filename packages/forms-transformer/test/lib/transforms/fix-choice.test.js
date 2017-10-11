@@ -33,4 +33,3 @@ test('options should transform to the right format', (t) => {
 
   t.deepEqual(result, expected)
 })
-
