@@ -1,5 +1,15 @@
 'use strict'
 
+/*::
+export type FormsCfg = {
+  definitionSource: string,
+  distPath: string,
+  framework: string,
+  sourcePath: string,
+  templatePath: string
+}
+*/
+
 const blinkmrc = require('@blinkmobile/blinkmrc')
 
 function readConfig (userConfig = false) {

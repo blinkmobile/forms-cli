@@ -1,3 +1,4 @@
+// @flow
 'use strict'
 
 const debugLogger = require('../lib/logger/loggers.js').debugLogger
@@ -5,9 +6,12 @@ const debugLogger = require('../lib/logger/loggers.js').debugLogger
 const askQuestions = require('../lib/init/ask-questions.js')
 const updateConfig = require('../lib/config/update-config.js')
 const addPlugin = require('../lib/plugin-system/add-plugin.js')
-const extractTemplates = require('../lib/plugin-system/extract-templates.js')
+const loadPlugin = require('../lib/plugin-system/load-plugin.js')
 
-function init (commands, flags) {
+function init (
+  commands /* : string[] */,
+  flags /* : Object */
+) /* : Promise<void> */ {
   return askQuestions()
     .then(updateConfig)
     .then((cfg) => {
@@ -16,7 +20,11 @@ function init (commands, flags) {
       }
 
       // TODO: this will only work once plugins are published
-      return addPlugin(cfg.framework).then(extractTemplates)
+      return addPlugin(cfg.framework)
+    })
+    .then((cfg) => {
+      return loadPlugin(cfg.framework)
+        .then((plugin) => plugin.init(cfg))
     })
     .catch((err) => {
       if (err && err.message.toLowerCase() === 'cancelled') {

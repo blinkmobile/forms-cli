@@ -1,4 +1,11 @@
+// @flow
 'use strict'
+
+/*::
+import type {
+  FormsCfg
+} from '../lib/config/read-config.js'
+*/
 
 const path = require('path')
 
@@ -14,7 +21,10 @@ const decide = require('../lib/utils/decide-on-normalisation-fns.js')
 const readConfig = require('../lib/config/read-config.js')
 const buildCommand = require('./build.js')
 
-function create (options, cmdFlags) {
+function create (
+  options /* : FormsCfg */,
+  cmdFlags /* : Object */
+) /* : Promise<void> */ {
   userLogger.info('Creating Form framework source files...')
 
   debugLogger.debug('Start Transformation')
@@ -32,4 +42,7 @@ Source files location: ${path.resolve(options.sourcePath)}
     })
 }
 
-module.exports = (input, flags) => readConfig().then((config) => create(config, flags))
+module.exports = (
+  input /* : string[] */,
+  flags /* : Object */
+) /* : Promise<void> */ => readConfig().then((config) => create(config, flags))

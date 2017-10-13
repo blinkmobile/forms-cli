@@ -1,3 +1,4 @@
+// @flow
 'use strict'
 
 const fs = require('fs')
@@ -7,7 +8,10 @@ const mkdirp = require('mkdirp')
 
 const maybeRun = require('@blinkmobile/maybe-run')
 
-function writeFileContents (p, contents) {
+function writeFileContents (
+  p /* : string */,
+  contents /* : string */
+) /* : Promise<string> */ {
   return new Promise((resolve, reject) => {
     const notError = maybeRun(reject)
     const dirname = path.dirname(p)
@@ -22,7 +26,14 @@ function writeFileContents (p, contents) {
   })
 }
 
+function lazyWriter (
+  p /* : string */,
+  contents /* : string */
+) /* : (string) => Promise<string> */ {
+  return (basePath = '' /* string */) => writeFileContents(path.join(basePath, p), contents)
+}
+
 module.exports = {
   writeFileContents,
-  lazyWriter: (p, contents) => (basePath = '') => writeFileContents(path.join(basePath, p), contents)
+  lazyWriter
 }
