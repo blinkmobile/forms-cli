@@ -24,7 +24,7 @@ A Forms CLI plug-in must expose an object of the following structure
 {
   build: (cfg) => Promise,
   init: (cfg) => Promise,
-  processForm: (formDefinition) => Promise,
+  processForm: (cfg, formDefinition) => Promise,
   writeTemplates: (destinationPath) => Promise
 }
 ```
@@ -40,7 +40,7 @@ The Forms CLI works with plug-ins that are specific to certain frameworks. These
 
 The Forms CLI is lightweight and the bulk of the work is done in the plug-ins installed into your projects folder.
 
-`processForm` is called by the command `bm forms create`. `bm forms create` will handle the job of getting the definition from its source, normalizing the structure into a specific JSON structure. Then it will iterate over each form, passing the whole form definition to your `processForm` function. `processForm` needs to return an array of functions that the Forms CLI will iterate over. Normally these functions would use the [template-helper](../packages/template-helper) functions to return a function which runs `lazyWriteFile` to write the source files for the framework you are building for. The [AngularJS](../packages/bm-plugin-forms-angularjs) plugin makes extensive use of the template helper.
+`processForm` is called by the command `bm forms create`. `bm forms create` will handle the job of getting the definition from its source, normalizing the structure into a specific JSON structure. Then it will iterate over each form, passing the whole form definition to your `processForm` function. `processForm` needs to return a Promise. Normally the `processForm` function would use the [template-helper](../packages/template-helper) functions to write the source files for the framework you are building for. The [AngularJS](../packages/bm-plugin-forms-angularjs) plugin makes extensive use of the template helper.
 
 `build` is called from `bm forms build` will take the source files made by `bm forms create` and run the build command from the installed plugin. The AngularJS plugin uses gulp to build a distribution file and setup a simple index.html, however you may elect to leave the `build` function empty (by passing back `Promise.resolve()`) and include the building of your forms library in your app's build step.
 
