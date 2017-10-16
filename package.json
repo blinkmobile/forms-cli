@@ -6,13 +6,18 @@
     "fixpack": "fixpack",
     "ava": "ava",
     "flow_check": "flow check",
-    "security_check": "nsp check"
+    "security_check": "nsp check",
+    "lerna": "lerna"
   },
   "author": "Blink Mobile Technologies",
   "contributors": [
     {
       "name": "Simon Dobie",
       "email": "simon@blinkmobile.com.au"
+    },
+    {
+      "name": "Matt Carroll",
+      "email": "matt@blinkmobile.com.au"
     }
   ],
   "license": "MIT",

@@ -62,7 +62,7 @@ commands[command](cli.input.slice(1), cli.flags, { cwd: process.cwd() })
   .catch((err) => {
     userLogger.info(`There was a problem executing '${command}':
 
-${err}
+${cli.flags.debug && err && err.stack ? err.stack : err}
 
 Please fix the error and try again.
 

@@ -3,6 +3,7 @@
 const path = require('path')
 const fs = require('fs')
 
+const kebabCase = require('lodash.kebabcase')
 const gulp = require('gulp')
 const babel = require('gulp-babel')
 const embedTemplates = require('gulp-angular-embed-templates')
@@ -12,6 +13,7 @@ const footer = require('gulp-footer')
 const ngAnnotate = require('gulp-ng-annotate')
 const angularFilesort = require('gulp-angular-filesort')
 const inject = require('gulp-inject')
+const injectString = require('gulp-inject-string')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
@@ -20,6 +22,8 @@ const globby = require('globby')
 const merge = require('merge-stream')
 
 const findUp = require('find-up')
+
+const toAngularName = require('../transform/to-angular-name.js')
 
 function makeModule (p, dest, pkgPath) {
   return gulp.src(`${p}/**/**.js`)
@@ -102,16 +106,30 @@ function bundle () {
 // creates a sample HTML file to illustrate a basic way of including the
 // components in a web page.
 function createHTML () {
+  const src = process.env.src
   const dest = process.env.dest
   const templatePath = process.env.templatePath
   const pkgPath = findUp.sync('.blinkmrc.json')
-  const filesToInject = [
-    `${dest}/*.js`,
-    path.join(path.dirname(pkgPath), 'node_modules', 'skeleton-framework', 'dist', 'skeleton.css')
-  ]
+  const angularForms = dirs(src)
+    .map((f) => {
+      const module = toAngularName(f)
+      const component = kebabCase(f)
+      return {
+        module,
+        component
+      }
+    })
+  const angularModules = `'${angularForms.map((form) => form.module).join('\',\'')}'`
+  const components = angularForms.reduce((str, form) => {
+    str += `
+    <${form.component} ng-if="$root.activeForm === '${form.module}'"></${form.component}>`
+    return str
+  }, '')
 
   return gulp.src(`${templatePath}/index.html`)
-    .pipe(inject(gulp.src(filesToInject, {read: false})))
+    .pipe(injectString.after('/* inject-string:angularjs-modules */', angularModules))
+    .pipe(injectString.after('<body ng-init="$root.forms = ', `[${angularModules}]`))
+    .pipe(injectString.after('<!-- inject-string:angularjs-components -->', components))
     .pipe(gulp.dest(dest))
 }
 
