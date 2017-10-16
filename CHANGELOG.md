@@ -8,6 +8,9 @@
 ### Changed
 - FT-149 | default source path from `./bm-forms-src` to `./bm-forms/src`
 
+### Fixed
+- FT-149 | AngularJS `index.html` template to work without changes (with the exception of adding your own Google Maps API Key)
+
 ## 1.0.0-alpha
 
 ### Added

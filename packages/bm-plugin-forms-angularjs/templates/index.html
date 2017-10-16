@@ -1,29 +1,51 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"></link>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/nathancahill/skeleton-tabs/v1.0.0/skeleton-tabs.css"></link>
     <!-- inject:css -->
     <!-- endinject -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="/node_modules/@blinkmobile/angular-camera/dist/bm-angular-camera.js"></script>
-    <script src="/node_modules/@blinkmobile/angular-location/dist/bm-location.js"></script>
-    <script src="/node_modules/getusermedia/getusermedia.bundle.js"></script>
-    <script src="/node_modules/signature_pad/dist/signature_pad.js"></script>
-    <script src="/node_modules/@blinkmobile/canvas-manipulation/dist/canvas-manipulation.js"></script>
-    <script src="/node_modules/@blinkmobile/angular-signature-pad/dist/angular-signature-pad.js"></script>
-    <script src="/node_modules/localforage/dist/localforage.js"></script>
-    <script src="/node_modules/angular-localforage/dist/angular-localForage.js"></script>
-    <script src="/node_modules/@blinkmobile/angularjs-draft-queue/dist/bm-angularjs-draft-queue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://cdn.rawgit.com/blinkmobile/angular-camera/v1.1.1/dist/bm-angular-camera.min.js"></script>
+    <script src="https://cdn.rawgit.com/blinkmobile/angular-location.js/v1.0.3/dist/bm-location.js"></script>
+    <script src="https://cdn.rawgit.com/otalk/getUserMedia/2.0.1/getusermedia.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="https://cdn.rawgit.com/blinkmobile/canvas-manipulation/1.0.1/dist/canvas-manipulation.min.js"></script>
+    <script src="https://cdn.rawgit.com/blinkmobile/angular-signature-pad/1.0.0/dist/angular-signature-pad.min.js"></script>
+    <script src="https://cdn.rawgit.com/localForage/localForage/1.5.2/dist/localforage.min.js"></script>
+    <script src="https://cdn.rawgit.com/scotttrinh/angular-localForage/v.1.3.7/dist/angular-localForage.min.js"></script>
+    <script src="https://cdn.rawgit.com/blinkmobile/angularjs-draft-queue/master/dist/bm-angularjs-draft-queue.min.js"></script>
+    <script src="./blink-forms-bundle.js"></script>
     <!-- inject:js -->
     <!-- endinject -->
   </head>
-  <body>
+  <body ng-init="$root.forms = ">
+    <!-- inject-string:angularjs-ng-init -->
+    <h1>BlinkMobile AngularJS Forms</h1>
 
-  <script>
-  angular.module('forms', ['bmDraftQueue'])
-         .config(['bmDraftQueueServiceProvider', function (bmDraftQueueServiceProvider) {
-            bmDraftQueueServiceProvider.config({appName: 'demoApp'})
-         }])
-  angular.bootstrap(document, ['forms'])
-  </script>
+    <ul class="tab-nav" ng-init="$root.activeForm = $root.forms[0]">
+      <li ng-repeat="formName in $root.forms">
+        <a
+          class="button"
+          ng-click="$root.activeForm = formName"
+          ng-class="{'active': $root.activeForm === formName }">{{formName}}</a>
+      </li>
+    </ul>
+
+    <!-- inject-string:angularjs-components -->
+
+    <script>
+      angular.module('forms', [
+        'bmDraftQueue',
+        /* inject-string:angularjs-modules */
+      ])
+        .config(['bmDraftQueueServiceProvider', function (bmDraftQueueServiceProvider) {
+          bmDraftQueueServiceProvider.config({appName: 'demoApp'})
+        }])
+        .run(['$rootScope', function ($rootScope) {
+          $rootScope.googleMapsApiKey = 'YOUR_API_KEY_GOES_HERE';
+        }])
+      angular.bootstrap(document, ['forms'])
+    </script>
   </body>
 </html>
