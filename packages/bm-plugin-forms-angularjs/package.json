@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@blinkmobile/angular-camera": "1.0.0",
-    "@blinkmobile/angular-location": "1.0.0",
+    "@blinkmobile/angular-location": "2.0.1",
     "@blinkmobile/angular-signature-pad": "1.0.0",
     "@blinkmobile/angularjs-draft-queue": "^1.0.0-alpha.2",
     "@blinkmobile/canvas-manipulation": "1.0.1",
