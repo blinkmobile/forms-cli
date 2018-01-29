@@ -9,6 +9,9 @@ function writeConfig (cfg, userConfig = false) {
   }
 
   return configStore.update((blinkmrc) => {
+    blinkmrc.forms = blinkmrc.forms || {}
+    cfg.service = blinkmrc.forms.service
+    cfg.authorisationService = blinkmrc.forms.authorisationService
     blinkmrc.forms = cfg
 
     return blinkmrc
