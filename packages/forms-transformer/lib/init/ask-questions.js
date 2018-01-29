@@ -9,6 +9,7 @@ const whichFramework = require('./questions/which-framework.js')
 const sourceFolder = require('./questions/source-folder.js')
 const distFolder = require('./questions/dist-folder.js')
 const templateLocation = require('./questions/template-folder.js')
+const whichOneBlinkForms = require('./questions/which-one-blink-forms.js')
 
 const questions = [
   sourceFolder,
@@ -25,14 +26,15 @@ function init () {
         return Promise.reject(new Error('cancelled'))
       }
 
-      return prompt.prompt(inputSource).then((answers) => {
-        let q = jsonPath
-        if (answers.inputSource === 'answerspace') {
-          q = whichAnswerspace
-        }
-
-        return prompt.prompt([q, ...questions])
-      })
+      return prompt.prompt(inputSource)
+        .then((answers) => {
+          switch (answers.inputSource) {
+            case 'answerspace': return whichAnswerspace
+            case 'oneBlinkForms': return whichOneBlinkForms()
+            default: return jsonPath
+          }
+        })
+        .then((nextQuestion) => prompt.prompt([nextQuestion, ...questions]))
     })
 }
 

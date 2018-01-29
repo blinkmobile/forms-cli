@@ -8,7 +8,7 @@ The forms transformer is a monorepo. There are a few tools you need to be famili
 ## Setup
 
 1. Clone the repo
-2. From the project root folder, run `npm run lerna -- bootstrap`
+2. From the project root folder, run `npx lerna bootstrap`
 
 ## Development
 
@@ -35,7 +35,7 @@ Assuming `parent-package` is the package that will include the dependency, and `
 }
 ```
 3. cd to the repo base folder
-4. run `npm run lerna -- bootstrap`
+4. run `npx lerna bootstrap`
 
 ## Testing
 
