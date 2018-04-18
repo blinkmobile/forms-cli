@@ -23,16 +23,9 @@ module.exports = function () {
       return blinkMobileIdentity.getPayload(jwt)
         .then((payload) => {
           const queryStringArgs = queryString.stringify({
-            include: 'organisations',
-            query: true,
-            search: JSON.stringify({
-              'links.users': payload.email,
-              'privilege.FORMS': {
-                '$exists': true
-              }
-            })
+            email: payload.email
           })
-          // Get list of orgs from simple-auth where user has forms permission
+          // Get list of forms permissions from one blink api where user has forms permission
           return Promise.all([
             fetch(`${origin(config)}/permissions?${queryStringArgs}`, { headers: { Authorization: `Bearer ${jwt}` } })
               .then((res) => res.json())
@@ -41,11 +34,17 @@ module.exports = function () {
                   debugLogger.error(body.error)
                   throw new Error(body.error)
                 }
-                if (!body.organisations || !body.organisations.length) {
-                  debugLogger.error('No organisations found')
-                  throw new Error('No organisations found')
+                if (!body.permissions || !body.permissions.length) {
+                  debugLogger.error('No permissions found')
+                  throw new Error('No permissions found')
                 }
-                return body.organisations
+                // loop through each permission, check for forms perm
+                const permissions = body.permissions.filter((permission) => {
+                  if (permission.privilege && permission.privilege.FORMS) {
+                    return permission
+                  }
+                })
+                return permissions
               }),
             // Pull down all forms they have access too
             fetch(`${origin(config)}/v1/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
@@ -60,18 +59,36 @@ module.exports = function () {
                   throw new Error('No forms found')
                 }
                 return body.data
+              }),
+            // Pull down all the organisations they have access to
+            fetch(`${origin(config)}/organisations`, { headers: { Authorization: `Bearer ${jwt}` } })
+              .then((res) => res.json())
+              .then((body) => {
+                if (body.error) {
+                  debugLogger.error(body.message)
+                  throw new Error(body.message)
+                }
+                if (!body.organisations || !body.organisations.length) {
+                  debugLogger.error('No organisations found')
+                  throw new Error('No organisations found')
+                }
+                return body.organisations
               })
           ])
         })
         .then((data) => {
-          const organisations = data[0]
+          const formsPermissions = data[0]
           const forms = data[1]
+          const organisations = data[2]
 
           // Create choices with organisation name as headings.
-          const choices = organisations.reduce((formsChoices, organisation) => {
-            const organisationsForms = forms.filter((form) => form.organisationId === organisation.id)
+          const choices = formsPermissions.reduce((formsChoices, permission) => {
+            const organisationsForms = forms.filter((form) => form.organisationId === permission.links.organisations)
             // Only add Organisation heading if there are forms to display
             if (organisationsForms.length) {
+              const organisation = organisations.find((organisation) => {
+                return organisation.id === permission.links.organisations
+              })
               formsChoices.push(new prompt.Separator(organisation.name), ...organisationsForms.map((form) => ({
                 name: form.name,
                 short: form.name,
