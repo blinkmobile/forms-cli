@@ -2,7 +2,6 @@
 
 const BlinkMobileIdentity = require('@blinkmobile/bm-identity')
 const fetch = require('node-fetch')
-const queryString = require('querystring')
 
 const prompt = require('../../prompt-config.js')
 const pkg = require('../../../package.json')
