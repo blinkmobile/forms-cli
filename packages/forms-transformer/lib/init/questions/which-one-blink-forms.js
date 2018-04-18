@@ -7,8 +7,7 @@ const queryString = require('querystring')
 const prompt = require('../../prompt-config.js')
 const pkg = require('../../../package.json')
 const debugLogger = require('../../logger/loggers.js').debugLogger
-const origin = require('../../utils/get-one-blink-forms-origin.js')
-const authOrigin = require('../../utils/get-auth-origin.js')
+const origin = require('../../utils/get-one-blink-api-origin.js')
 const readConfig = require('../../config/read-config.js')
 
 const blinkMobileIdentity = new BlinkMobileIdentity(pkg.name)
@@ -35,7 +34,7 @@ module.exports = function () {
           })
           // Get list of orgs from simple-auth where user has forms permission
           return Promise.all([
-            fetch(`${authOrigin(config)}/permissions?${queryStringArgs}`, { headers: { Authorization: `Bearer ${jwt}` } })
+            fetch(`${origin(config)}/permissions?${queryStringArgs}`, { headers: { Authorization: `Bearer ${jwt}` } })
               .then((res) => res.json())
               .then((body) => {
                 if (body.error) {

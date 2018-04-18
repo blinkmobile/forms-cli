@@ -10,8 +10,7 @@ function writeConfig (cfg, userConfig = false) {
 
   return configStore.update((blinkmrc) => {
     blinkmrc.forms = blinkmrc.forms || {}
-    cfg.service = blinkmrc.forms.service
-    cfg.authorisationService = blinkmrc.forms.authorisationService
+    cfg.apiService = blinkmrc.forms.apiService
     blinkmrc.forms = cfg
 
     return blinkmrc
