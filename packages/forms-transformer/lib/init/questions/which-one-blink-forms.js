@@ -22,30 +22,7 @@ module.exports = function () {
     .then(([config, jwt]) => {
       return blinkMobileIdentity.getPayload(jwt)
         .then((payload) => {
-          const queryStringArgs = queryString.stringify({
-            email: payload.email
-          })
-          // Get list of forms permissions from one blink api where user has forms permission
           return Promise.all([
-            fetch(`${origin(config)}/permissions?${queryStringArgs}`, { headers: { Authorization: `Bearer ${jwt}` } })
-              .then((res) => res.json())
-              .then((body) => {
-                if (body.error) {
-                  debugLogger.error(body.error)
-                  throw new Error(body.error)
-                }
-                if (!body.permissions || !body.permissions.length) {
-                  debugLogger.error('No permissions found')
-                  throw new Error('No permissions found')
-                }
-                // loop through each permission, check for forms perm
-                const permissions = body.permissions.filter((permission) => {
-                  if (permission.privilege && permission.privilege.FORMS) {
-                    return permission
-                  }
-                })
-                return permissions
-              }),
             // Pull down all forms they have access too
             fetch(`${origin(config)}/v1/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
               .then((res) => res.json())
@@ -77,18 +54,14 @@ module.exports = function () {
           ])
         })
         .then((data) => {
-          const formsPermissions = data[0]
-          const forms = data[1]
-          const organisations = data[2]
+          const forms = data[0]
+          const organisations = data[1]
 
           // Create choices with organisation name as headings.
-          const choices = formsPermissions.reduce((formsChoices, permission) => {
-            const organisationsForms = forms.filter((form) => form.organisationId === permission.links.organisations)
+          const choices = organisations.reduce((formsChoices, organisation) => {
+            const organisationsForms = forms.filter((form) => form.organisationId === organisation.id)
             // Only add Organisation heading if there are forms to display
             if (organisationsForms.length) {
-              const organisation = organisations.find((organisation) => {
-                return organisation.id === permission.links.organisations
-              })
               formsChoices.push(new prompt.Separator(organisation.name), ...organisationsForms.map((form) => ({
                 name: form.name,
                 short: form.name,
