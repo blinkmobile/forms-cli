@@ -23,18 +23,18 @@ module.exports = function () {
         .then((payload) => {
           return Promise.all([
             // Pull down all forms they have access too
-            fetch(`${origin(config)}/v1/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
+            fetch(`${origin(config)}/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
               .then((res) => res.json())
               .then((body) => {
                 if (body.error) {
                   debugLogger.error(body.message)
                   throw new Error(body.message)
                 }
-                if (!body.data || !body.data.length) {
+                if (!body.forms || !body.forms.length) {
                   debugLogger.error('No forms found')
                   throw new Error('No forms found')
                 }
-                return body.data
+                return body.forms
               }),
             // Pull down all the organisations they have access to
             fetch(`${origin(config)}/organisations`, { headers: { Authorization: `Bearer ${jwt}` } })
