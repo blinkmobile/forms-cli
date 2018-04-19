@@ -2,13 +2,11 @@
 
 const BlinkMobileIdentity = require('@blinkmobile/bm-identity')
 const fetch = require('node-fetch')
-const queryString = require('querystring')
 
 const prompt = require('../../prompt-config.js')
 const pkg = require('../../../package.json')
 const debugLogger = require('../../logger/loggers.js').debugLogger
-const origin = require('../../utils/get-one-blink-forms-origin.js')
-const authOrigin = require('../../utils/get-auth-origin.js')
+const origin = require('../../utils/get-one-blink-api-origin.js')
 const readConfig = require('../../config/read-config.js')
 
 const blinkMobileIdentity = new BlinkMobileIdentity(pkg.name)
@@ -23,50 +21,40 @@ module.exports = function () {
     .then(([config, jwt]) => {
       return blinkMobileIdentity.getPayload(jwt)
         .then((payload) => {
-          const queryStringArgs = queryString.stringify({
-            include: 'organisations',
-            query: true,
-            search: JSON.stringify({
-              'links.users': payload.email,
-              'privilege.FORMS': {
-                '$exists': true
-              }
-            })
-          })
-          // Get list of orgs from simple-auth where user has forms permission
           return Promise.all([
-            fetch(`${authOrigin(config)}/permissions?${queryStringArgs}`, { headers: { Authorization: `Bearer ${jwt}` } })
-              .then((res) => res.json())
-              .then((body) => {
-                if (body.error) {
-                  debugLogger.error(body.error)
-                  throw new Error(body.error)
-                }
-                if (!body.organisations || !body.organisations.length) {
-                  debugLogger.error('No organisations found')
-                  throw new Error('No organisations found')
-                }
-                return body.organisations
-              }),
             // Pull down all forms they have access too
-            fetch(`${origin(config)}/v1/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
+            fetch(`${origin(config)}/forms`, { headers: { Authorization: `Bearer ${jwt}` } })
               .then((res) => res.json())
               .then((body) => {
                 if (body.error) {
                   debugLogger.error(body.message)
                   throw new Error(body.message)
                 }
-                if (!body.data || !body.data.length) {
+                if (!body.forms || !body.forms.length) {
                   debugLogger.error('No forms found')
                   throw new Error('No forms found')
                 }
-                return body.data
+                return body.forms
+              }),
+            // Pull down all the organisations they have access to
+            fetch(`${origin(config)}/organisations`, { headers: { Authorization: `Bearer ${jwt}` } })
+              .then((res) => res.json())
+              .then((body) => {
+                if (body.error) {
+                  debugLogger.error(body.message)
+                  throw new Error(body.message)
+                }
+                if (!body.organisations || !body.organisations.length) {
+                  debugLogger.error('No organisations found')
+                  throw new Error('No organisations found')
+                }
+                return body.organisations
               })
           ])
         })
         .then((data) => {
-          const organisations = data[0]
-          const forms = data[1]
+          const forms = data[0]
+          const organisations = data[1]
 
           // Create choices with organisation name as headings.
           const choices = organisations.reduce((formsChoices, organisation) => {

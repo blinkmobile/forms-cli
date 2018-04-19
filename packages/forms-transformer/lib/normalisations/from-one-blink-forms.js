@@ -7,9 +7,9 @@ const debugLogger = require('../logger/loggers.js').debugLogger
 const BlinkMobileIdentity = require('@blinkmobile/bm-identity')
 const pkg = require('../../package.json')
 const blinkMobileIdentity = new BlinkMobileIdentity(pkg.name)
-const origin = require('../utils/get-one-blink-forms-origin.js')
+const origin = require('../utils/get-one-blink-api-origin.js')
 
-function normalise(options) {
+function normalise (options) {
   // for each id, retrieve def and add to response array
   return blinkMobileIdentity.getAccessToken()
     .then((jwt) => {
