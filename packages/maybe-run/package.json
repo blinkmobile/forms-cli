@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/maybe-run",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Helper function to make dealing with nodejs error a little bit nicer",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/maybe-run",
-  "dependencies": {}
+  "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/maybe-run"
 }
