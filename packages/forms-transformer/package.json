@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/forms-cli",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "bin": {
     "blinkm-forms": "bin/index.js"
   },
@@ -33,7 +33,7 @@
   "dependencies": {
     "@blinkmobile/blinkmrc": "1.1.0",
     "@blinkmobile/bm-identity": "3.3.0",
-    "@blinkmobile/maybe-run": "^1.0.0-alpha.0",
+    "@blinkmobile/maybe-run": "^1.0.0-alpha.1",
     "@blinkmobile/varied-definition": "1.1.0",
     "babel-preset-es2015": "6.24.0",
     "did-you-mean": "0.0.1",
