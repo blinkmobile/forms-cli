@@ -19,7 +19,7 @@
   "author": "Blink Mobile Technologies",
   "license": "MIT",
   "dependencies": {
-    "@blinkmobile/bm-plugin-forms-angularjs": "1.0.0-alpha.5"
+    "@blinkmobile/forms-template-helper": "1.0.0-alpha.4"
   },
   "engines": {
     "node": ">=8",
