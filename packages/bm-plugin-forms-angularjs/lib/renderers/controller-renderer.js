@@ -13,7 +13,7 @@ function makeControllerRenderers ({form, pages}) {
 
   let fn = template(form)
 
-  if (form._checks.length) {
+  if (form._checks && form._checks.length) {
     fn = insertConditionalLogic(fn, form._checks)
   }
 

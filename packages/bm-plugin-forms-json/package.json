@@ -7,9 +7,7 @@
     "lib/"
   ],
   "scripts": {
-    "test": "ava",
-    "eslint": "eslint --fix --cache .",
-    "ava": "ava"
+    "test": "echo \"Error: no test specified\""
   },
   "keywords": [
     "Blink",
@@ -20,11 +18,9 @@
   ],
   "author": "Blink Mobile Technologies",
   "license": "MIT",
-  "dependencies": {
-    "@blinkmobile/forms-template-helper": "^1.0.0-alpha.4"
-  },
+  "dependencies": {},
   "engines": {
-    "node": ">=6",
+    "node": ">=8",
     "npm": ">=3"
   },
   "publishConfig": {

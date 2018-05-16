@@ -25,9 +25,15 @@ const findUp = require('find-up')
 
 const toAngularName = require('../transform/to-angular-name.js')
 
+const INDEX_HTML_PATH = process.env.indexHtmlPath
+const FORM_BUNDLE_NAME = process.env.formBundleName
+const VENDOR_BUNDLE_NAME = process.env.vendorBundleName
+
 function makeModule (p, dest, pkgPath) {
+  const fullPathToES2015Preset = path.resolve(__dirname, '..', '..', 'node_modules', 'babel-preset-es2015')
+
   return gulp.src(`${p}/**/**.js`)
-    .pipe(babel({presets: [path.join(path.dirname(pkgPath), 'node_modules', 'babel-preset-es2015')]}))
+    .pipe(babel({presets: [fullPathToES2015Preset]}))
     .pipe(angularFilesort())
     .pipe(embedTemplates())
     .pipe(ngAnnotate())
@@ -75,7 +81,7 @@ function vendors () {
 
   return b.bundle()
     .pipe(through())
-    .pipe(source('vendor/vendor.js'))
+    .pipe(source(VENDOR_BUNDLE_NAME))
     .pipe(buffer())
     .pipe(gulp.dest(dest))
 }
@@ -88,24 +94,28 @@ function bundle () {
 
   // files that need to be bundled via browserify
   // these are files used in the angular source eg uuid generator
-  const usedModules = [`${src}/../node_modules/uuid/index.js`]
+  const usedModules = [path.join('..', '..', 'node_modules', 'uuid', 'index.js')]
   const mods = [...usedModules, `${dest}/components/*.js`]
 
   const b = browserify({
+    basedir: __dirname,
     entries: globby.sync(mods),
+    require: usedModules,
+    paths: path.resolve(__dirname, '..', '..', 'node_modules'),
     debug: true
   })
 
   return b.bundle()
     .pipe(through())
-    .pipe(source('blink-forms-bundle.js'))
+    .pipe(source(FORM_BUNDLE_NAME))
     .pipe(buffer())
     .pipe(gulp.dest(dest))
 }
 
 // creates a sample HTML file to illustrate a basic way of including the
 // components in a web page.
-function createHTML () {
+function createHTML (cb) {
+  
   const src = process.env.src
   const dest = process.env.dest
   const templatePath = process.env.templatePath
@@ -126,7 +136,7 @@ function createHTML () {
     return str
   }, '')
 
-  return gulp.src(`${templatePath}/index.html`)
+  return gulp.src(INDEX_HTML_PATH)
     .pipe(injectString.after('/* inject-string:angularjs-modules */', angularModules))
     .pipe(injectString.after('<body ng-init="$root.forms = ', `[${angularModules}]`))
     .pipe(injectString.after('<!-- inject-string:angularjs-components -->', components))

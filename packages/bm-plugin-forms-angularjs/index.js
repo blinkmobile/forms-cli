@@ -12,5 +12,6 @@ module.exports = {
   build,
   init: (cfg) => templateService.load(cfg.templatePath),
   processForm,
-  writeTemplates: (dest) => writeTemplates(path.join(__dirname, 'templates'), dest)
+  writeTemplates: (dest) => writeTemplates(path.join(__dirname, 'templates'), dest),
+  name: 'AngularJS plugin'
 }
