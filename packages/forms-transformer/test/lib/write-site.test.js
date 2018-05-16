@@ -2,14 +2,14 @@
 
 /* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
-const pq = require('proxyquire').noCallThru()
+// const pq = require('proxyquire').noCallThru()
 /* eslint-enable node/no-unpublished-require, node/no-extraneous-require */
 
 // stubs
 test.beforeEach((t) => {
-  t.context.writeSite = pq('../../lib/write-site.js', {
-    './logger.js': require('../stubs/logger.js')
-  }).writeSite
+  t.context.writeSite = require('../../lib/write-site.js').writeSite/* , {
+    './logger/loggers.js': require('../stubs/logger')
+  }).writeSite */
 })
 
 test('should return a Promise', (t) => t.context.writeSite('foo', {bar: [() => Promise.resolve(true)]}).then(() => t.pass()).catch(() => t.fail()))
