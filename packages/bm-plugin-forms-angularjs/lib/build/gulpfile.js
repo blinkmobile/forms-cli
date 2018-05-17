@@ -30,7 +30,7 @@ const FORM_BUNDLE_NAME = process.env.formBundleName
 const VENDOR_BUNDLE_NAME = process.env.vendorBundleName
 
 function makeModule (p, dest, pkgPath) {
-  const fullPathToES2015Preset = path.resolve(__dirname, '..', '..', 'node_modules', 'babel-preset-es2015')
+  const fullPathToES2015Preset = require.resolve('babel-preset-es2015')
 
   return gulp.src(`${p}/**/**.js`)
     .pipe(babel({presets: [fullPathToES2015Preset]}))
@@ -115,7 +115,7 @@ function bundle () {
 // creates a sample HTML file to illustrate a basic way of including the
 // components in a web page.
 function createHTML (cb) {
-  
+
   const src = process.env.src
   const dest = process.env.dest
   const templatePath = process.env.templatePath
