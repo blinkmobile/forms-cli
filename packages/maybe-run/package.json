@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/maybe-run",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Helper function to make dealing with nodejs error a little bit nicer",
   "main": "index.js",
   "scripts": {
