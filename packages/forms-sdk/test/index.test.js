@@ -1,5 +1,3 @@
-// @flow
-
 /* eslint-disable node/no-unpublished-require, node/no-extraneous-require */
 const test = require('ava')
 
