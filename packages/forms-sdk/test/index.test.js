@@ -40,6 +40,6 @@ test('building the preview form', (t) => {
 
   return sdk.ejectTemplates(templatePath)
     .then(() => sdk.generateSource(templatePath, srcPath, formDef))
-    .then(() => sdk.buildDist(srcPath, destPath, templatePath))
+    .then(() => sdk.buildDist(templatePath, srcPath, destPath))
     .then(() => t.is(fs.readdirSync(destPath).length > 0, true, `${destPath} is empty!`))
 })
