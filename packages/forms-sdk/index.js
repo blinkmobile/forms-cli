@@ -39,15 +39,14 @@ module.exports = class FormsSDK {
   }
 
   buildDist (
+    templatePath /*: string */,
     srcPath /*: string */,
-    destPath /*: string */,
-    templatePath /*: string */
+    destPath /*: string */
   ) /*: Promise<string[]> */ {
     if (!destPath) throw new Error('destination path is required')
     if (!srcPath) throw new Error('source path is required')
     if (!templatePath) throw new Error('template path is required')
     return this.plugin.init({templatePath})
       .then(() => this.plugin.build({sourcePath: srcPath, distPath: destPath, templatePath}))
-      .then((cfg) => [cfg.formBundleName, cfg.indexHtmlPath])
   }
 }
