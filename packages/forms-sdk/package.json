@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/transformation-sdk",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "SDK for forms definition transformation",
   "scripts": {
     "test": "ava",
