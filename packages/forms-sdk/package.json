@@ -1,0 +1,19 @@
+{
+  "name": "@blinkmobile/transformation-sdk",
+  "version": "1.0.0",
+  "description": "SDK for forms definition transformation",
+  "scripts": {
+    "test": "ava",
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "ava": "ava",
+    "flow_check": "flow check",
+    "security_check": "nsp check"
+  },
+  "main": "index.js",
+  "author": "Blink Mobile",
+  "license": "ISC",
+  "devDependencies": {
+    "@blinkmobile/bm-plugin-forms-angularjs": "1.0.0-alpha.5"
+  }
+}

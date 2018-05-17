@@ -1,0 +1,61 @@
+{
+  "name": "testForm",
+  "_elements": [
+    {
+      "name": "mod_name",
+      "type": "text",
+      "label": "Mod Name"
+    },
+    {
+      "name": "Type",
+      "type": "select",
+      "options": [
+        {
+          "key": "0",
+          "value": "mechanical"
+        },
+        {
+          "key": "1",
+          "value": "regulated"
+        }
+      ],
+      "label": "Type of box"
+    },
+    {
+      "name": "squonk2",
+      "type": "checkboxes",
+      "options": [
+        {
+          "key": "yes",
+          "value": "yes",
+          "name": "Yeah"
+        },
+        {
+          "key": "no",
+          "value": "no",
+          "name": "Nah"
+        },
+        {
+          "name": "Maybe",
+          "value": "maybe"
+        }
+      ],
+      "label": "label"
+    },
+    {
+      "name": "field1",
+      "type": "text"
+    },
+    {
+      "name": "fields2",
+      "type": "text",
+      "label": "Field 2"
+    },
+    {
+      "name": "field3",
+      "type": "text",
+      "label": "Field 3"
+    }
+  ],
+  "submissionURL": "https://www.blinkm.co/submission"
+}
