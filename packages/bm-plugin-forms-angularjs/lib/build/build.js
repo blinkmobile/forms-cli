@@ -4,6 +4,8 @@ const gulp = require('gulp')
 
 const maybeRun = require('@blinkmobile/maybe-run')
 
+const path = require('path')
+
 function build (cfg) {
   return new Promise((resolve, reject) => {
     const notError = maybeRun(reject)
@@ -11,6 +13,8 @@ function build (cfg) {
     cfg.indexHtmlPath = `${cfg.templatePath}/index.html`
     cfg.formBundleName = 'blink-forms-bundle.js'
     cfg.vendorBundleName = 'vendor/vendor.js'
+    cfg.formBundleOutputPath = path.join(cfg.distPath, cfg.formBundleName)
+    cfg.indexHtmlOutputPath = path.join(cfg.distPath, 'index.html')
 
     process.env.src = cfg.sourcePath
     process.env.dest = cfg.distPath
@@ -23,7 +27,7 @@ function build (cfg) {
 
     process.nextTick(() => {
       gulp.start('build', (err) => {
-        notError(err) && resolve(cfg)
+        notError(err) && resolve([cfg.formBundleOutputPath, cfg.indexHtmlOutputPath])
       })
     })
   })
