@@ -20,16 +20,9 @@
     <!-- endinject -->
   </head>
   <body ng-init="$root.forms = ">
-    <h1>BlinkMobile AngularJS Forms</h1>
 
-    <ul class="tab-nav" ng-init="$root.activeForm = $root.forms[0]">
-      <li ng-repeat="formName in $root.forms">
-        <a
-          class="button"
-          ng-click="$root.activeForm = formName"
-          ng-class="{'active': $root.activeForm === formName }">{{formName}}</a>
-      </li>
-    </ul>
+    <div ng-init="$root.activeForm = $root.forms[0]">
+        </div>
 
     <!-- inject-string:angularjs-components -->
 
