@@ -94,14 +94,14 @@ function bundle () {
 
   // files that need to be bundled via browserify
   // these are files used in the angular source eg uuid generator
-  const usedModules = [path.join('..', '..', 'node_modules', 'uuid', 'index.js')]
+  const usedModules = [require.resolve('uuid')]
   const mods = [...usedModules, `${dest}/components/*.js`]
 
   const b = browserify({
     basedir: __dirname,
     entries: globby.sync(mods),
     require: usedModules,
-    paths: path.resolve(__dirname, '..', '..', 'node_modules'),
+    paths: path.resolve(__dirname, '..', '..', '..', '..'),
     debug: true
   })
 
