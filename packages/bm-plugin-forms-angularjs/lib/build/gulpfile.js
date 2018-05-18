@@ -97,13 +97,24 @@ function bundle () {
   const usedModules = [require.resolve('uuid')]
   const mods = [...usedModules, `${dest}/components/*.js`]
 
-  const b = browserify({
+  const browserifyOptions = {
     basedir: __dirname,
     entries: globby.sync(mods),
     require: usedModules,
-    paths: path.resolve(__dirname, '..', '..', '..', '..'),
+    paths: [
+      path.resolve(__dirname),
+      path.resolve(__dirname, '..'),
+      path.resolve(__dirname, '..', '..',),
+      path.resolve(__dirname, '..', '..', '..'),
+      path.resolve(__dirname, '..', '..', '..', '..'),
+      path.resolve(__dirname, '..', '..', 'node_modules')
+    ],
     debug: true
-  })
+  }
+
+  // console.log('options', JSON.stringify(browserifyOptions, null, 2))
+
+  const b = browserify(browserifyOptions)
 
   return b.bundle()
     .pipe(through())
