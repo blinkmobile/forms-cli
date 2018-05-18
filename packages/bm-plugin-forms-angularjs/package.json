@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/bm-plugin-forms-angularjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AngularJS Plugin for Blink Mobile Technologies Forms transformer",
   "main": "index.js",
   "repository": "https://github.com/blinkmobile/forms-cli/tree/master/packages/bm-plugin-forms-angularjs",
