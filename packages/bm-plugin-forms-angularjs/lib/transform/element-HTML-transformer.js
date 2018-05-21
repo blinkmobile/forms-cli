@@ -29,6 +29,19 @@ function elementTransducer (allElements, pages, moduleName) {
     return transformPage(allElements)
   }
 
+  // if no elements are in the definition, add a header indicating there are no elements
+  if (allElements.length < 1) {
+    allElements.push({
+      'name': '_noelements',
+      'type': 'heading',
+      'text': 'You have not yet added any form elements',
+      'position': 'left',
+      'fontFace': 'arial',
+      'page': 0,
+      'headingType': 4
+    })
+  }
+
   const elementsByPage = groupBy(allElements, (el) => el.page)
 
   return map(elementsByPage, (els, pageIndex) => paginate`${transformPage(els).join('')}${pageIndex}${moduleName}`)
