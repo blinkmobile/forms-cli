@@ -1,6 +1,6 @@
 {
   "name": "@blinkmobile/transformation-sdk",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "SDK for forms definition transformation",
   "scripts": {
     "test": "ava",
@@ -14,7 +14,7 @@
   "author": "Blink Mobile",
   "license": "ISC",
   "devDependencies": {
-    "@blinkmobile/bm-plugin-forms-angularjs": "^1.0.3"
+    "@blinkmobile/bm-plugin-forms-angularjs": "^1.0.4"
   },
   "publishConfig": {
     "access": "public"
